@@ -5,13 +5,23 @@ import gsap from 'gsap';
 import Image from 'next/image'; // Import the Image component from Next.js
 
 // Utility function to truncate text
-const truncateText = (text, maxLength) => {
+const truncateText = (text: string, maxLength: number): string => {
   return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
 };
 
-const FilterCard = ({ filter }) => {
+interface Filter {
+  image: string;
+  title: string;
+  description: string;
+}
+
+interface FilterCardProps {
+  filter: Filter;
+}
+
+const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const hoverContentRef = useRef(null); // Reference for hover content
+  const hoverContentRef = useRef<HTMLDivElement | null>(null); // Reference for hover content
 
   // GSAP animation for hover effect
   useEffect(() => {
