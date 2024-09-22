@@ -20,14 +20,14 @@ export default function Home() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
         .getUserMedia({ video: true })
-        .then(function (stream) {
-          let video = videoRef.current;
+        .then((stream) => {
+          const video = videoRef.current; // Change 'let' to 'const'
           if (video) {
             video.srcObject = stream; // No longer shows an error
             video.play();
           }
         })
-        .catch(function (err) {
+        .catch((err) => {
           console.log('Error accessing the camera: ', err);
         });
     }
