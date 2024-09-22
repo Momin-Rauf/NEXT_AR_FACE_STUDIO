@@ -1,0 +1,33 @@
+[
+    {
+        "title": "Sleek Aviator Glasses",
+        "image": "https://images.unsplash.com/flagged/photo-1577479662097-5e0347cbe923?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE5fHx8ZW58MHx8fHx8",
+        "description": "A sleek and stylish aviator frame perfect for outdoor activities.",
+        "date": "2024-09-14"
+    },
+    
+    {
+        "title": "Sporty Sunglasses",
+        "image": "https://images.unsplash.com/photo-1473466676339-6141af006f8c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2xhc3Nlc3xlbnwwfHwwfHx8MA%3D%3D",
+        "description": "Durable and lightweight sporty sunglasses for active lifestyles.",
+        "date": "2024-09-14"
+    },
+    {
+        "title": "Cat-Eye Spectacles",
+        "image": "https://media.istockphoto.com/id/1977840847/photo/aqua-headband.webp?a=1&b=1&s=612x612&w=0&k=20&c=7zQqKcgAMLiUDLwCN1rjL_r41mAMJivp7EtGziSURmo=",
+        "description": "Elegant Head Band.",
+        "date": "2024-09-14"
+    },
+    {
+        "title": "Square Designer Shades",
+        "image": "https://media.istockphoto.com/id/1453988945/photo/yellow-bucket-hat-isolated-on-white.webp?a=1&b=1&s=612x612&w=0&k=20&c=INcsFRjbBq84ijPFajG5p8TCzI8Apg8ihhdFq49pnpE=",
+        "description": "Square designer Hat for confident look.",
+        "date": "2024-09-14"
+    },
+    {
+        "title": "Minimalist Rimless Glasses",
+        "image": "https://media.istockphoto.com/id/181883137/photo/protective-face-mask.webp?a=1&b=1&s=612x612&w=0&k=20&c=KC4u5D0WshNIq22DQHmnzenv2QSkTVJ_-T2tMjqZySM=",
+        "description": "Minimalist Face mask for a clean and sophisticated style.",
+        "date": "2024-09-14"
+    }
+]
