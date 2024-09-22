@@ -15,7 +15,8 @@ const FilterBoard = () => {
     const currentItems = dummy_data.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(dummy_data.length / itemsPerPage);
 
-    const handleFileChange = (event) => {
+    // Explicitly type the event parameter
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const uploadedFile = event.target.files[0];
         if (uploadedFile) {
             setFile(URL.createObjectURL(uploadedFile));
