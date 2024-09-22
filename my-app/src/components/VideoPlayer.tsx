@@ -10,7 +10,7 @@ const VideoPlayer = () => {
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
-          let video = videoRef.current;
+          const video = videoRef.current; // Changed let to const
           if (video) {
             video.srcObject = stream;
             video.play();
