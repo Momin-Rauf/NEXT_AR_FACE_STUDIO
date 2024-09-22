@@ -1,13 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image'; // Import Image from next/image
+import Image from 'next/image';
 import dummy_data from "../lib/dummy_data.json";
 import FilterCard from './FilterCard';
 
 const FilterBoard = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState<string | null>(null); // Explicitly typed
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -15,9 +15,8 @@ const FilterBoard = () => {
     const currentItems = dummy_data.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(dummy_data.length / itemsPerPage);
 
-    // Explicitly type the event parameter
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const uploadedFile = event.target.files[0];
+        const uploadedFile = event.target.files?.[0]; // Optional chaining
         if (uploadedFile) {
             setFile(URL.createObjectURL(uploadedFile));
             setIsModalOpen(true);
@@ -81,10 +80,6 @@ const FilterBoard = () => {
                         ))}
                     </div>
                 </div>
-
-                {/* Other tabs... */}
-                {/* Repeat similar structures for other tabs as needed... */}
-
             </div>
 
             {/* Modal */}
@@ -96,7 +91,7 @@ const FilterBoard = () => {
                             <div className="diff aspect-[16/9]">
                                 <div className="diff-item-1">
                                     <Image 
-                                        alt="daisy" 
+                                        alt="Sample" 
                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi663GPu5UrYHjQhmR5qG5Uz7Sd_4-bwrIwFU18xrkNLrLeWnc5BlDWvd6FrlPdSWWT8g&usqp=CAU" 
                                         layout="responsive" 
                                         width={640} 
@@ -113,12 +108,10 @@ const FilterBoard = () => {
                                         className="w-full h-auto mt-4" 
                                     />
                                 </div>
-                                <div className="diff-resizer"></div>
                             </div>
                         )}
-                        <p>Choose the Color of Light </p>
-                        <input type="color" name="" id="" />
-                        {/* Additional sliders and buttons... */}
+                        <p>Choose the Color of Light:</p>
+                        <input type="color" />
                         <div className="modal-action">
                             <button className="btn" onClick={closeModal}>Download</button>
                         </div>
