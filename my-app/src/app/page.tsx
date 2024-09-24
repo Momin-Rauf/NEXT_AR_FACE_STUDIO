@@ -1,7 +1,7 @@
 'use client';
 import './globals.css';
 import Navbar from '@/components/Navbar';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterBoard from '@/components/FilterBoard';
 // import VideoPlayer from '@/components/VideoPlayer';
 import FaceTracking from '@/components/FaceTracking';
