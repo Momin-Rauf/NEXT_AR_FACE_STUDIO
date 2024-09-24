@@ -4,9 +4,7 @@ import 'aframe';
 import 'mind-ar/dist/mindar-face-aframe.prod.js';
 
 const FaceTracking = () => {
-  useEffect(() => {
-    // Optional: Any additional setup can be done here
-  }, []);
+
 
   return (
     <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
