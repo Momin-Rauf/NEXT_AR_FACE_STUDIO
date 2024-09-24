@@ -1,4 +1,4 @@
-
+'use client';
 import 'aframe';
 import 'mind-ar/dist/mindar-face-aframe.prod.js';
 
