@@ -14,7 +14,7 @@ const FaceTracking = () => {
 
       <a-camera active="false" position="0 0 0"></a-camera>
       <a-entity mindar-face-target="anchorIndex: 168">
-	<a-gltf-model rotation="0 0 0" position="0 0 0" scale="0.2 0.2 0.2" src="#glassesModel"></a-gltf-model>
+	<a-gltf-model rotation="0 0 0" position="0 0.2 0" scale="0.2 0.2 0.2" src="#glassesModel"></a-gltf-model>
       </a-entity>
     </a-scene>
     </div>

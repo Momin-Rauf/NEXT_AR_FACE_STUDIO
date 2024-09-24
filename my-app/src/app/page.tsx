@@ -3,20 +3,21 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import React, { useEffect, useState } from 'react';
 import FilterBoard from '@/components/FilterBoard';
-// import VideoPlayer from '@/components/VideoPlayer';
-import FaceTracking from '@/components/FaceTracking';
+import dynamic from 'next/dynamic';
+
+// Dynamically import FaceTracking component, disabling SSR
+const FaceTracking = dynamic(() => import('@/components/FaceTracking'), { ssr: false });
+
 export default function Home() {
-  // Specify the type for videoRef as HTMLVideoElement
   const [loading, setLoading] = useState(true); // Loading state
 
-  // Access the webcam on component mount
+  // Simulating an artificial loading delay (e.g., waiting for data or assets)
   useEffect(() => {
-    // Simulating an artificial loading delay (e.g., waiting for data or assets)
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false); // Hide loader after components are ready
     }, 2000); // Adjust this delay as needed
 
-    
+    return () => clearTimeout(timer); // Cleanup the timeout on unmount
   }, []);
 
   if (loading) {
@@ -35,7 +36,7 @@ export default function Home() {
         <div className="w-[50%]">
           <FilterBoard />
         </div>
-        {/* <VideoPlayer /> */}
+        {/* VideoPlayer can be added back if needed */}
         <FaceTracking />
       </div>
     </>
