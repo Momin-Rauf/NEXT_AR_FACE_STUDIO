@@ -7,7 +7,6 @@ import FilterBoard from '@/components/FilterBoard';
 import FaceTracking from '@/components/FaceTracking';
 export default function Home() {
   // Specify the type for videoRef as HTMLVideoElement
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [loading, setLoading] = useState(true); // Loading state
 
   // Access the webcam on component mount
