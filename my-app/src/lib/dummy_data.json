@@ -1,33 +1,22 @@
 [
-    {
+    {   "id":1,
         "title": "Sleek Aviator Glasses",
         "image": "/Assets/myassets/g1.jpg",
         "description": "A sleek and stylish aviator frame perfect for outdoor activities.",
         "date": "2024-09-14"
     },
     
-    {
+    {   "id":2,
         "title": "Sporty Sunglasses",
         "image": "/Assets/myassets/glasses.jpeg",
         "description": "Durable and lightweight sporty sunglasses for active lifestyles.",
         "date": "2024-09-14"
     },
-    {
+    {   "id":3,
         "title": "Cat-Eye Spectacles",
         "image": "/Assets/myassets/g3.jpg",
         "description": "Elegant Head Band.",
         "date": "2024-09-14"
-    },
-    {
-        "title": "Square Designer Shades",
-        "image": "/Assets/myassets/cat.jpg",
-        "description": "Square designer Hat for confident look.",
-        "date": "2024-09-14"
-    },
-    {
-        "title": "Minimalist Rimless Glasses",
-        "image": "/Assets/myassets/cat.jpg",
-        "description": "Minimalist Face mask for a clean and sophisticated style.",
-        "date": "2024-09-14"
     }
+    
 ]
