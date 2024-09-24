@@ -45,9 +45,9 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="card card-compact bg-white w-54 text-black shadow-xl"
+      className="card card-compact bg-white w-54 h-54 cursor-pointer text-black shadow-xl"
     >
-      <figure>
+      <figure  >
         <Image
           src={filter.image} // Use the filter image here
           alt={filter.title}
