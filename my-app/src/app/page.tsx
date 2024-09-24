@@ -3,8 +3,8 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import React, { useEffect, useRef, useState } from 'react';
 import FilterBoard from '@/components/FilterBoard';
-import VideoPlayer from '@/components/VideoPlayer';
-
+// import VideoPlayer from '@/components/VideoPlayer';
+import FaceTracking from '@/components/FaceTracking';
 export default function Home() {
   // Specify the type for videoRef as HTMLVideoElement
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -17,20 +17,7 @@ export default function Home() {
       setLoading(false); // Hide loader after components are ready
     }, 2000); // Adjust this delay as needed
 
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          const video = videoRef.current; // Change 'let' to 'const'
-          if (video) {
-            video.srcObject = stream; // No longer shows an error
-            video.play();
-          }
-        })
-        .catch((err) => {
-          console.log('Error accessing the camera: ', err);
-        });
-    }
+    
   }, []);
 
   if (loading) {
@@ -49,7 +36,8 @@ export default function Home() {
         <div className="w-[50%]">
           <FilterBoard />
         </div>
-        <VideoPlayer />
+        {/* <VideoPlayer /> */}
+        <FaceTracking />
       </div>
     </>
   );
