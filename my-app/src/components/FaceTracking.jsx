@@ -4,10 +4,10 @@ import 'mind-ar/dist/mindar-face-aframe.prod.js';
 import { useFilterContext } from '@/context/FilterContext'; // Import the context hook
 
 const FaceTracking = () => {
-  const { selectedFilterId } = useFilterContext(); // Access the selected filter from the context
+  const { selectedFilter } = useFilterContext(); // Access the selected filter from the context
 
   // Log the selected filter ID
-  console.log('Selected Filter ID:', selectedFilterId);
+  console.log('Selected Filter:', selectedFilter);
 
   return (
     <div className="w-[50%] h-[90%] relative top-10 m-2 flex flex-col items-center justify-center z-10">
@@ -15,22 +15,27 @@ const FaceTracking = () => {
       
         {/* Consolidated a-assets for glasses models */}
         <a-assets>
-          <a-asset-item id="glassesModel1" src="/Assets/glasses/scene.gltf"></a-asset-item>
-          <a-asset-item id="glassesModel2" src="/Assets/black-glasses/scene.gltf"></a-asset-item>
-          <a-asset-item id="glassesModel3" src="/Assets/new_glasses/scene.gltf"></a-asset-item>
+          <a-asset-item className='glasses' id="Model1" src="/Assets/glasses/scene.gltf"></a-asset-item>
+          <a-asset-item className='glasses' id="Model2" src="/Assets/black-glasses/scene.gltf"></a-asset-item>
+          <a-asset-item className='glasses' id="Model3" src="/Assets/new_glasses/scene.gltf"></a-asset-item>
+          {/* <a-asset-item className='hat' id="Model4" src="/Assets/hat/scene.gltf"></a-asset-item> */}
+          <a-asset-item className='hat' id="Model4" src="/Assets/hat1/scene.gltf"></a-asset-item>
+          <a-asset-item className='hat' id="Model5" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/hat/scene.gltf"></a-asset-item>
+          <a-asset-item className='hat' id="Model6" src="/Assets/mustache/scene.gltf"></a-asset-item>
         </a-assets>
 
         <a-camera active="false" position="0 0 0"></a-camera>
 
-        {/* Check if a filter is selected and render the corresponding glasses model */}
-        {selectedFilterId && (
-          <a-entity mindar-face-target="anchorIndex: 168">
+        {/* Render the selected model with dynamic transformations */}
+        {selectedFilter && (
+          <a-entity mindar-face-target="anchorIndex: 10">
             <a-gltf-model 
-              rotation="0 0 0" 
-              position="0 0.2 0" 
-              scale="0.2 0.2 0.2" 
-              src={`#glassesModel${selectedFilterId}`} // Use the selected filter's ID to choose the model
-              onLoaded={() => console.log(`Model ${selectedFilterId} loaded successfully.`)} // Log when the model is loaded
+              animation-mixer="enabled: false"
+              rotation={selectedFilter.rotation} 
+              position={selectedFilter.position} 
+              scale={selectedFilter.scale} 
+              src={`#Model${selectedFilter.id}`} // Use the selected filter's ID to choose the model
+              onLoaded={() => console.log(`Model ${selectedFilter.id} loaded successfully.`)} // Log when the model is loaded
             ></a-gltf-model>
           </a-entity>
         )}

@@ -1,11 +1,11 @@
 Model Information:
-* title:	Simple Hat For Ray II
-* source:	https://sketchfab.com/3d-models/simple-hat-for-ray-ii-fb83cd5fdc114bceb9367dcbe00a33a5
-* author:	ChamberSu1996 (https://sketchfab.com/chambersu1996)
+* title:	Hat
+* source:	https://sketchfab.com/3d-models/hat-3884980ab7dc4e6992728947df26e61a
+* author:	xSe7eNx (https://sketchfab.com/xSe7eNx)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Simple Hat For Ray II" (https://sketchfab.com/3d-models/simple-hat-for-ray-ii-fb83cd5fdc114bceb9367dcbe00a33a5) by ChamberSu1996 (https://sketchfab.com/chambersu1996) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Hat" (https://sketchfab.com/3d-models/hat-3884980ab7dc4e6992728947df26e61a) by xSe7eNx (https://sketchfab.com/xSe7eNx) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

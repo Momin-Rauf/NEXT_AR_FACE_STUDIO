@@ -15,6 +15,9 @@ interface Filter {
   image: string;
   title: string;
   description: string;
+  rotation: string;
+  position: string;
+  scale: string;
 }
 
 interface FilterCardProps {
@@ -24,7 +27,7 @@ interface FilterCardProps {
 const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverContentRef = useRef<HTMLDivElement | null>(null);
-  const { setSelectedFilterId } = useFilterContext(); // Access the context to set the selected filter
+  const { setSelectedFilter } = useFilterContext(); // Access the context to set the selected filter
 
   // GSAP animation for hover effect
   useEffect(() => {
@@ -36,8 +39,13 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   }, [isHovered]);
 
   const handleFilterSelection = () => {
-    console.log('Selected Filter ID:', filter.id); // Log the selected filter ID
-    setSelectedFilterId(filter.id); // Set the selected filter on click
+    console.log('Selected Filter:', filter); // Log the selected filter
+    setSelectedFilter({
+      id: filter.id,
+      rotation: filter.rotation,
+      position: filter.position,
+      scale: filter.scale,
+    }); // Set the selected filter in the context
   };
 
   return (

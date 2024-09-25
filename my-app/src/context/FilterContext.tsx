@@ -2,16 +2,16 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 // Define the Filter interface
 interface Filter {
-  id: number; // Assuming ID is a number
-  image: string;
-  title: string;
-  description: string;
+  id: number; 
+  rotation: string;
+  position: string;
+  scale: string;
 }
 
 // Define the context properties
 interface FilterContextProps {
-  selectedFilterId: number | null; // Only store the ID of the selected filter
-  setSelectedFilterId: (filterId: number | null) => void; // Function to update the selected filter ID
+  selectedFilter: Filter | null;
+  setSelectedFilter: (filter: Filter | null) => void;
 }
 
 // Create the context
@@ -19,11 +19,11 @@ const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
 // Create the FilterProvider component
 export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Initialize selectedFilterId state to hold the filter ID
-  const [selectedFilterId, setSelectedFilterId] = useState<number | null>(null);
+  // Initialize selectedFilter state to hold the filter object
+  const [selectedFilter, setSelectedFilter] = useState<Filter | null>(null);
 
   return (
-    <FilterContext.Provider value={{ selectedFilterId, setSelectedFilterId }}>
+    <FilterContext.Provider value={{ selectedFilter, setSelectedFilter }}>
       {children}
     </FilterContext.Provider>
   );

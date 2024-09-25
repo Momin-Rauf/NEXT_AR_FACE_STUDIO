@@ -3,203 +3,210 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 2353,
+      "count": 32716,
       "max": [
-        0.21804243326187134,
-        0.20822206139564514,
-        1.6187602281570435
+        0.6384583115577698,
+        0.5821595788002014,
+        0.16475200653076172
       ],
       "min": [
-        -0.20699091255664825,
-        -0.2077094316482544,
-        1.3638814687728882
+        -0.6275783181190491,
+        -0.5749216675758362,
+        -0.179110586643219
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 28236,
+      "byteOffset": 392592,
       "componentType": 5126,
-      "count": 2353,
+      "count": 32716,
       "max": [
-        0.998775839805603,
-        0.9993757009506226,
-        0.9990270733833313
+        0.9998980760574341,
+        0.9997473955154419,
+        0.9999797344207764
       ],
       "min": [
-        -0.9992656707763672,
-        -0.9975540637969971,
-        -0.9995851516723633
+        -0.9999436140060425,
+        -0.9999954700469971,
+        -0.999811053276062
       ],
       "type": "VEC3"
     },
     {
-      "bufferView": 3,
-      "componentType": 5126,
-      "count": 2353,
-      "max": [
-        0.9999987483024597,
-        0.999976634979248,
-        0.9995067715644836,
-        1.0
-      ],
-      "min": [
-        -0.9998672604560852,
-        -0.9999790787696838,
-        -0.9999154806137085,
-        -1.0
-      ],
-      "type": "VEC4"
-    },
-    {
-      "bufferView": 3,
-      "byteOffset": 37648,
-      "componentType": 5126,
-      "count": 2353,
-      "max": [
-        1.0,
-        1.0,
-        1.0,
-        1.0
-      ],
-      "min": [
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "type": "VEC4"
-    },
-    {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 2353,
+      "count": 32716,
       "max": [
-        0.9999188780784607,
-        0.44998615980148315
+        0.9969894289970398,
+        0.9452205300331116
       ],
       "min": [
-        8.135214011417702e-05,
-        8.135214011417702e-05
-      ],
-      "type": "VEC2"
-    },
-    {
-      "bufferView": 1,
-      "byteOffset": 18824,
-      "componentType": 5126,
-      "count": 2353,
-      "max": [
-        0.9999188780784607,
-        0.44998615980148315
-      ],
-      "min": [
-        8.135214011417702e-05,
-        8.135214011417702e-05
+        0.0034083316568285227,
+        0.06291504204273224
       ],
       "type": "VEC2"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 12072,
+      "count": 171648,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 785184,
+      "componentType": 5126,
+      "count": 997,
+      "max": [
+        0.35760432481765747,
+        0.2980082631111145,
+        -0.07813672721385956
+      ],
+      "min": [
+        -0.3497646152973175,
+        -0.2967509925365448,
+        -0.12329407036304474
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 797148,
+      "componentType": 5126,
+      "count": 997,
+      "max": [
+        0.991418719291687,
+        0.9734621047973633,
+        0.23838138580322266
+      ],
+      "min": [
+        -0.9945740699768066,
+        -0.9996176958084106,
+        -0.14102903008460999
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 261728,
+      "componentType": 5126,
+      "count": 997,
+      "max": [
+        0.9141960144042969,
+        0.9160524606704712
+      ],
+      "min": [
+        0.7875819802284241,
+        0.3184647858142853
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 686592,
+      "componentType": 5125,
+      "count": 4608,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "ChamberSu1996 (https://sketchfab.com/chambersu1996)",
+      "author": "xSe7eNx (https://sketchfab.com/xSe7eNx)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/simple-hat-for-ray-ii-fb83cd5fdc114bceb9367dcbe00a33a5",
-      "title": "Simple Hat For Ray II"
+      "source": "https://sketchfab.com/3d-models/hat-3884980ab7dc4e6992728947df26e61a",
+      "title": "Hat"
     },
-    "generator": "Sketchfab-12.67.0",
+    "generator": "Sketchfab-12.68.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 48288,
+      "byteLength": 705024,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 37648,
-      "byteOffset": 48288,
+      "byteLength": 269704,
+      "byteOffset": 705024,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 56472,
-      "byteOffset": 85936,
+      "byteLength": 809112,
+      "byteOffset": 974728,
       "byteStride": 12,
-      "name": "floatBufferViews",
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 75296,
-      "byteOffset": 142408,
-      "byteStride": 16,
       "name": "floatBufferViews",
       "target": 34962
     }
   ],
   "buffers": [
     {
-      "byteLength": 217704,
+      "byteLength": 1783840,
       "uri": "scene.bin"
-    }
-  ],
-  "images": [
-    {
-      "uri": "textures/HatLP_baseColor.png"
-    },
-    {
-      "uri": "textures/HatLP_normal.png"
     }
   ],
   "materials": [
     {
-      "alphaMode": "BLEND",
       "doubleSided": true,
-      "name": "HatLP",
-      "normalTexture": {
-        "index": 1
-      },
+      "name": "Sombrero",
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          1.0,
-          1.0,
-          1.0,
-          0.9
+          0.8,
+          0.8,
+          0.8,
+          1.0
         ],
-        "baseColorTexture": {
-          "index": 0
-        },
-        "metallicFactor": 0.25,
-        "roughnessFactor": 0.5
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8040408206
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Sombrero2",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8,
+          0.8,
+          0.8,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8040408206
       }
     }
   ],
   "meshes": [
     {
-      "name": "HatLP_HatLP_0",
+      "name": "Sombrero_Sombrero_0",
       "primitives": [
         {
           "attributes": {
-            "COLOR_0": 3,
             "NORMAL": 1,
             "POSITION": 0,
-            "TANGENT": 2,
-            "TEXCOORD_0": 4,
-            "TEXCOORD_1": 5
+            "TEXCOORD_0": 2
           },
-          "indices": 6,
+          "indices": 3,
           "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Sombrero_Sombrero2_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
           "mode": 4
         }
       ]
@@ -252,7 +259,7 @@
         0.0,
         1.0
       ],
-      "name": "SimpleHatForRayII.fbx"
+      "name": "03fd1160654e48a68ec9435a4987c388.fbx"
     },
     {
       "children": [
@@ -262,39 +269,36 @@
     },
     {
       "children": [
-        4
+        4,
+        5
       ],
       "matrix": [
         100.0,
         0.0,
         0.0,
         0.0,
-        0.0,
-        -4.371139006309477e-06,
-        -99.9999999999999,
-        0.0,
-        0.0,
-        99.9999999999999,
-        -4.371139006309477e-06,
+        -0.0,
+        -1.629206793918314e-05,
+        -99.99999999999868,
         0.0,
         0.0,
+        99.99999999999868,
+        -1.629206793918314e-05,
         0.0,
-        0.0,
+        -0.0002053160424111411,
+        18.18187713623047,
+        -1.699206040939316e-05,
         1.0
       ],
-      "name": "HatLP"
+      "name": "Sombrero"
     },
     {
       "mesh": 0,
-      "name": "HatLP_HatLP_0"
-    }
-  ],
-  "samplers": [
+      "name": "Sombrero_Sombrero_0"
+    },
     {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 10497,
-      "wrapT": 10497
+      "mesh": 1,
+      "name": "Sombrero_Sombrero2_0"
     }
   ],
   "scene": 0,
@@ -304,16 +308,6 @@
       "nodes": [
         0
       ]
-    }
-  ],
-  "textures": [
-    {
-      "sampler": 0,
-      "source": 0
-    },
-    {
-      "sampler": 0,
-      "source": 1
     }
   ]
 }
