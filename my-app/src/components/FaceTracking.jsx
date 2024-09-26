@@ -19,7 +19,7 @@ const FaceTracking = () => {
           <a-asset-item className='glasses' id="Model2" src="/Assets/black-glasses/scene.gltf"></a-asset-item>
           <a-asset-item className='glasses' id="Model3" src="/Assets/new_glasses/scene.gltf"></a-asset-item>
           <a-asset-item className='hat' id="Model4" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/hat/scene.gltf"></a-asset-item>
-          <a-asset-item className='hat' id="Model5" src="/Assets/mustache/scene.gltf"></a-asset-item>
+          <a-asset-item className='hat' id="Model" src="/Assets/mustache/scene.gltf"></a-asset-item>
         </a-assets>
 
         <a-camera className="w-[50%] shadow-md shadow-black h-[70%] border-2 border-black relative top-20  m-2 flex flex-col items-center justify-center z-0" active="false" position="0 0 0"></a-camera>
