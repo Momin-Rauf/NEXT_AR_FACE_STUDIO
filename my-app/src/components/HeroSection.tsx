@@ -1,4 +1,5 @@
-    import React, { useEffect, useRef } from "react";
+   'use client';
+   import React, { useEffect, useRef } from "react";
     import Link from "next/link";
     import { gsap } from "gsap";
     import Image from "next/image";

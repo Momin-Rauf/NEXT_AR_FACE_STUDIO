@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+'use client';
+
 import Link from "next/link";
 const AboutWalee = () => {
  
