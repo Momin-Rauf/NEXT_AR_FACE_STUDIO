@@ -31,8 +31,8 @@ export default function FaceStudio() {
   return (
     <FilterProvider>
       <Navbar />
-      <div className="bg-gradient-to-r pl-2 from-[#d2bcbc] to-[#9270ed] h-screen flex justify-between flex-row">
-        <div className="w-[50%]">
+      <div className="bg-white pl-2  h-screen flex justify-between flex-row">
+        <div className="mt-24 w-[50%]">
           <FilterBoard />
         </div>
         <FaceTracking />

@@ -45,6 +45,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       rotation: filter.rotation,
       position: filter.position,
       scale: filter.scale,
+      anchor:filter.anchor
     }); // Set the selected filter in the context
   };
 
@@ -53,7 +54,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="card card-compact bg-white w-54 h-54 cursor-pointer text-black shadow-xl transition-transform duration-300"
+      className="card card-compact  bg-white w-54 h-54 cursor-pointer text-black shadow-xl transition-transform duration-300"
       role="button"
       tabIndex={0}
       onKeyPress={(e) => {
@@ -67,7 +68,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
         <Image
           src={filter.image}
           alt={filter.title}
-          className="w-full h-48 object-cover"
+          className="w-full "
           layout="responsive"
           width={216}
           height={192}

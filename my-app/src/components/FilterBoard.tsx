@@ -29,13 +29,20 @@ const FilterBoard = () => {
     };
 
     return (
-        <div className="w-full">
-            <div role="tablist" className="tabs tabs-bordered">
-                <input type="radio" name="my_tabs_2" role="tab" className="tab bg-white text-black" aria-label="Custom" defaultChecked />
+        <div className="w-full bg-blue-400 ">
+            <div role="tablist" className="tabs tabs-bordered tabs-lg">
+            <input 
+    type="radio" 
+    name="my_tabs_2" 
+    role="tab" 
+    className="tab flex-grow bg-white w-[300px] text-black"  // Increase this width as per your needs
+    aria-label="Face" 
+    defaultChecked 
+/>
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">
                     <input
                         type="file"
-                        className="file-input-xs m-2 bg-white text-black w-full max-w-xs"
+                        className="file-input-xs my-2 bg-white text-black w-full max-w-xs"
                         onChange={handleFileChange}
                     />
                     <button className="btn btn-xs bg-white text-black hover:bg-gray-400 hover:text-white" onClick={() => setIsModalOpen(true)}>

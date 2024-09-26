@@ -6,6 +6,7 @@ interface Filter {
   rotation: string;
   position: string;
   scale: string;
+  anchor:number;
 }
 
 // Define the context properties
