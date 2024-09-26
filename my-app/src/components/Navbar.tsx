@@ -24,7 +24,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div ref={navbarRef} className="border-1 p-3 bg-white text-black flex flex-row items-center justify-between">
+    <div ref={navbarRef} className="border-1 fixed z-10 shadow-md border-[1px] w-[100%] p-3 bg-white text-black flex flex-row items-center justify-between">
       {/* Logo */}
       <Image src="/walee-logo.png" alt="Logo" width={100} height={100} className="w-[10%] h-[10%]" /> {/* Adjust width and height as needed */}
 
@@ -43,7 +43,9 @@ const Navbar = () => {
           <Link href="/contact">Contact us</Link>
         </li>
       </ul>
+      
     </div>
+
   );
 };
 
