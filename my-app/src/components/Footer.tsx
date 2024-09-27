@@ -4,7 +4,7 @@ const Footer = () => {
  
 
   return (
-    <footer className="footer gap-96  border-[2px] border-black text-black bg-white">
+    <footer className="footer gap-96   text-black bg-white">
  
   <nav className="text-xl" >
     <h6 className="footer-title">Services</h6>
