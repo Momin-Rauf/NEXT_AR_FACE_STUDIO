@@ -4,7 +4,6 @@
 // import Image from "next/image";
 
 import Upload from '@/components/Upload';
-import React, { useEffect, useState } from "react";
 import Navbar from '@/components/Navbar';
 import '../app/globals.css';
 
