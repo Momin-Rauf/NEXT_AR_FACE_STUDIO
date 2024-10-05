@@ -15,10 +15,10 @@ export const authOptions: NextAuthOptions = {
       id: "Credentials",
       name: "Credentials",
       credentials: {
-        username: { label: "Email", type: "text", placeholder: "jsmith" },
+        identifier: { label: "Email", type: "text", placeholder: "jsmith" }, // Use identifier instead of username
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials: Credentials): Promise<any> { // Specify the type for credentials
         await dbConnect();
         try {
           const user = await UserModel.findOne({
@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
           } else {
             throw new Error("Incorrect password");
           }
-        } catch  {
+        } catch {
           // You may want to log or handle the error here
           throw new Error("Authorization failed");
         }
@@ -61,7 +61,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    async session({ session, user, token }) {
+    async session({ session, token }) { // Remove user if not used
       if (token) {
         session.user._id = token._id;
         session.user.isVerified = token.isVerified;
@@ -73,7 +73,6 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/SignIn",
   },
-
   session: {
     strategy: "jwt",
   },
