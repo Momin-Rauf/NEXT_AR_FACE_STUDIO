@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image';
+
 import dummy_data from "../lib/dummy_data.json";
 import FilterCard from './FilterCard';
 

@@ -15,7 +15,7 @@ export default function Upload() {
   const [file, setFile] = useState<File | null>(null); // State to store the selected file
   const [uploading, setUploading] = useState<boolean>(false); // State to indicate the upload status
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null); // State to store the uploaded image URL
-  const [modelData, setModelData] = useState<any>(null);
+  const [modelData, setModelData] = useState<string>('');
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     setFile(selectedFile || null); // Set the selected file or null if no file is selected
