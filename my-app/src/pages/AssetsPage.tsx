@@ -1,7 +1,7 @@
 'use client';
-import { listAll, ref, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase";
-import Image from "next/image";
+// import { listAll, ref, getDownloadURL } from "firebase/storage";
+// import { storage } from "../firebase";
+// import Image from "next/image";
 
 import Upload from '@/components/Upload';
 import React, { useEffect, useState } from "react";
