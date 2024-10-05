@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
         identifier: { label: "Email", type: "text", placeholder: "jsmith" }, // Use identifier instead of username
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: Credentials): Promise<any> { // Specify the type for credentials
+      async authorize(credentials: any): Promise<any> { // Specify the type for credentials
         await dbConnect();
         try {
           const user = await UserModel.findOne({
