@@ -6,17 +6,14 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
 
 interface ModelResult {
-  // Define the structure of the model result if you have specific fields
+
   taskId: string;
   status: string;
   modelUrl: string; // Example, change according to actual response
 }
 
 export default function Upload() {
-  const [modelData, setModelData] = useState<ModelResult | null>(null);
-  const [CustomModelImage, setCustomModelImage] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+
   const [file, setFile] = useState<File | null>(null); // State to store the selected file
   const [uploading, setUploading] = useState<boolean>(false); // State to indicate the upload status
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null); // State to store the uploaded image URL
@@ -78,7 +75,7 @@ export default function Upload() {
     } catch (error) {
       console.error("Error starting 3D model generation:", error);
       setError("Error starting 3D model generation.");
-      setLoading(false);
+      setUploading(false);
     }
   };
 
@@ -109,7 +106,7 @@ export default function Upload() {
       console.error("Error fetching the 3D model:", error);
       setError("Error fetching the 3D model.");
     } finally {
-      setLoading(false);
+      setUploading(false);
     }
   };
 
@@ -179,3 +176,11 @@ export default function Upload() {
     </div>
   );
 }
+function setError(arg0: string) {
+  throw new Error("Function not implemented.");
+}
+
+function setModelData(modelResult: ModelResult) {
+  throw new Error("Function not implemented.");
+}
+
