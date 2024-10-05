@@ -6,18 +6,16 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
 
 interface ModelResult {
-
   taskId: string;
   status: string;
-  modelUrl: string; // Example, change according to actual response
+  modelUrl: string; 
 }
 
 export default function Upload() {
-
   const [file, setFile] = useState<File | null>(null); // State to store the selected file
   const [uploading, setUploading] = useState<boolean>(false); // State to indicate the upload status
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null); // State to store the uploaded image URL
-
+  const [modelData, setModelData] = useState<any>(null);
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     setFile(selectedFile || null); // Set the selected file or null if no file is selected
@@ -41,6 +39,8 @@ export default function Upload() {
     }
   };
 
+
+
   const fetchModelAndGenerate = async () => {
     if (!uploadedUrl) return;
 
@@ -49,7 +49,7 @@ export default function Upload() {
       enable_pbr: true,
     };
 
-    const YOUR_API_KEY = "msy_3ISMmzdtT6WYkLQw9YTCNFstajd77yszx8Ky";
+    const YOUR_API_KEY = process.env.NEXT_PUBLIC_MESHY_API_KEY;
 
     try {
       // First API request to start the 3D model generation
@@ -74,7 +74,7 @@ export default function Upload() {
       await imgToModel(result);
     } catch (error) {
       console.error("Error starting 3D model generation:", error);
-      setError("Error starting 3D model generation.");
+     
       setUploading(false);
     }
   };
@@ -82,7 +82,7 @@ export default function Upload() {
   const imgToModel = async (taskID: string) => {
     if (!taskID) return;
 
-    const YOUR_API_KEY = "msy_3ISMmzdtT6WYkLQw9YTCNFstajd77yszx8Ky";
+    const YOUR_API_KEY = process.env.NEXT_PUBLIC_MESHY_API_KEY;
 
     try {
       const modelResponse = await fetch(
@@ -104,7 +104,7 @@ export default function Upload() {
       console.log(modelResult);
     } catch (error) {
       console.error("Error fetching the 3D model:", error);
-      setError("Error fetching the 3D model.");
+   
     } finally {
       setUploading(false);
     }
@@ -131,26 +131,6 @@ export default function Upload() {
             {uploading ? "Uploading..." : "Upload Image"}
           </button>
 
-          <div className="dropdown dropdown-right">
-            <button
-              tabIndex={0}
-              className="btn bg-gray-100 text-black hover:bg-gray-200 m-1 px-4 py-2 rounded-md"
-            >
-              Select Category
-            </button>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu bg-white rounded-box w-52 p-2 shadow-lg border border-gray-200"
-            >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Item 2</a>
-              </li>
-            </ul>
-          </div>
-
           {uploadedUrl && (
             <div className="mt-4">
               <p className="text-sm text-gray-600 mb-2">Uploaded image:</p>
@@ -176,11 +156,3 @@ export default function Upload() {
     </div>
   );
 }
-function setError(arg0: string) {
-  throw new Error("Function not implemented.");
-}
-
-function setModelData(modelResult: ModelResult) {
-  throw new Error("Function not implemented.");
-}
-
