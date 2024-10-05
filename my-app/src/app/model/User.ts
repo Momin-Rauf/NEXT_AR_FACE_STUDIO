@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface UserFilter extends Document {
     image_url: string;
     model_url: string;
+    category:string;
     createdAt: Date;
 }
 
@@ -12,6 +13,10 @@ const UserFilterSchema: Schema<UserFilter> = new Schema({
         required: true
     },
     model_url: {
+        type: String,
+        required: true
+    },
+    category: {
         type: String,
         required: true
     },
