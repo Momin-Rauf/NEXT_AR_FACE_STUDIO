@@ -4,10 +4,6 @@ import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "../../../model/User";
 
-interface Credentials {
-  identifier: string; // Assuming this is either email or username
-  password: string;
-}
 
 export const authOptions: NextAuthOptions = {
   providers: [
