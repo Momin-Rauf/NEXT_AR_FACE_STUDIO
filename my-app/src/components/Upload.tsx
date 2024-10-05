@@ -82,7 +82,7 @@ export default function Upload() {
 
   const imgToModel = async (taskID: string) => {
     if (!taskID) return;
-
+    
     const YOUR_API_KEY = process.env.NEXT_PUBLIC_MESHY_API_KEY;
 
     try {
