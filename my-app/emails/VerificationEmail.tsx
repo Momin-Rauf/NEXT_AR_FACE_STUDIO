@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Html, Head, Body, Container, Text } from "@react-email/components";
+import { Html, Head, Button,Body, Container, Text } from "@react-email/components";
 
 
 interface VerificationEmailProps {
@@ -17,8 +17,9 @@ export function VerificationEmail({ username, otp }:VerificationEmailProps) {
           <Text style={styles.message}>
             Thank you for signing up! Use the OTP below to verify your account.
           </Text>
+          <Button href={`http://localhost:3000/verify/${username}`} >VerifyHere</Button>
           <Text style={styles.otp}>Your OTP: <strong>{otp}</strong></Text>
-          <Text style={styles.footer}>
+          <Text >
             If you didn’t request this, please ignore this email.
           </Text>
         </Container>
