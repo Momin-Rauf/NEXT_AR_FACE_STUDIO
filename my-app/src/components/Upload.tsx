@@ -101,7 +101,7 @@ export default function Upload() {
 
       const modelResult: ModelResult = await modelResponse.json();
       setModelData(modelResult);
-      console.log(modelResult);
+      console.log(modelData);
     } catch (error) {
       console.error("Error fetching the 3D model:", error);
    
