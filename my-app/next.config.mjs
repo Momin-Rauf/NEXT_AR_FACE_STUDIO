@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['firebasestorage.googleapis.com'], // Allow images from Firebase Storage
+    domains: ['firebasestorage.googleapis.com'],
+  },
+  experimental: {
+    appDir: true, // Enable App Router features
   },
   webpack(config) {
-    // Adding a rule to handle .glb and .gltf files
     config.module.rules.push({
       test: /\.(glb|gltf)$/,
       use: {
