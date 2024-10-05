@@ -1,9 +1,16 @@
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "../../../model/User";
 
+// Define a type for the credentials
+interface Credentials {
+  identifier: string; // Assuming this is either email or username
+  password: string;
+}
+
+// Define the auth options
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -13,7 +20,7 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials: Credentials): Promise<User | null> {
         await dbConnect();
         try {
           const user = await UserModel.findOne({
@@ -34,13 +41,15 @@ export const authOptions: NextAuthOptions = {
             credentials.password,
             user.password
           );
+
           if (isPasswordCorrect) {
-            return user;
+            return user; // Return the user object
           } else {
             throw new Error("Incorrect password");
           }
-        } catch (err: any) {
+        } catch (error) {
           // You may want to log or handle the error here
+          console.error(error); // Log the error for debugging
           throw new Error("Authorization failed");
         }
       },
@@ -67,7 +76,6 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/SignIn",
   },
-
   session: {
     strategy: "jwt",
   },
