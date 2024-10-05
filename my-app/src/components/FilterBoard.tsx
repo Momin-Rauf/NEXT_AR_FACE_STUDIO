@@ -40,15 +40,7 @@ const FilterBoard = () => {
     defaultChecked 
 />
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">
-                    <input
-                        type="file"
-                        className="file-input-xs my-2 bg-white text-black w-full max-w-xs"
-                        onChange={handleFileChange}
-                    />
-                    <button className="btn btn-xs bg-white text-black hover:bg-gray-400 hover:text-white" onClick={() => setIsModalOpen(true)}>
-                        Upload
-                    </button>
-                    
+                   
                     <div className="max-w-md">
                         <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
                             <div className="grid place-items-center h-full w-12 text-gray-300">

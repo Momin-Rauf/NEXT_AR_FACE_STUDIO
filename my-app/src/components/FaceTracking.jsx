@@ -32,7 +32,7 @@ const FaceTracking = () => {
           <a-asset-item id="Model2" src="/Assets/black-glasses/scene.gltf"></a-asset-item>
           <a-asset-item id="Model3" src="/Assets/new_glasses/scene.gltf"></a-asset-item>
           <a-asset-item id="Model4" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/hat/scene.gltf"></a-asset-item>
-          <a-asset-item id="Model5" src="/Assets/mustache/scene.gltf"></a-asset-item>
+          <a-asset-item id="Model5" src="/Assets/meshy_glasses/model.glb"></a-asset-item>
         </a-assets>
 
         <a-camera
