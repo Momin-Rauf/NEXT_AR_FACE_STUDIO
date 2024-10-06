@@ -13,7 +13,7 @@ export async function sendVerificationEmail(
 
         // Send the email
         const sendResponse = await resend.emails.send({
-            from: 'mominrauf33@gmail.com',  // Ensure this is verified
+            from: 'Acme <onboarding@resend.dev>',  // Ensure this is verified
             to: email,
             subject: 'AR Face Studio | Verification Code',
             react: emailBody,  // Use the rendered email body
