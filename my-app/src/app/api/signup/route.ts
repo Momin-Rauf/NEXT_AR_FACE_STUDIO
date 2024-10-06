@@ -8,7 +8,7 @@ export async function POST(request: Request) {
 
   try {
     const { username, email, password } = await request.json();
-
+    console.log(username, email, password);
     const existingUserVerification = await UserModel.findOne({
       username,
       isVerified: true,
@@ -60,6 +60,7 @@ export async function POST(request: Request) {
     }
 
     const mail = await sendVerificationEmail(email, username, verifyCode);
+    console.log(email,password,verifyCode);
     if (!mail.success) {
       return new Response(
         JSON.stringify({
