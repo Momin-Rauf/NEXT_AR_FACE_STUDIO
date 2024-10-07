@@ -7,13 +7,15 @@ export async function POST(request: Request) {
   await dbConnect();
 
   try {
-    const { username, email, password } = await request.json();
+    const res = await request.json();
+    const { username, email, password } = res;
     console.log(username, email, password);
+
+    // Check if the username is already taken and verified
     const existingUserVerification = await UserModel.findOne({
       username,
       isVerified: true,
     });
-
     if (existingUserVerification) {
       return new Response(
         JSON.stringify({
@@ -24,26 +26,35 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if email or username is already registered
     const existingUserByEmail = await UserModel.findOne({ email });
+    const existingUserByUsername = await UserModel.findOne({ username });
+    console.log("existingUserByEmail", existingUserByEmail);
     const verifyCode = Math.floor(10000 + Math.random() * 90000).toString();
 
-    if (existingUserByEmail) {
-      if (existingUserByEmail.isVerified) {
+    // If either email or username exists
+    if (existingUserByEmail || existingUserByUsername) {
+      const checkUser = existingUserByEmail || existingUserByUsername;
+
+      // Check if the user exists and is verified
+      if (checkUser && checkUser.isVerified) {
         return new Response(
           JSON.stringify({
             success: false,
-            message: 'Email is already registered and verified',
+            message: 'Email or username is already registered and verified',
           }),
           { status: 400 }
         );
-      } else {
+      } else if (checkUser) { // Additional check to ensure checkUser is not null
+        console.log('Updating existing unverified user');
         const hashedPassword = await bcrypt.hash(password, 10);
-        existingUserByEmail.password = hashedPassword;
-        existingUserByEmail.verifyCode = verifyCode;
-        existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000); // 1 hour expiry
-        await existingUserByEmail.save();
+        checkUser.password = hashedPassword;
+        checkUser.verifyCode = verifyCode;
+        checkUser.verifyCodeExpiry = new Date(Date.now() + 3600000); // 1 hour expiry
+        await checkUser.save();
       }
     } else {
+      // Create new user if neither email nor username exists
       const hashedPassword = await bcrypt.hash(password, 10);
       const expiryDate = new Date();
       expiryDate.setHours(expiryDate.getHours() + 1); // Set expiry to 1 hour ahead
@@ -59,8 +70,8 @@ export async function POST(request: Request) {
       await newUser.save();
     }
 
+    // Send verification email
     const mail = await sendVerificationEmail(email, username, verifyCode);
-    console.log(email,password,verifyCode);
     if (!mail.success) {
       return new Response(
         JSON.stringify({

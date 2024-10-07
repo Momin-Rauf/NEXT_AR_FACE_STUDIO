@@ -15,7 +15,7 @@ export async function sendVerificationEmail(
       from: process.env.GOOGLE_EMAIL,  // Ensure GOOGLE_EMAIL is set in your environment
       to: email,
       subject: 'AR Face Studio | Verification Code',
-      html: `<h2>This is your verification code </h2><pre><b>${verifyCode}</b></pre>` // Now this is a string, not a JSX.Element
+      html: `<h2>Hello ${username} This is your verification code </h2><pre><b>${verifyCode}</b></pre>` // Now this is a string, not a JSX.Element
     };
 
     // Await the sendMail function to handle it as a promise

@@ -1,30 +1,37 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-export { default } from "next-auth/middleware"
-import { getToken } from "next-auth/jwt"
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getToken } from "next-auth/jwt";
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-    const token = await getToken({ req: request })
-    const url = request.nextUrl
+    console.log('Middleware invoked'); // Check if middleware is hit
+    
+    const token = await getToken({ req: request });
+    console.log('Token:', token); // Log the token value
 
-    // If the user is already authenticated and is trying to access the sign-in page, redirect them away
-    if (token && url.pathname.startsWith('/SignIn')) {
-        return NextResponse.redirect(new URL('/', request.url)) // Redirect to home if signed in
+    const { pathname, searchParams } = request.nextUrl;
+    console.log('Requested Path:', pathname); // Log the requested path
+
+    // If the user is authenticated and trying to access the sign-in page, redirect them away
+    if (token && pathname.startsWith('/SignIn')) {
+        console.log('Redirecting from SignIn to Home'); // Log redirection
+        return NextResponse.redirect(new URL('/', request.url));
     }
 
-    // If the user is not authenticated and tries to access protected routes, redirect to the sign-in page
-    if (!token && (url.pathname.startsWith('/AssetsPage') || url.pathname.startsWith('/FaceStudio'))) {
-        return NextResponse.redirect(new URL('/SignIn', request.url)) // Redirect to sign-in page if not authenticated
+    // If the user is not authenticated and tries to access protected routes, redirect to sign-in page
+    if (!token && (pathname.startsWith('/As') || pathname.startsWith('/FaceStudio'))) {
+        const redirectUrl = new URL('/SignIn', request.url);
+        if (!searchParams.has('callbackUrl')) {
+            redirectUrl.searchParams.set('callbackUrl', request.url);
+        }
+        console.log('Redirecting to SignIn:', redirectUrl.toString()); // Log the redirect URL
+        return NextResponse.redirect(redirectUrl);
     }
 
-   
-
-    // Allow the request to continue for authenticated users on protected routes or public routes
-    return NextResponse.next()
+    console.log('Request continues'); // Log when the request continues
+    return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
+
 export const config = {
-  matcher: ['/', '/SignIn', '/AssetsPage', '/FaceStudio']
-}
+  matcher: ['/', '/SignIn', '/FaceStudio'],
+};
