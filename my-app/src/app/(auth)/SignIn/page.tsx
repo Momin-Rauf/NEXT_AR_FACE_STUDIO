@@ -52,7 +52,7 @@ const LoginPage = () => {
     // Redirect on successful login
     if (result?.url) {
       console.log("Redirecting to:", result.url);  // Log the redirection URL
-      router.replace('/AssetsPage'); // Redirect to '/AssetsPage' after successful login
+      router.replace('/FaceStudio'); // Redirect to '/AssetsPage' after successful login
     } else {
       console.log("No redirection URL provided.");  // Log if URL is not present
     }

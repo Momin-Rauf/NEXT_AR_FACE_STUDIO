@@ -2,8 +2,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface UserFilter extends Document {
     image_url: string;
-    model_url: string;
-    category:string;
+    model_data: Buffer; // Storing the glb file as binary data
+    category: string;
     createdAt: Date;
 }
 
@@ -12,8 +12,8 @@ const UserFilterSchema: Schema<UserFilter> = new Schema({
         type: String,
         required: true
     },
-    model_url: {
-        type: String,
+    model_data: {
+        type: Buffer,  // Storing binary data for .glb file
         required: true
     },
     category: {
@@ -66,14 +66,9 @@ const UserSchema: Schema<User> = new Schema({
         type: Boolean,
         default: false
     },
-    userfilter:[UserFilterSchema]
-
-
-   
+    userfilter: [UserFilterSchema]
 });
 
-
-const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User",UserSchema)
- 
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User", UserSchema);
 
 export default UserModel;

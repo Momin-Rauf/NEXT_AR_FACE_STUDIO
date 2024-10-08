@@ -9,11 +9,20 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 interface ModelResult {
   taskId: string;
   status: string;
+  progress: string;
   modelUrl: string;
+}
+
+function ModelViewer({ modelUrl }: { modelUrl: string }) {
+  const { scene } = useGLTF(modelUrl);
+  return (
+    <primitive object={scene} dispose={null} />
+  );
 }
 
 export default function Upload() {
   const [file, setFile] = useState<File | null>(null);
+  const [Modelfile, setModelFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
   const [modelData, setModelData] = useState<string | null>(null);
@@ -23,6 +32,11 @@ export default function Upload() {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     setFile(selectedFile || null);
+  };
+
+  const ModelFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    setModelFile(selectedFile || null);
   };
 
   const handleUpload = async () => {
@@ -40,6 +54,30 @@ export default function Upload() {
       console.error("Error uploading the file", error);
     } finally {
       setUploading(false);
+    }
+  };
+
+  const handleModelUpload = async () => {
+    if (!Modelfile) return; // Check if Modelfile exists
+
+    setUploading(true); // Start uploading state
+
+    // Create a storage reference with a unique name for the GLB file
+    const storageRef = ref(storage, `models/${Modelfile.name}-${Date.now()}.glb`);
+
+    try {
+      // Upload the File to Firebase
+      await uploadBytes(storageRef, Modelfile);
+
+      // Get the download URL of the uploaded file
+      const url = await getDownloadURL(storageRef);
+      setModelData(url); // Set the model URL in state
+
+      console.log("GLB file uploaded successfully:", url); // Log the URL
+    } catch (error) {
+      console.error("Error uploading the GLB file", error); // Handle errors
+    } finally {
+      setUploading(false); // End uploading state
     }
   };
 
@@ -103,10 +141,14 @@ export default function Upload() {
 
         const modelResult: ModelResult = await modelResponse.json();
         setStatus(modelResult.status);
-        setProgress(modelResult.status);
-
+        setProgress(modelResult.progress);
+        
+        // Inside the pollForModel function
         if (modelResult.status === "SUCCEEDED") {
-          setModelData(modelResult.model_urls.glb); // Set the GLB model URL
+          const modelUrl = modelResult.model_urls.glb; // Extract the model URL
+          // Set the model URL in state
+          console.log("Model data:", modelUrl); // Log the model URL
+
           console.log("Model generation succeeded", modelResult);
           return;
         } else if (modelResult.status === "FAILED") {
@@ -122,11 +164,6 @@ export default function Upload() {
 
     checkStatus();
   };
-
-  function Model({ url }: { url: string }) {
-    const { scene } = useGLTF(url);
-    return <primitive object={scene} scale={1} />;
-  }
 
   return (
     <div className="flex h-screen p-24 flex-row justify-between items-center rounded-none shadow-xl">
@@ -169,16 +206,24 @@ export default function Upload() {
         {status && (
           <div>
             <p className="mt-4 text-sm text-gray-700">Status: {status} </p>
-            <p className="mt-4 text-sm text-gray-700">progress: {progress} </p>
+            <p className="mt-4 text-sm text-gray-700">Progress: {progress} </p>
             {status === "SUCCEEDED" ? (
               <div>
                 <p className="mt-4 text-sm text-green-700">Model generated!</p>
-                <Canvas style={{ width: "500px", height: "500px" }}>
-                  <Suspense fallback={null}>
-                    {modelData && <Model url={modelData} />}
-                    <OrbitControls />
-                  </Suspense>
-                </Canvas>
+                <a className='border-2 border-black p-4' href={modelData} >Download</a>
+                <input
+                  type="file"
+                  onChange={ModelFileChange}
+                  className="file-input file-input-bordered bg-white shadow-sm shadow-black file-input-accent w-full max-w-md p-2 border border-gray-300 rounded-md text-sm"
+                />
+                <button
+                  type="submit"
+                  className="btn bg-blue-600 w-[400px] text-white px-6 py-2 rounded-md mt-4 hover:bg-blue-700 disabled:opacity-50"
+                  onClick={handleModelUpload}
+                  disabled={uploading}
+                >
+                  {uploading ? "Uploading..." : "Upload GLB Model"}
+                </button>
               </div>
             ) : (
               <progress className="progress w-56"></progress>
@@ -186,6 +231,21 @@ export default function Upload() {
           </div>
         )}
       </div>
+
+      {/* Render the uploaded GLB model using React Three Fiber */}
+      {modelData && (
+        <div className="w-full h-[400px]">
+          <Canvas>
+            <Suspense fallback={null}>
+              <ModelViewer modelUrl={modelData} />
+              <OrbitControls />
+            </Suspense>
+          </Canvas>
+        </div>
+      )}
     </div>
   );
 }
+
+
+
