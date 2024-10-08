@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth/next';
+import NextAuth from "next-auth/next";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -9,23 +9,22 @@ import UserModel from "@/app/model/User";
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      id: "Credentials",
-      name: "Credentials",
+      id: "credentials",
+      name: "credentials",
       credentials: {
-        identifier: { label: "Email", type: "text", placeholder: "jsmith" }, 
+        username: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials: any,req): Promise<any> {
         await dbConnect();
-        
+
         try {
           const user = await UserModel.findOne({
-            $or: [
-              { email: credentials.identifier },
-              { username: credentials.identifier },
-            ],
+            email: credentials.identifier,
           });
-
+          console.log(user);
+          
+          console.log(credentials);
           if (!user) {
             throw new Error("No user found");
           }
@@ -33,10 +32,12 @@ export const authOptions: NextAuthOptions = {
           if (!user.isVerified) {
             throw new Error("Please verify your account");
           }
+          const passwordMatch = await bcrypt.compare(credentials.password, user.password);
+ 
 
-          const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
-          
-          if (isPasswordCorrect) {
+
+          console.log("password",passwordMatch);
+          if (passwordMatch) {
             return user;
           } else {
             throw new Error("Incorrect password");

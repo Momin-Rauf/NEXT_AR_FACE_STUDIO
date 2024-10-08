@@ -42,6 +42,7 @@ const VerifyAccount = () => {
                 title: "Success",
                 description: res.data.message // Use res instead of response
             });
+          
 
             router.replace('signIn');
         } catch (error) {

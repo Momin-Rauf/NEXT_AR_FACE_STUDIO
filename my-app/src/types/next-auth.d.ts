@@ -2,7 +2,7 @@ import 'next-auth'
 
 
 declare module 'next-auth' {
-    interface User{
+    interface User{ 
         _id?:string;
         isVerified?:boolean
         username?:string
@@ -16,4 +16,12 @@ declare module 'next-auth' {
             username?:string;
         } & DefaultSession['user']
     }
+
+    interface JWT{
+        _id?:string;
+            isVerified?:boolean;
+            username?:string;
+    }
+
+    
 }

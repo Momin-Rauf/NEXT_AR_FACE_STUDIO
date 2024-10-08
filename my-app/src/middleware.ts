@@ -17,8 +17,9 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/', request.url));
     }
 
+
     // If the user is not authenticated and tries to access protected routes, redirect to sign-in page
-    if (!token && (pathname.startsWith('/As') || pathname.startsWith('/FaceStudio'))) {
+    if (!token && (pathname.startsWith('/AssetsPage') || pathname.startsWith('/FaceStudio'))) {
         const redirectUrl = new URL('/SignIn', request.url);
         if (!searchParams.has('callbackUrl')) {
             redirectUrl.searchParams.set('callbackUrl', request.url);
@@ -35,3 +36,5 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ['/', '/SignIn', '/FaceStudio'],
 };
+
+

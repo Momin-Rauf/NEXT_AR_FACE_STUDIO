@@ -58,16 +58,7 @@ const LoginPage = () => {
     }
   };
 
-  if (session) {
-    return (
-      <div className="flex flex-col h-screen justify-center items-center">
-        <p>Signed in as {session.user.email}</p>
-        <button onClick={() => signOut()} className="mt-4 bg-gray-700 text-white p-2 rounded">
-          Sign out
-        </button>
-      </div>
-    );
-  }
+ 
 
   return (
     <div className="flex flex-col h-screen justify-center items-center bg-gradient-to-br from-gray-500 to-gray-300">

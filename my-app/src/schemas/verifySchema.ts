@@ -1,5 +1,5 @@
-import {z} from "zod"
+import { z } from "zod";
 
 export const verifySchema = z.object({
-    code: z.string().length(5,'verification code must be 5 digits')
-})n
+  code: z.string().regex(/^\d{5}$/, 'Verification code must be exactly 5 digits'),
+});
