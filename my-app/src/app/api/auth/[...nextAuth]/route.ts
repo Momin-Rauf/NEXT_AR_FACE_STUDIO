@@ -50,10 +50,12 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
+      console.log("call1",user);
       if (user) {
         token._id = user._id?.toString();
         token.isVerified = user.isVerified;
         token.username = user.username;
+        console.log("call2",token);
       }
       return token;
     },

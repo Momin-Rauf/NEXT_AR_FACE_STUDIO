@@ -2,10 +2,13 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import Link from 'next/link';
+import { useSession,signOut } from "next-auth/react";
+signOut
 import Image from 'next/image'; // Import Image from next/image
 
 const Navbar = () => {
   const navbarRef = useRef<HTMLDivElement | null>(null);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (navbarRef.current) {
@@ -42,10 +45,19 @@ const Navbar = () => {
         <li className="relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300">
           <Link href="/contact">Contact us</Link>
         </li>
-      </ul>
-      
-    </div>
 
+        {/* Conditional rendering for session status */}
+        {session && (
+         
+            
+            <li className="menu relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black hover:after:w-full after:transition-all after:duration-300 menu-horizontal px-1">
+      
+          <button onClick={() => signOut()} >Logout</button>
+           
+         </li>
+        ) }
+      </ul>
+    </div>
   );
 };
 

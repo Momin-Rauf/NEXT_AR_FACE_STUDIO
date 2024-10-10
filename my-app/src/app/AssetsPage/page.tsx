@@ -5,7 +5,7 @@
 
 import Upload from '@/components/Upload';
 import Navbar from '@/components/Navbar';
-import '../app/globals.css';
+import '../globals.css';
 
 const AssetsPage: React.FC = () => {
 
@@ -38,7 +38,7 @@ const AssetsPage: React.FC = () => {
 
   return (
     <>
-      <Navbar />
+
       <div className='bg-white h-screen flex flex-col justify-center items-center text-black'>
         <h1 className='font-bold text-[50px]'>Generate your own 3D filters from Images</h1>
         <button className="btn text-white bg-blue-900 mt-5">Get Started</button>

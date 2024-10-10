@@ -5,8 +5,8 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(request: NextRequest) {
     console.log('Middleware invoked'); // Check if middleware is hit
     
-    const token = await getToken({ req: request });
-    console.log('Token:', token); // Log the token value
+    const token = await getToken({ req: request, secret: process.env.NEXT_AUTH_SECRET });
+    console.log('Token:', token);  // Log the token value
 
     const { pathname, searchParams } = request.nextUrl;
     console.log('Requested Path:', pathname); // Log the requested path
@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
 
 
 export const config = {
-  matcher: ['/', '/SignIn', ],
+  matcher: ['/','/FaceStudio','/AssetsPage', '/SignIn', ],
 };
 
 

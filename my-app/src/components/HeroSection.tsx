@@ -1,12 +1,20 @@
 'use client';
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import Image from "next/image";
 import { FaAngleDoubleDown } from "react-icons/fa";
+import { useSession } from "next-auth/react"; // Import useSession
 
 const HeroSection = () => {
+    const [sessionData, setSessionData] = useState(null);
+    const { data: session } = useSession(); 
     const textRef = useRef<HTMLDivElement | null>(null); // Specify the type of the ref
+
+    // Set session data once the session changes
+    useEffect(() => {
+        setSessionData(session);
+    }, [session]); // Only run when `session` changes
 
     // GSAP animations
     useEffect(() => {
@@ -79,9 +87,15 @@ const HeroSection = () => {
                         Explore endless possibilities for creativity, fun, and magic—all in
                         your browser!
                     </p>
-                    <Link className="btn btn-active border-0 shadow-mg hover:scale-105 shadow-black w-[100px] bg-[#6530f8] text-white hover:bg-blue-800" href={"/FaceStudio"}>
-                        Demo
-                    </Link>
+                    {sessionData ? ( // Check if sessionData exists
+                        <Link className="btn btn-active border-0 shadow-mg hover:scale-105 shadow-black w-[100px] bg-[#6530f8] text-white hover:bg-blue-800" href={"/FaceStudio"}>
+                            Face Studio
+                        </Link>
+                    ) : (
+                        <Link className="btn btn-active border-0 shadow-mg hover:scale-105 shadow-black w-[100px] bg-[#6530f8] text-white hover:bg-blue-800" href={"/SignIn"}>
+                            Sign In
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>
