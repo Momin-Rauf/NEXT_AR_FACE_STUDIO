@@ -8,7 +8,7 @@ import Image from 'next/image'; // Import Image from next/image
 
 const Navbar = () => {
   const navbarRef = useRef<HTMLDivElement | null>(null);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (navbarRef.current) {

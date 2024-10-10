@@ -13,12 +13,6 @@ interface ModelResult {
   modelUrl: string;
 }
 
-function ModelViewer({ modelUrl }: { modelUrl: string }) {
-  const { scene } = useGLTF(modelUrl);
-  return (
-    <primitive object={scene} dispose={null} />
-  );
-}
 
 export default function Upload() {
   const [file, setFile] = useState<File | null>(null);
