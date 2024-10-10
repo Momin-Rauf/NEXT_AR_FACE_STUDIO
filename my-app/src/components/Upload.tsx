@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, ChangeEvent, Suspense } from "react";
+import { useState, ChangeEvent } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+
 
 interface ModelResult {
   model_urls: any;
