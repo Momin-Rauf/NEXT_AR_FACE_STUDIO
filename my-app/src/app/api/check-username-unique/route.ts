@@ -22,6 +22,7 @@ export async function GET(request:Request){
         
         if(!result.success){
             const usernameErrors = result.error.format().username?._errors || [];
+            console.log(usernameErrors);
             return Response.json({success:false,message:"failed"},{status:500});
         }
 

@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any,req): Promise<any> {
+      async authorize(credentials: any): Promise<any> {
         await dbConnect();
 
         try {
@@ -43,7 +43,7 @@ export const authOptions: NextAuthOptions = {
             throw new Error("Incorrect password");
           }
         } catch (error) {
-          throw new Error("Authorization failed");
+          throw new Error("Authorization failed",error);
         }
       },
     }),

@@ -25,7 +25,6 @@ import { signUpSchema } from "@/schemas/signUpSchema";
 const Page = () => {
   const [username, setUsername] = useState('');
   const debounce = useDebounceCallback(setUsername, 300);
-  const [usernameResponse, setUsernameResponse] = useState('');
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -48,12 +47,13 @@ const Page = () => {
         setIsCheckingUsername(true);
         try {
           const response = await axios.get(`/api/check-username-unique?username=${username}`);
-       
+          console.log(response);
         // Assuming your API returns a message
         } catch (error) {
           console.error(error);
         } finally {
           setIsCheckingUsername(false);
+          console.log(isCheckingUsername);
         }
       }
     };

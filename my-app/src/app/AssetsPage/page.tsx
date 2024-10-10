@@ -4,7 +4,6 @@
 // import Image from "next/image";
 
 import Upload from '@/components/Upload';
-import Navbar from '@/components/Navbar';
 import '../globals.css';
 
 const AssetsPage: React.FC = () => {

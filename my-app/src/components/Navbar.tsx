@@ -3,7 +3,6 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import Link from 'next/link';
 import { useSession,signOut } from "next-auth/react";
-signOut
 import Image from 'next/image'; // Import Image from next/image
 
 const Navbar = () => {
