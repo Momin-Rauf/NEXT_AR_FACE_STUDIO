@@ -4,7 +4,6 @@ import { useState, ChangeEvent } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
 
-
 interface ModelResult {
   model_urls: any;
   taskId: string;
@@ -12,7 +11,6 @@ interface ModelResult {
   progress: string;
   modelUrl: string;
 }
-
 
 export default function Upload() {
   const [file, setFile] = useState<File | null>(null);
@@ -140,7 +138,7 @@ export default function Upload() {
         // Inside the pollForModel function
         if (modelResult.status === "SUCCEEDED") {
           const modelUrl = modelResult.model_urls.glb; // Extract the model URL
-          // Set the model URL in state
+          setModelData(modelUrl); // Set the model URL in state
           console.log("Model data:", modelUrl); // Log the model URL
 
           console.log("Model generation succeeded", modelResult);
@@ -202,9 +200,14 @@ export default function Upload() {
             <p className="mt-4 text-sm text-gray-700">Status: {status} </p>
             <p className="mt-4 text-sm text-gray-700">Progress: {progress}% </p>
             
-              <div className='mt-4 ' >
-               
-                <a className='shadw-md shadow-black  bg-blue-400 hover:bg-blue-700 rounded-md  p-3' href={modelData} >Download</a>
+            {status === 'SUCCEEDED' ? (
+              <div className='mt-4'>
+                <a
+                  className='shadw-md shadow-black bg-blue-400 hover:bg-blue-700 rounded-md p-3'
+                  href={modelData}
+                >
+                  Download
+                </a>
                 <input
                   type="file"
                   onChange={ModelFileChange}
@@ -219,19 +222,12 @@ export default function Upload() {
                   {uploading ? "Uploading..." : "Upload GLB Model"}
                 </button>
               </div>
-            {/* )  */}
-            {/* : (
+            ) : (
               <progress className="progress w-56"></progress>
-            )} */}
+            )}
           </div>
         )}
       </div>
-
-      {/* Render the uploaded GLB model using React Three Fiber */}
-      
     </div>
   );
 }
-
-
-

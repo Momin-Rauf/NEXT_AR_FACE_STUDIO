@@ -19,7 +19,6 @@ import { useRouter } from "next/navigation";
 import { signInSchema } from "@/schemas/signInSchema";
 
 const LoginPage = () => {
-  const { data: session } = useSession();
   const { toast } = useToast();
   const router = useRouter();
 
