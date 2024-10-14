@@ -200,31 +200,32 @@ export default function Upload() {
             <p className="mt-4 text-sm text-gray-700">Status: {status} </p>
             <p className="mt-4 text-sm text-gray-700">Progress: {progress}% </p>
             
-            {status === 'SUCCEEDED' ? (
-              <div className='mt-4'>
-                <a
-                  className='shadw-md shadow-black bg-blue-400 hover:bg-blue-700 rounded-md p-3'
-                  href={modelData}
-                >
-                  Download
-                </a>
-                <input
-                  type="file"
-                  onChange={ModelFileChange}
-                  className="file-input file-input-bordered mt-10 bg-white shadow-sm shadow-black file-input-accent w-full max-w-md p-2 border border-gray-300 rounded-md text-sm"
-                />
-                <button
-                  type="submit"
-                  className="btn bg-blue-600 w-[400px] text-white px-6 py-2 rounded-md mt-4 hover:bg-blue-700 disabled:opacity-50"
-                  onClick={handleModelUpload}
-                  disabled={uploading}
-                >
-                  {uploading ? "Uploading..." : "Upload GLB Model"}
-                </button>
-              </div>
-            ) : (
-              <progress className="progress w-56"></progress>
-            )}
+            {status === 'SUCCEEDED' && modelData ? (
+  <div className='mt-4'>
+    <a
+      className='shadw-md shadow-black bg-blue-400 hover:bg-blue-700 rounded-md p-3'
+      href={modelData}
+    >
+      Download
+    </a>
+    <input
+      type="file"
+      onChange={ModelFileChange}
+      className="file-input file-input-bordered mt-10 bg-white shadow-sm shadow-black file-input-accent w-full max-w-md p-2 border border-gray-300 rounded-md text-sm"
+    />
+    <button
+      type="submit"
+      className="btn bg-blue-600 w-[400px] text-white px-6 py-2 rounded-md mt-4 hover:bg-blue-700 disabled:opacity-50"
+      onClick={handleModelUpload}
+      disabled={uploading}
+    >
+      {uploading ? "Uploading..." : "Upload GLB Model"}
+    </button>
+  </div>
+) : (
+  <progress className="progress w-56"></progress>
+)}
+
           </div>
         )}
       </div>
