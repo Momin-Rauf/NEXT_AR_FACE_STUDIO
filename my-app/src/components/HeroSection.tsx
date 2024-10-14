@@ -4,16 +4,16 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import Image from "next/image";
 import { FaAngleDoubleDown } from "react-icons/fa";
-import { useSession } from "next-auth/react"; // Import useSession
+import { useSession, Session } from "next-auth/react"; // Import useSession and Session type
 
 const HeroSection = () => {
-    const [sessionData, setSessionData] = useState(null);
+    const [sessionData, setSessionData] = useState<Session | null>(null); // Update the type to 'Session | null'
     const { data: session } = useSession(); 
     const textRef = useRef<HTMLDivElement | null>(null); // Specify the type of the ref
 
     // Set session data once the session changes
     useEffect(() => {
-        setSessionData(session);
+        setSessionData(session); // Now this will work since sessionData accepts 'Session | null'
     }, [session]); // Only run when `session` changes
 
     // GSAP animations
