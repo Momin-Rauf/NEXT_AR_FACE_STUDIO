@@ -9,14 +9,13 @@ const UserNameQuerySchema = z.object({
     username: usernameValidation,
 });
 
-// Handle GET requests to check username uniqueness
-export async function GET(request: Request) {
+// Handle POST requests to check username uniqueness
+export async function POST(request: Request) {
     await dbConnect();
 
     try {
-        // Parse the query parameters from the request URL
-        const { searchParams } = new URL(request.url);
-        const username = searchParams.get('username');
+        // Parse the JSON body from the request
+        const { username } = await request.json();
 
         // Validate the username using Zod
         const result = UserNameQuerySchema.safeParse({ username });
