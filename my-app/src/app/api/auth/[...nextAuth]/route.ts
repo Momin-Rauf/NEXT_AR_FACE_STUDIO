@@ -1,11 +1,12 @@
 import NextAuth from "next-auth/next";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/app/model/User";
 
 // NextAuth options setup
-const authOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -36,8 +37,8 @@ const authOptions = {
           } else {
             throw new Error("Incorrect password");
           }
-        } catch (error) {
-          throw new Error("Authorization failed", error);
+        } catch (error: any) {
+          throw new Error(`Authorization failed: ${error.message}`);
         }
       },
     }),
@@ -66,7 +67,7 @@ const authOptions = {
     signIn: "/SignIn",
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt", // Ensure it's "jwt"
   },
   secret: process.env.NEXT_AUTH_SECRET,
 };
