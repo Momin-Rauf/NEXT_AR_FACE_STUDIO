@@ -10,7 +10,7 @@ const UserNameQuerySchema = z.object({
 });
 
 // Handle GET requests to check username uniqueness
-export async function GET(request) {
+export async function GET(request: Request) {
     await dbConnect();
 
     try {
