@@ -18,8 +18,6 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
-type ActionType = 'ADD_TOAST' | 'UPDATE_TOAST' | 'DISMISS_TOAST' | 'REMOVE_TOAST'
-
 let count = 0
 
 function genId() {
@@ -181,5 +179,4 @@ function useToast() {
     dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }),
   }
 }
-
 export { useToast, toast }
