@@ -4,7 +4,8 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import Image from "next/image";
 import { FaAngleDoubleDown } from "react-icons/fa";
-import { useSession, Session } from "next-auth/react"; // Import useSession and Session type
+import { useSession } from "next-auth/react"; // No need to import Session from here
+import { Session } from "next-auth"; // Import Session from next-auth
 
 const HeroSection = () => {
     const [sessionData, setSessionData] = useState<Session | null>(null); // Update the type to 'Session | null'
