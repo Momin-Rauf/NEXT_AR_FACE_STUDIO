@@ -1,12 +1,11 @@
 import NextAuth from "next-auth/next";
-import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/app/model/User";
 
 // NextAuth options setup
-export const authOptions: NextAuthOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -22,9 +21,7 @@ export const authOptions: NextAuthOptions = {
           const user = await UserModel.findOne({
             email: credentials.identifier,
           });
-          console.log(user);
-          
-          console.log(credentials);
+
           if (!user) {
             throw new Error("No user found");
           }
@@ -32,30 +29,25 @@ export const authOptions: NextAuthOptions = {
           if (!user.isVerified) {
             throw new Error("Please verify your account");
           }
+
           const passwordMatch = await bcrypt.compare(credentials.password, user.password);
- 
-
-
-          console.log("password",passwordMatch);
           if (passwordMatch) {
             return user;
           } else {
             throw new Error("Incorrect password");
           }
         } catch (error) {
-          throw new Error("Authorization failed",error);
+          throw new Error("Authorization failed", error);
         }
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log("call1",user);
       if (user) {
         token._id = user._id?.toString();
         token.isVerified = user.isVerified;
         token.username = user.username;
-        console.log("call2",token);
       }
       return token;
     },
@@ -82,5 +74,5 @@ export const authOptions: NextAuthOptions = {
 // Create the authentication handler
 const handler = NextAuth(authOptions);
 
-// Export the handler for both GET and POST methods
+// Export the handler as default for both GET and POST methods
 export { handler as GET, handler as POST };
