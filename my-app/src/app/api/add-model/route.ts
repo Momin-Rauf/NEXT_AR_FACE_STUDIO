@@ -1,10 +1,10 @@
 import UserModel from '../../model/User';
+import type { NextRequest } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { getToken } from "next-auth/jwt";
-import mongoose from 'mongoose'; // Import mongoose for ObjectId
-import UserFilter from '../../model/User';
+import mongoose from 'mongoose';
+
 export async function POST(request: NextRequest) {
   try {
     // Connect to the database
@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
     
     // Get JWT Token
     const token = await getToken({ req: request, secret: process.env.NEXT_AUTH_SECRET });
-    console.log(token, "in api ");
     if (!token) {
       return NextResponse.json(
         { success: false, message: "Please sign in first" },
@@ -29,16 +28,15 @@ export async function POST(request: NextRequest) {
 
     // Parse the request body
     const body = await request.json();
-    console.log(body);
     const { image_url, model_data, category } = body;
 
-    // Create a new user filter object with explicit type
-    const newFilter: UserFilter = {
-      _id: new mongoose.Types.ObjectId(), // Generate a new ObjectId
+    // Create a new user filter object without TypeScript types
+    const newFilter = {
+      _id: new mongoose.Types.ObjectId(),
       image_url,
       model_data,
       category,
-      createdAt: new Date(), // Add the createdAt property
+      createdAt: new Date(),
     };
 
     // Push the new filter into the user's userfilter array
@@ -47,7 +45,6 @@ export async function POST(request: NextRequest) {
     // Save the updated user with the new filter
     await user.save();
 
-    // Return the newly created filter as the response
     return NextResponse.json({ message: 'User filter added successfully' }, { status: 201 });
   } catch (error) {
     console.error('Error adding user filter:', error);
