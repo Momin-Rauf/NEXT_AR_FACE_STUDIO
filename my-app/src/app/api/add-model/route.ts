@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     // Parse the request body
     const body = await request.json();
     console.log(body)
-    const { uploadedUrl, modelData, category } = body;
+    const { image_url, model_data, category } = body;
 
     // Create a new user filter object (no explicit type declaration)
     const newFilter = {
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       category,
       createdAt: new Date(),
     };
-
+    console.log
     // Add the new filter to the user's userfilter array
     user.userfilter.push(newFilter);
 

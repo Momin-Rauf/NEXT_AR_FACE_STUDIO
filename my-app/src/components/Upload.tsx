@@ -16,8 +16,8 @@ export default function Upload() {
   const [file, setFile] = useState<File | null>(null);
   const [Modelfile, setModelFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
-  const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
-  const [modelData, setModelData] = useState<string | null>(null);
+  const [image_url, setUploadedUrl] = useState<string | null>(null);
+  const [model_data, setModelData] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [progress, setProgress] = useState<string>("");
@@ -55,14 +55,14 @@ export default function Upload() {
   };
 
   const storeData = async () => {
-    console.log("saving : ",uploadedUrl, modelData, category )
+    console.log("saving : ",image_url, model_data, category )
     try {
       const response = await fetch("/api/add-model", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ uploadedUrl, modelData, category }),
+        body: JSON.stringify({ image_url, model_data, category }),
       });
       if (!response.ok) {
         throw new Error("Failed to store the data.");
@@ -97,10 +97,10 @@ export default function Upload() {
   };
 
   const fetchModelAndGenerate = async () => {
-    if (!uploadedUrl) return;
+    if (!image_url) return;
 
     const payload = {
-      image_url: uploadedUrl,
+      image_url: image_url,
       enable_pbr: true,
     };
 
@@ -188,12 +188,12 @@ export default function Upload() {
   )}
 
   {/* Uploaded Image and 3D Model Generator */}
-  {uploadedUrl && (
+  {image_url && (
     <div className="flex flex-col w-full md:w-[40%] justify-center items-center p-8 bg-[#f3f4f6] shadow-lg rounded-lg">
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Uploaded Image</h2>
       <img
         className="w-[300px] h-[300px] object-cover rounded-md shadow-md mb-6"
-        src={uploadedUrl}
+        src={image_url}
         alt="Uploaded"
       />
       <label className="text-lg text-gray-700">Select 3D Model Category</label>
@@ -248,7 +248,7 @@ export default function Upload() {
           <div className="mt-4">
             <a
               className="inline-block bg-[#6631f7] text-white px-4 py-2 rounded-md shadow-md hover:bg-[#5a2dd6] transition-all"
-              href={modelData}
+              href={model_data}
               target="_blank"
               rel="noopener noreferrer"
             >
