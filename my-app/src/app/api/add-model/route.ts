@@ -3,7 +3,8 @@ import dbConnect from '@/lib/dbConnect';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from "next-auth/jwt";
-
+import mongoose from 'mongoose'; // Import mongoose for ObjectId
+import UserFilter from '../../model/User';
 export async function POST(request: NextRequest) {
   try {
     // Connect to the database
@@ -31,11 +32,13 @@ export async function POST(request: NextRequest) {
     console.log(body);
     const { image_url, model_data, category } = body;
 
-    // Create a new user filter object using the UserFilter model
-    const newFilter = {
+    // Create a new user filter object with explicit type
+    const newFilter: UserFilter = {
+      _id: new mongoose.Types.ObjectId(), // Generate a new ObjectId
       image_url,
       model_data,
       category,
+      createdAt: new Date(), // Add the createdAt property
     };
 
     // Push the new filter into the user's userfilter array
