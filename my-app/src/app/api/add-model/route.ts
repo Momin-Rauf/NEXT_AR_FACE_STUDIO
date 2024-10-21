@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     
     // Get JWT Token
     const token = await getToken({ req: request, secret: process.env.NEXT_AUTH_SECRET });
-    console.log(token,"in api ")
+    console.log(token, "in api");
     if (!token) {
       return NextResponse.json(
         { success: false, message: "Please sign in first" },
@@ -28,17 +28,17 @@ export async function POST(request: NextRequest) {
 
     // Parse the request body
     const body = await request.json();
-    console.log(body)
+    console.log(body);
     const { image_url, model_data, category } = body;
 
-    // Create a new user filter object (no explicit type declaration)
-    const newFilter = {
+    // Create a new user filter object using Mongoose model
+    const newFilter = new user.userfilter.create({
       image_url,
       model_data,
       category,
       createdAt: new Date(),
-    };
-  
+    });
+
     // Add the new filter to the user's userfilter array
     user.userfilter.push(newFilter);
 
