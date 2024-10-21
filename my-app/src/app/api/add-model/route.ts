@@ -1,4 +1,4 @@
-import UserModel, { UserFilter } from '../../model/User';
+import UserModel from '../../model/User';
 import dbConnect from '@/lib/dbConnect';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { image_url, model_data, category } = body;
 
-    // Create a new user filter object
-    const newFilter: UserFilter = {
+    // Create a new user filter object (no explicit type declaration)
+    const newFilter = {
       image_url,
       model_data,
       category,
