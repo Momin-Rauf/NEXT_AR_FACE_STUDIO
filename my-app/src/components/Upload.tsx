@@ -55,6 +55,7 @@ export default function Upload() {
   };
 
   const storeData = async () => {
+    console.log("saving : ",uploadedUrl, modelData, category )
     try {
       const response = await fetch("/api/add-model", {
         method: "POST",

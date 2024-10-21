@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     
     // Get JWT Token
     const token = await getToken({ req: request, secret: process.env.NEXT_AUTH_SECRET });
-    
+    console.log(token,"in api ")
     if (!token) {
       return NextResponse.json(
         { success: false, message: "Please sign in first" },
@@ -28,12 +28,13 @@ export async function POST(request: NextRequest) {
 
     // Parse the request body
     const body = await request.json();
-    const { image_url, model_data, category } = body;
+    console.log(body)
+    const { uploadedUrl, modelData, category } = body;
 
     // Create a new user filter object (no explicit type declaration)
     const newFilter = {
-      image_url,
-      model_data,
+      uploadedUrl,
+      modelData,
       category,
       createdAt: new Date(),
     };
