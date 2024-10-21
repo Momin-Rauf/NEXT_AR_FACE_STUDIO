@@ -3,7 +3,6 @@ import dbConnect from '@/lib/dbConnect';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from "next-auth/jwt";
-import UserFilterModel from '../../model/User'; // Ensure you import the UserFilter model correctly
 
 export async function POST(request: NextRequest) {
   try {
