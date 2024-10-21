@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import React, { useEffect, useState } from 'react';
 import FilterBoard from '@/components/FilterBoard';
 import dynamic from 'next/dynamic';
+import Upload from '@/components/Upload';
 import { FilterProvider } from '@/context/FilterContext'; // Import your context provider
 
 // Dynamically import FaceTracking component, disabling SSR
@@ -31,11 +32,14 @@ export default function FaceStudio() {
   return (
     <FilterProvider>
       <Navbar />
+      <div className = 'flex flex-col gap-5' >
       <div className="bg-white pl-2  h-screen flex justify-between flex-row">
         <div className="mt-24 w-[50%]">
           <FilterBoard />
         </div>
         <FaceTracking />
+      </div>
+        <Upload/>
       </div>
     </FilterProvider>
   );

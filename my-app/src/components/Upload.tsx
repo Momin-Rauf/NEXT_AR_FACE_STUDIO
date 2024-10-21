@@ -19,6 +19,7 @@ export default function Upload() {
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
   const [modelData, setModelData] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [progress, setProgress] = useState<string>("");
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,27 +50,48 @@ export default function Upload() {
     }
   };
 
+  const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setCategory(event.target.value);
+  };
+
+  const storeData = async () => {
+    try {
+      const response = await fetch("/api/add-model", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uploadedUrl, modelData, category }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to store the data.");
+      }
+      console.log("Data stored successfully.");
+    } catch (error) {
+      console.error("Error storing data", error);
+    }
+  };
+
   const handleModelUpload = async () => {
-    if (!Modelfile) return; // Check if Modelfile exists
+    if (!Modelfile) return;
 
-    setUploading(true); // Start uploading state
+    setUploading(true);
 
-    // Create a storage reference with a unique name for the GLB file
-    const storageRef = ref(storage, `models/${Modelfile.name}-${Date.now()}.glb`);
+    const storageRef = ref(
+      storage,
+      `models/${Modelfile.name}-${Date.now()}.glb`
+    );
 
     try {
-      // Upload the File to Firebase
       await uploadBytes(storageRef, Modelfile);
-
-      // Get the download URL of the uploaded file
       const url = await getDownloadURL(storageRef);
-      setModelData(url); // Set the model URL in state
-
-      console.log("GLB file uploaded successfully:", url); // Log the URL
+      setModelData(url);
+      console.log("GLB file uploaded successfully:", url);
+      await storeData();
     } catch (error) {
-      console.error("Error uploading the GLB file", error); // Handle errors
+      console.error("Error uploading the GLB file", error);
     } finally {
-      setUploading(false); // End uploading state
+      setUploading(false);
     }
   };
 
@@ -134,14 +156,12 @@ export default function Upload() {
         const modelResult: ModelResult = await modelResponse.json();
         setStatus(modelResult.status);
         setProgress(modelResult.progress);
-        
-        // Inside the pollForModel function
-        if (modelResult.status === "SUCCEEDED") {
-          const modelUrl = modelResult.model_urls.glb; // Extract the model URL
-          setModelData(modelUrl); // Set the model URL in state
-          console.log("Model data:", modelUrl); // Log the model URL
 
-          console.log("Model generation succeeded", modelResult);
+        if (modelResult.status === "SUCCEEDED") {
+          const modelUrl = modelResult.model_urls.glb;
+          setModelData(modelUrl);
+         
+          console.log("Model data:", modelUrl);
           return;
         } else if (modelResult.status === "FAILED") {
           console.error("Model generation failed.");
@@ -158,77 +178,104 @@ export default function Upload() {
   };
 
   return (
-    <div className="flex h-screen p-24 flex-row justify-between items-center rounded-none shadow-xl">
-      {uploading && (
-        <span className="loading ml-24 loading-spinner loading-lg"></span>
-      )}
+    <div className="flex h-auto p-10 flex-col md:flex-row justify-between items-center bg-white shadow-xl">
+  {/* Loading Spinner */}
+  {uploading && (
+    <div className="flex justify-center items-center w-full">
+      <span className="loading loading-spinner loading-lg text-[#fb666f]"></span>
+    </div>
+  )}
 
-      {uploadedUrl && (
-        <div className="flex flex-col justify-center p-10 rounded-md items-center shadow-md shadow-black">
-          <img
-            className="w-[300px] m-4 h-[300px] object-fit overflow-hidden"
-            src={uploadedUrl}
-            alt="Uploaded"
-          />
-          <button
-            className="btn bg-green-600 text-white px-6 py-2 rounded-md mt-4 hover:bg-green-700"
-            onClick={fetchModelAndGenerate}
-          >
-            Generate 3D Model
-          </button>
-        </div>
-      )}
+  {/* Uploaded Image and 3D Model Generator */}
+  {uploadedUrl && (
+    <div className="flex flex-col w-full md:w-[40%] justify-center items-center p-8 bg-[#f3f4f6] shadow-lg rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Uploaded Image</h2>
+      <img
+        className="w-[300px] h-[300px] object-cover rounded-md shadow-md mb-6"
+        src={uploadedUrl}
+        alt="Uploaded"
+      />
+      <label className="text-lg text-gray-700">Select 3D Model Category</label>
+      <select
+        value={category}
+        onChange={handleCategoryChange}
+        className="select bg-white select-bordered mt-4 w-full max-w-md border-gray-300 text-gray-700"
+      >
+        <option value="">Choose a Category</option>
+        <option value="architecture">Architecture</option>
+        <option value="nature">Nature</option>
+        <option value="technology">Technology</option>
+        <option value="art">Art</option>
+      </select>
+      <button
+        className="btn bg-[#6631f7] text-white px-6 py-2 rounded-md mt-4 hover:bg-[#5a2dd6] transition-all"
+        onClick={fetchModelAndGenerate}
+        disabled={!category}
+      >
+        Generate 3D Model
+      </button>
+    </div>
+  )}
 
-      <div className="w-[500px]">
-        <h1>Upload your file here</h1>
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="file-input file-input-bordered bg-white shadow-sm shadow-black file-input-accent w-full max-w-md p-2 border border-gray-300 rounded-md text-sm"
-        />
-        <button
-          type="submit"
-          className="btn bg-blue-600 w-[400px] text-white px-6 py-2 rounded-md mt-4 hover:bg-blue-700 disabled:opacity-50"
-          onClick={handleUpload}
-          disabled={uploading}
-        >
-          {uploading ? "Uploading..." : "Upload Image"}
-        </button>
-
-        {status && (
-          <div>
-            <p className="mt-4 text-sm text-gray-700">Status: {status} </p>
-            <p className="mt-4 text-sm text-gray-700">Progress: {progress}% </p>
-            
-            {status === 'SUCCEEDED' && modelData ? (
-  <div className='mt-4'>
-    <a
-      className='shadw-md shadow-black bg-blue-400 hover:bg-blue-700 rounded-md p-3'
-      href={modelData}
-    >
-      Download
-    </a>
+  {/* File Upload Section */}
+  <div className="w-full md:w-[40%] p-8 bg-[#f3f4f6] mx-auto shadow-lg rounded-lg">
+    <h2 className="text-3xl font-semibold text-gray-800 mb-4">Upload Your Image</h2>
+    <p className="text-gray-600 mb-6">
+      Upload an image file to generate a 3D mesh for an AR face filter.
+    </p>
     <input
       type="file"
-      onChange={ModelFileChange}
-      className="file-input file-input-bordered mt-10 bg-white shadow-sm shadow-black file-input-accent w-full max-w-md p-2 border border-gray-300 rounded-md text-sm"
+      onChange={handleFileChange}
+      className="file-input file-input-bordered bg-white   w-full max-w-md p-2 mb-4 border-gray-300 rounded-md"
     />
     <button
       type="submit"
-      className="btn bg-blue-600 w-[400px] text-white px-6 py-2 rounded-md mt-4 hover:bg-blue-700 disabled:opacity-50"
-      onClick={handleModelUpload}
+      className="btn bg-[#fb666f] w-full text-white px-6 py-2 rounded-md mt-4 hover:bg-[#e4555c] transition-all"
+      onClick={handleUpload}
       disabled={uploading}
     >
-      {uploading ? "Uploading..." : "Upload GLB Model"}
+      {uploading ? "Uploading..." : "Upload Image"}
     </button>
-  </div>
-) : (
-  <progress className="progress w-56"></progress>
-)}
 
+    {/* Upload Status and Progress */}
+    {status && (
+      <div className="mt-6 text-center">
+        <p className="text-gray-700">Status: {status}</p>
+        <p className="text-gray-700">Progress: {progress}%</p>
+
+        {status === "SUCCEEDED" && modelData ? (
+          <div className="mt-4">
+            <a
+              className="inline-block bg-[#6631f7] text-white px-4 py-2 rounded-md shadow-md hover:bg-[#5a2dd6] transition-all"
+              href={modelData}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download 3D Model
+            </a>
+            <div className="mt-6">
+              <input
+                type="file"
+                onChange={ModelFileChange}
+                className="file-input file-input-bordered w-full p-2 border-gray-300 rounded-md"
+              />
+              <button
+                type="submit"
+                className="btn bg-[#6631f7] w-full text-white px-6 py-2 rounded-md mt-4 hover:bg-[#5a2dd6] transition-all"
+                onClick={handleModelUpload}
+                disabled={uploading}
+              >
+                {uploading ? "Uploading..." : "Upload GLB Model"}
+              </button>
+            </div>
           </div>
+        ) : (
+          <progress className="progress w-56 mt-4"></progress>
         )}
       </div>
-    </div>
+    )}
+  </div>
+</div>
+
   );
 }

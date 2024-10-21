@@ -2,7 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface UserFilter extends Document {
     image_url: string;
-    model_data: Buffer; // Storing the glb file as binary data
+    model_data: string; // Storing the glb file as binary data
     category: string;
     createdAt: Date;
 }
@@ -13,7 +13,7 @@ const UserFilterSchema: Schema<UserFilter> = new Schema({
         required: true
     },
     model_data: {
-        type: Buffer,  // Storing binary data for .glb file
+        type: String,  // Storing binary data for .glb file
         required: true
     },
     category: {
