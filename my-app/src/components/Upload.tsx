@@ -227,7 +227,7 @@ export default function Upload() {
     <input
       type="file"
       onChange={handleFileChange}
-      className="file-input file-input-bordered bg-white   w-full max-w-md p-2 mb-4 border-gray-300 rounded-md"
+      className="file-input file-input-ghost  bg-white  w-full max-w-md p-2 mb-4 border-gray-300 rounded-md"
     />
     <button
       type="submit"
@@ -244,7 +244,7 @@ export default function Upload() {
         <p className="text-gray-700">Status: {status}</p>
         <p className="text-gray-700">Progress: {progress}%</p>
 
-        {status === "SUCCEEDED" && modelData ? (
+        {status === "SUCCEEDED" && model_data ? (
           <div className="mt-4">
             <a
               className="inline-block bg-[#6631f7] text-white px-4 py-2 rounded-md shadow-md hover:bg-[#5a2dd6] transition-all"
