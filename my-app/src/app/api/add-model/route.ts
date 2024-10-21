@@ -33,8 +33,8 @@ export async function POST(request: NextRequest) {
 
     // Create a new user filter object (no explicit type declaration)
     const newFilter = {
-      uploadedUrl,
-      modelData,
+      image_url,
+      model_data,
       category,
       createdAt: new Date(),
     };
