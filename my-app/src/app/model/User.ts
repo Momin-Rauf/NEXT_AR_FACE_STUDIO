@@ -1,6 +1,13 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-const UserFilterSchema = new mongoose.Schema({
+export interface UserFilter extends Document {
+    image_url: string;
+    model_data: string; 
+    category: string;
+    createdAt: Date;
+}
+
+const UserFilterSchema: Schema<UserFilter> = new Schema({
     image_url: {
         type: String,
         required: true
@@ -20,7 +27,17 @@ const UserFilterSchema = new mongoose.Schema({
     }
 });
 
-const UserSchema = new mongoose.Schema({
+export interface User extends Document {
+    username: string;
+    email: string;
+    password: string;
+    isVerified: boolean;
+    verifyCode: string;
+    verifyCodeExpiry: Date;
+    userfilter: UserFilter[];
+}
+
+const UserSchema: Schema<User> = new Schema({
     username: {
         type: String,
         required: [true, 'User name is required'],
@@ -52,6 +69,6 @@ const UserSchema = new mongoose.Schema({
     userfilter: [UserFilterSchema]
 });
 
-const UserModel = mongoose.models.User || mongoose.model("User", UserSchema);
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User", UserSchema);
 
 export default UserModel;
