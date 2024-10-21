@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       category,
       createdAt: new Date(),
     };
-    console.log
+  
     // Add the new filter to the user's userfilter array
     user.userfilter.push(newFilter);
 
