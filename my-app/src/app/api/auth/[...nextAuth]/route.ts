@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/app/model/User";
 
+//comments
 // NextAuth options setup
 export const authOptions: NextAuthOptions = {
   providers: [
