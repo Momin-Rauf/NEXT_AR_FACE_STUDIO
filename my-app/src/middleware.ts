@@ -19,14 +19,14 @@ export async function middleware(request: NextRequest) {
 
 
     // If the user is not authenticated and tries to access protected routes, redirect to sign-in page
-    if (!token && (pathname.startsWith('/AssetsPage') || pathname.startsWith('/FaceStudio'))) {
-        const redirectUrl = new URL('/SignIn', request.url);
-        if (!searchParams.has('callbackUrl')) {
-            redirectUrl.searchParams.set('callbackUrl', request.url);
-        }
-        console.log('Redirecting to SignIn:', redirectUrl.toString()); // Log the redirect URL
-        return NextResponse.redirect(redirectUrl);
-    }
+    // if (!token && (pathname.startsWith('/AssetsPage') || pathname.startsWith('/FaceStudio'))) {
+    //     const redirectUrl = new URL('/SignIn', request.url);
+    //     if (!searchParams.has('callbackUrl')) {
+    //         redirectUrl.searchParams.set('callbackUrl', request.url);
+    //     }
+    //     console.log('Redirecting to SignIn:', redirectUrl.toString()); // Log the redirect URL
+    //     return NextResponse.redirect(redirectUrl);
+    // }
 
     console.log('Request continues'); // Log when the request continues
     return NextResponse.next();
