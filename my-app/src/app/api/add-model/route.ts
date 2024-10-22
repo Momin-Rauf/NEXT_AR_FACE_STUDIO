@@ -1,10 +1,11 @@
 import UserModel from '../../model/User';
 import dbConnect from '@/lib/dbConnect';
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { getToken } from "next-auth/jwt";
 import mongoose from 'mongoose';
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   try {
     // Connect to the database
     await dbConnect();
