@@ -1,6 +1,6 @@
 'use client';
 
-import {  signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -33,12 +33,11 @@ const LoginPage = () => {
 
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
     const result = await signIn('credentials', {
-      redirect: false, // Prevent redirection
-      identifier: data.email, // Assuming 'identifier' refers to email
+      redirect: false,
+      identifier: data.email,
       password: data.password,
     });
 
-    // Check if result.error exists, display an error toast if login fails
     if (result?.error) {
       toast({
         title: "Login Failed",
@@ -47,22 +46,17 @@ const LoginPage = () => {
       });
       return;
     }
-  
-    // Redirect on successful login
+
     if (result?.url) {
-      console.log("Redirecting to:", result.url);  // Log the redirection URL
-      router.replace('/FaceStudio'); // Redirect to '/AssetsPage' after successful login
-    } else {
-      console.log("No redirection URL provided.");  // Log if URL is not present
-    }
+      router.replace('/FaceStudio');
+    } 
   };
 
- 
-
   return (
-    <div className="flex flex-col h-screen justify-center items-center bg-gradient-to-br from-gray-500 to-gray-300">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md transition-transform transform">
-        <h2 className="text-gray-800 text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="flex flex-row h-screen justify-center items-center border-red-700 border-2 items-center ">
+      <img src="/Assets/pictures/login.jpg" className = 'w-[40%]  '  />
+      <div className="bg-white hover:shadow-sm rounded-xl p-8 w-full max-w-md mt-4 shadow-black  transform transition-all duration-500 ">
+        <h2 className="text-[#6631f7] text-4xl font-bold mb-8 text-center tracking-tight">Welcome Back</h2>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -76,7 +70,7 @@ const LoginPage = () => {
                       type="email"
                       placeholder="Enter email"
                       {...field}
-                      className="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg transition-all duration-300"
+                      className="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6631f7] rounded-lg transition-all duration-300 p-4"
                     />
                   </FormControl>
                   <FormMessage />
@@ -94,7 +88,7 @@ const LoginPage = () => {
                       placeholder="Enter password"
                       type="password"
                       {...field}
-                      className="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded-lg transition-all duration-300"
+                      className="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6631f7] rounded-lg transition-all duration-300 p-4"
                     />
                   </FormControl>
                   <FormMessage />
@@ -103,15 +97,22 @@ const LoginPage = () => {
             />
             <Button
               type="submit"
-              className="w-full bg-gray-700 hover:bg-gray-600 text-white transition-colors duration-300 rounded-lg shadow-md"
+              className="w-full bg-[#ff275b] hover:bg-[#ff4971] text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-xl transform transition-all duration-300 hover:scale-105"
             >
               Login
             </Button>
           </form>
         </Form>
+        <div className="text-center mt-6">
+          <p className="text-gray-600">Don't have an account? 
+            <a href="/sign-up" className="text-[#6631f7] hover:text-[#ff275b] font-semibold ml-2 transition-all duration-300">Sign Up</a>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
 export default LoginPage;
+
+
