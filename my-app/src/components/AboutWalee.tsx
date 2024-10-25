@@ -17,7 +17,7 @@ const AboutWalee = () => {
         </p>
 
         <p className='m-2 text-lg leading-relaxed text-gray-700'>
-          If you are an influencer looking to collaborate with brands, download our app from the Google Play Store or Apple App Store. Alternatively, if you're a business owner aiming to reach your audience, please fill out the form below.
+          If you are an influencer looking to collaborate with brands, download our app from the Google Play Store or Apple App Store. Alternatively, if you are a business owner aiming to reach your audience, please fill out the form below.
         </p>
 
         <Link 
