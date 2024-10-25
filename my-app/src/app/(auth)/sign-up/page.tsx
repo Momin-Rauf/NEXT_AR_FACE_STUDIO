@@ -79,7 +79,7 @@ const SignUpPage = () => {
   return (
     <div className="flex flex-row h-screen justify-center items-center border-red-700 border-2">
       <img src="/Assets/pictures/signup.jpg" className='w-[40%]' />
-      <div className="bg-white  hover:shadow-sm rounded-xl p-8 w-full max-w-md mt-10 shadow-black transform transition-all duration-500">
+      <div className="bg-white  hover:shadow-sm rounded-xl p-4 w-full max-w-md mt-10 shadow-black transform transition-all duration-500">
         <h2 className="text-[#6631f7] text-4xl font-bold mb-8 text-center tracking-tight">Create an Account</h2>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
