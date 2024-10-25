@@ -53,7 +53,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-row h-screen justify-center items-center border-red-700 border-2 items-center ">
+    <div className="flex flex-row h-screen justify-center items-center border-red-700 border-2 ">
       <img src="/Assets/pictures/login.jpg" className = 'w-[40%]  '  />
       <div className="bg-white hover:shadow-sm rounded-xl p-8 w-full max-w-md mt-4 shadow-black  transform transition-all duration-500 ">
         <h2 className="text-[#6631f7] text-4xl font-bold mb-8 text-center tracking-tight">Welcome Back</h2>
