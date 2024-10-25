@@ -32,9 +32,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
 }
 
-
 export const config = {
-  matcher: [ '/',"SignIn","AssetsPage"],
-};
-
+    matcher: ["/", "/SignIn", "/AssetsPage", "/FaceStudio"],
+  };
+  
 
