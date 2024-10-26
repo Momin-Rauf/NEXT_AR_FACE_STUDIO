@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
-import { useFilterContext } from '@/context/FilterContext'; // Import the context
+import { useFilterContext } from '@/context/FilterContext'; 
 
 // Utility function to truncate text
 const truncateText = (text: string, maxLength: number): string => {
@@ -12,13 +12,14 @@ const truncateText = (text: string, maxLength: number): string => {
 
 interface Filter {
   id: number;
-  image: string;
+  image_url: string;
+  
   title: string;
   description: string;
   rotation: string;
   position: string;
   scale: string;
-  anchor:number;
+  anchor: number;
 }
 
 interface FilterCardProps {
@@ -46,7 +47,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       rotation: filter.rotation,
       position: filter.position,
       scale: filter.scale,
-      anchor:filter.anchor
+      anchor: filter.anchor
     }); // Set the selected filter in the context
   };
 
@@ -55,7 +56,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="card card-compact  bg-white w-54 h-54 cursor-pointer text-black shadow-xl transition-transform duration-300"
+      className="card card-compact bg-white w-54 h-54 cursor-pointer text-black shadow-xl transition-transform duration-300"
       role="button"
       tabIndex={0}
       onKeyPress={(e) => {
@@ -67,22 +68,24 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
     >
       <figure>
         <Image
-          src={filter.image}
-          alt={filter.title}
-          className="w-full "
+          src={filter.image_url  }
+          alt={filter.title || ""}
+          className="w-full"
           layout="responsive"
           width={216}
           height={192}
           style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} // Scale on hover
         />
-        <div
-          ref={hoverContentRef}
-          className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white p-4"
-          style={{ top: 0, left: 0 }}
-        >
-          <h3 className="text-lg font-bold mb-2">{filter.title}</h3>
-          <p className="text-sm">{truncateText(filter.description, 100)}</p>
-        </div>
+        {filter.description && (
+          <div
+            ref={hoverContentRef}
+            className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white p-4"
+            style={{ top: 0, left: 0 }}
+          >
+            <h3 className="text-lg font-bold mb-2">{filter.title}</h3>
+            <p className="text-sm">{truncateText(filter.description, 100)}</p>
+          </div>
+        )}
       </figure>
     </div>
   );

@@ -48,10 +48,10 @@ const FaceTracking = () => {
             mindar-face-target={`anchorIndex:${selectedFilter?.anchor}`}>
             <a-gltf-model
               animation-mixer="enabled: false"
-              rotation={selectedFilter.rotation}
-              position={selectedFilter.position}
-              scale={selectedFilter.scale}
-              src={`#Model${selectedFilter.id}`} // Use the selected filter's ID to choose the model
+              rotation={selectedFilter.rotation || '0 0 0'}
+              position={selectedFilter.position || '0 0 0'}
+              scale={selectedFilter.scale || '0 0 0'}
+              src={`#Model${selectedFilter.id || '1'}`} // Use the selected filter's ID to choose the model
               onLoaded={() => console.log(`Model ${selectedFilter.id} loaded successfully.`)} // Log when the model is loaded
             ></a-gltf-model>
           </a-entity>

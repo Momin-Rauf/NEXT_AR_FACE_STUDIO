@@ -1,7 +1,7 @@
 [
     {   "id":1,
         "title": "Sleek Glasses",
-        "image": "/Assets/myassets/g3.jpg",
+        "image_url": "/Assets/myassets/g3.jpg",
         "description": "A sleek and stylish ",
         "date": "2024-09-14",
         "rotation":"0.4 0.4 0.4",
@@ -12,7 +12,7 @@
     
     {   "id":2,
         "title": "Sporty Sunglasses",
-        "image": "/Assets/myassets/g2.jpg",
+        "image_url": "/Assets/myassets/g2.jpg",
         "description": "",
         "date": "2024-09-14",
         "rotation":"0 0.5 0",
@@ -21,7 +21,7 @@
         "anchor":168    },
     {   "id":3,
         "title": "Spectacles",
-        "image": "/Assets/myassets/g1.jpg",
+        "image_url": "/Assets/myassets/g1.jpg",
         "description": "Elegant eye glasses",
         "date": "2024-09-14",
         "rotation":"0 0 0",
@@ -34,7 +34,7 @@
     {
         "id": 4,
         "title": "Clown Hat",
-        "image": "/Assets/myassets/joker.jpg",
+        "image_url": "/Assets/myassets/joker.jpg",
         "description": "",
         "date": "2024-09-14",
         "rotation":"0 -0 0",
@@ -45,7 +45,7 @@
     {
         "id": 5,
         "title": "mask",
-        "image": "/Assets/myassets/mustache.jpg",
+        "image_url": "/Assets/myassets/mustache.jpg",
         "description": "",
         "date": "2024-09-14",
         "rotation":"0 0 0",
