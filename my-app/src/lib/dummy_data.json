@@ -1,58 +1,88 @@
 [
+
+  
     {   "id":1,
         "title": "Sleek Glasses",
-        "image_url": "/Assets/myassets/g3.jpg",
+        "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fg1.jpg?alt=media&token=d34e6e0c-676f-47cd-8b68-669988396963",
+        "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fg1.gltf?alt=media&token=4155e58e-19dc-4973-8ad5-5c3f4efe846f",
         "description": "A sleek and stylish ",
         "date": "2024-09-14",
         "rotation":"0.4 0.4 0.4",
         "position":"0 -0.26 0",
         "scale":"0.2 0.2 0.2",
-        "anchor":168
+        "anchor":168,
+         "category":"glasses"
     },
     
     {   "id":2,
         "title": "Sporty Sunglasses",
-        "image_url": "/Assets/myassets/g2.jpg",
+        "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fg2scene.gltf?alt=media&token=eece6ec3-8a38-45ef-a807-622db8bc780d",
+        "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fg2.jpg?alt=media&token=3fca342b-2022-4b98-a89a-5618114a2961",
         "description": "",
         "date": "2024-09-14",
         "rotation":"0 0.5 0",
         "position":"0 -0.24 0",
         "scale":"0.5 0.5 0.5",
-        "anchor":168    },
+        "anchor":168,
+        "category":"glasses"    },
     {   "id":3,
         "title": "Spectacles",
-        "image_url": "/Assets/myassets/g1.jpg",
+        "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fg3.jpg?alt=media&token=8ed4e9fe-5043-4876-9789-4da0a9352fec",
+        "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fg4scene.gltf?alt=media&token=07c339d7-2174-44d9-a49d-4a52ba87bee0",
         "description": "Elegant eye glasses",
         "date": "2024-09-14",
         "rotation":"0 0 0",
         "position":"0 -0.29 .12",
         "scale":"0.12 0.12 0.12",
-        "anchor":168
-    }
-    ,
+        "anchor":168,
+         "category":"glasses"
+        
+    },
+    
    
-    {
+ {
         "id": 4,
-        "title": "Clown Hat",
-        "image_url": "/Assets/myassets/joker.jpg",
+        "title": "Hat",
+        "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fh2scene.glb?alt=media&token=90c78910-8aac-4acb-ba36-3b110dfd2adb",
+        "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fhector-j-rivas-V0OsHPIh4To-unsplash.jpg?alt=media&token=8cb2f455-c91b-40f0-b0c5-71e62d4938b4",
         "description": "",
         "date": "2024-09-14",
         "rotation":"0 -0 0",
         "position":"0 1.0 -0.9",
         "scale":"0.35 0.35 0.35",
-        "anchor":10
+        "anchor":10,
+         "category":"hat"
     },
+
     {
         "id": 5,
-        "title": "mask",
-        "image_url": "/Assets/myassets/mustache.jpg",
+        "title": "hat",
+        "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fh4scene.glb?alt=media&token=6969c914-6f1b-49de-9092-c48d39849c01",
+        "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fjoker.jpg?alt=media&token=22884892-9dc8-4216-9b0f-9f0314508f13",
         "description": "",
         "date": "2024-09-14",
         "rotation":"0 0 0",
         "position":"0 -.26 0",
         "scale":"0.6 0.6 0.6",
-        "anchor":168
-    }
+        "anchor":168,
+        "category":"hat"
+        
+    },
+
+    {   "id":6,
+    "title": "Glasses",
+    "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fthirteen-j-EE0G0CgC-WM-unsplash.jpg?alt=media&token=4e4b8c8f-ca3f-47f4-bdc6-419a3b872a6d",
+    "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fg3model.glb?alt=media&token=8b2f3066-610f-4f7c-b194-e57d9ed7d388",
+    "description": "A sleek and stylish ",
+    "date": "2024-09-14",
+    "rotation":"0.4 0.4 0.4",
+    "position":"0 -0.26 0",
+    "scale":"0.2 0.2 0.2",
+    "anchor":168,
+     "category":"glasses"
+}
+
+    
 
     
     

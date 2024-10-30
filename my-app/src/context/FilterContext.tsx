@@ -7,6 +7,7 @@ interface Filter {
   position: string;
   scale: string;
   anchor:number;
+  model:string
 }
 
 // Define the context properties

@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 import { storage } from "../firebase";
 
 interface ModelResult {
@@ -29,7 +30,9 @@ export default function Upload() {
 
   const ModelFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
+
     setModelFile(selectedFile || null);
+    console.log("Modelfile:",Modelfile)
   };
 
   const handleUpload = async () => {
@@ -233,6 +236,8 @@ export default function Upload() {
                 </div>
               </div>
             ) : null}
+
+             
           </div>
         )}
       </div>

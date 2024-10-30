@@ -20,6 +20,7 @@ interface Filter {
   position: string;
   scale: string;
   anchor: number;
+  model_data:string;
 }
 
 interface FilterCardProps {
@@ -47,7 +48,8 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       rotation: filter.rotation,
       position: filter.position,
       scale: filter.scale,
-      anchor: filter.anchor
+      anchor: filter.anchor,
+      model:filter.model_data
     }); // Set the selected filter in the context
   };
 

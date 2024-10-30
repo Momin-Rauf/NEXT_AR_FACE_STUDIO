@@ -28,11 +28,8 @@ const FaceTracking = () => {
       >
         {/* Consolidated a-assets for glasses models */}
         <a-assets>
-          <a-asset-item id="Model1" src="/Assets/glasses/scene.gltf"></a-asset-item>
-          <a-asset-item id="Model2" src="/Assets/black-glasses/scene.gltf"></a-asset-item>
-          <a-asset-item id="Model3" src="https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fmodel.glb-1728413802452.glb?alt=media&token=67780f65-ef3f-4dac-92cb-fb770c494f46"></a-asset-item>
-          <a-asset-item id="Model4" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/hat/scene.gltf"></a-asset-item>
-          <a-asset-item id="Model5" src="/Assets/meshy_glasses/model.glb"></a-asset-item>
+          <a-asset-item id="Model1" src={`${selectedFilter?.model}`}></a-asset-item>
+          
         </a-assets>
 
         <a-camera
@@ -51,7 +48,7 @@ const FaceTracking = () => {
               rotation={selectedFilter.rotation || '0 0 0'}
               position={selectedFilter.position || '0 0 0'}
               scale={selectedFilter.scale || '0 0 0'}
-              src={`#Model${selectedFilter.id || '1'}`} // Use the selected filter's ID to choose the model
+              src={`Model`} // Use the selected filter's ID to choose the model
               onLoaded={() => console.log(`Model ${selectedFilter.id} loaded successfully.`)} // Log when the model is loaded
             ></a-gltf-model>
           </a-entity>

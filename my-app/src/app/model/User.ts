@@ -7,7 +7,7 @@ const UserFilterSchema = new mongoose.Schema({
     },
     model_data: {
         type: String,  
-        required: true
+        required:true,
     },
     category: {
         type: String,
@@ -17,6 +17,34 @@ const UserFilterSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true
+    },
+    rotation: {
+        type: String, // You can change this to an array if you prefer
+        required: true
+    },
+    position: {
+        type: String, // You can also change this to an array for better structure
+        required: true
+    },
+    scale: {
+        type: String, // Similarly, this can also be an array
+        required: true
+    },
+    anchor: {
+        type: Number,
+        required: true
     }
 });
 
