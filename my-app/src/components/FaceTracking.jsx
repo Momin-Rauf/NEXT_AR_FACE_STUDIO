@@ -1,6 +1,6 @@
 'use client';
 import 'aframe';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import 'mind-ar/dist/mindar-face-aframe.prod.js';
 import { useFilterContext } from '@/context/FilterContext'; // Import the context hook
 
@@ -11,7 +11,6 @@ const FaceTracking = () => {
     // Logic to handle when selectedFilter changes
     console.log('Anchor changed to:', selectedFilter?.anchor);
   }, [selectedFilter]);
-
 
   // Log the selected filter ID
   console.log('Selected Filter:', selectedFilter?.anchor);
@@ -28,8 +27,12 @@ const FaceTracking = () => {
       >
         {/* Consolidated a-assets for glasses models */}
         <a-assets>
-          <a-asset-item id="Model1" src={`${selectedFilter?.model}`}></a-asset-item>
-          
+          <a-asset-item
+            id="Model"
+            src={
+              selectedFilter?.model_data
+            }
+          ></a-asset-item>
         </a-assets>
 
         <a-camera
@@ -40,16 +43,18 @@ const FaceTracking = () => {
 
         {/* Render the selected model with dynamic transformations */}
         {selectedFilter && (
-          <a-entity 
+          <a-entity
             key={`filter-${selectedFilter.anchor}`} // Unique key for re-rendering
-            mindar-face-target={`anchorIndex:${selectedFilter?.anchor}`}>
+            mindar-face-target={`anchorIndex:${selectedFilter?.anchor}`}
+          >
             <a-gltf-model
               animation-mixer="enabled: false"
               rotation={selectedFilter.rotation || '0 0 0'}
               position={selectedFilter.position || '0 0 0'}
-              scale={selectedFilter.scale || '0 0 0'}
-              src={`Model`} // Use the selected filter's ID to choose the model
+              scale={selectedFilter.scale || '1 1 1'} // Ensure scale is visible
+              src="#Model" // Use the asset ID directly
               onLoaded={() => console.log(`Model ${selectedFilter.id} loaded successfully.`)} // Log when the model is loaded
+              onError={() => console.error('Model failed to load')} // Log on model load failure
             ></a-gltf-model>
           </a-entity>
         )}

@@ -39,7 +39,7 @@ export default function Upload() {
     if (!file) return;
     setUploading(true);
 
-    const storageRef = ref(storage, `images/${file.name}`);
+    const storageRef = ref(storage, `models/${file.name}`);
     try {
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
@@ -74,7 +74,7 @@ export default function Upload() {
     if (!Modelfile) return;
     setUploading(true);
 
-    const storageRef = ref(storage, `models/${Modelfile.name}-${Date.now()}.glb`);
+    const storageRef = ref(storage, `images/${Modelfile.name}-${Date.now()}.glb`);
     try {
       await uploadBytes(storageRef, Modelfile);
       const url = await getDownloadURL(storageRef);
@@ -224,7 +224,7 @@ export default function Upload() {
                   <input
                     type="file"
                     onChange={ModelFileChange}
-                    className="file-input file-input-bordered w-full p-2 border-gray-300 rounded-md"
+                    className="file-input file-input-ghost w-full max-w-md p-2 mb-4 border-gray-300 rounded-md"
                   />
                   <button
                     className="btn bg-[#6631f7] w-full text-white px-6 py-2 rounded-md mt-4 hover:bg-[#5a2dd6] transition-all"
