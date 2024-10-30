@@ -10,6 +10,8 @@ const FaceTracking = () => {
   useEffect(() => {
     // Logic to handle when selectedFilter changes
     console.log('Anchor changed to:', selectedFilter?.anchor);
+
+    
   }, [selectedFilter]);
 
   // Log the selected filter ID
@@ -30,7 +32,7 @@ const FaceTracking = () => {
           <a-asset-item
             id="Model"
             src={
-              selectedFilter?.model_data
+              selectedFilter?.model
             }
           ></a-asset-item>
         </a-assets>
