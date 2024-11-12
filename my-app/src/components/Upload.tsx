@@ -39,7 +39,7 @@ export default function Upload() {
     if (!file) return;
     setUploading(true);
 
-    const storageRef = ref(storage, `models/${file.name}`);
+    const storageRef = ref(storage, `images/${file.name}`);
     try {
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
