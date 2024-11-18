@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cocroach
+* source:	https://sketchfab.com/3d-models/cocroach-2b7b2029047c49f3bb54df5b2f93b914
+* author:	chervinin (https://sketchfab.com/chervinin)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cocroach" (https://sketchfab.com/3d-models/cocroach-2b7b2029047c49f3bb54df5b2f93b914) by chervinin (https://sketchfab.com/chervinin) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -10,16 +10,26 @@ const FaceTracking = () => {
 
   useEffect(() => {
     if (modelRef.current && selectedFilter) {
-      // Manually update the model attributes
-      modelRef.current.setAttribute('src', selectedFilter?.model || '');
+      // Update the model attributes dynamically
+      modelRef.current.setAttribute('src', selectedFilter?.model || ''); // Set model source
       modelRef.current.setAttribute('position', selectedFilter?.position || '0 0 0');
       modelRef.current.setAttribute('rotation', selectedFilter?.rotation || '0 0 0');
       modelRef.current.setAttribute('scale', selectedFilter?.scale || '1 1 1');
+
+  if (selectedFilter.id === 6  || selectedFilter.id === 2  ) {
+        modelRef.current.setAttribute('animation', 'property: position; to: 1 1 1; dur: 1000; loop: true; ');
+        modelRef.current.setAttribute('animation__rotation', 'property: rotation; to: 0 360 0; dur: 5000; loop: true');
+        console.log('Cockroach animation applied!');
+      } else {
+        // Remove animations for other models
+        modelRef.current.removeAttribute('animation');
+        modelRef.current.removeAttribute('animation__rotation');
+      }
+
       console.log('Updated model:', selectedFilter?.model);
     }
-  }, [selectedFilter]); // Run this effect whenever the selectedFilter changes
+  }, [selectedFilter]); // Re-run effect whenever selectedFilter changes
 
-  // Log the selected filter ID (for debugging purposes)
   console.log('Selected Filter:', selectedFilter?.anchor);
 
   return (
@@ -32,7 +42,6 @@ const FaceTracking = () => {
         vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false"
       >
-        {/* Consolidated a-assets for glasses models */}
         <a-assets>
           <a-asset-item
             id="Model"
@@ -49,12 +58,12 @@ const FaceTracking = () => {
         {/* Render the selected model with dynamic transformations */}
         {selectedFilter && (
           <a-entity
-            key={`filter-${selectedFilter.id}`} // Unique key for re-rendering
+            key={`filter-${selectedFilter.id}`} 
+            mindar-face="true" // Track the face with mindar-face component
             mindar-face-target={`anchorIndex:${selectedFilter?.anchor}`}
           >
             <a-gltf-model
               ref={modelRef} // Attach ref to model
-              animation-mixer="enabled: false"
               rotation={selectedFilter.rotation || '0 0 0'}
               position={selectedFilter.position || '0 0 0'}
               scale={selectedFilter.scale || '1 1 1'} // Ensure scale is visible
