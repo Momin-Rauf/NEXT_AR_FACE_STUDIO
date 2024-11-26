@@ -1,0 +1,11 @@
+Model Information:
+* title:	Movier's Face (beta)
+* source:	https://sketchfab.com/3d-models/moviers-face-beta-a27257ad7653464e8a069b132cb2ffa9
+* author:	Javier Da Rosa (https://sketchfab.com/Javier_Da_Rosa)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Movier's Face (beta)" (https://sketchfab.com/3d-models/moviers-face-beta-a27257ad7653464e8a069b132cb2ffa9) by Javier Da Rosa (https://sketchfab.com/Javier_Da_Rosa) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

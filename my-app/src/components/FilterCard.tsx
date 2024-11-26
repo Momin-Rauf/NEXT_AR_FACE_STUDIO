@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
-import { useFilterContext } from '@/context/FilterContext'; 
+import { useFilterContext } from '@/context/FilterContext';
 
 // Utility function to truncate text
 const truncateText = (text: string, maxLength: number): string => {
@@ -13,14 +13,13 @@ const truncateText = (text: string, maxLength: number): string => {
 interface Filter {
   id: number;
   image_url: string;
-  
   title: string;
-  description: string;
-  rotation: string;
-  position: string;
-  scale: string;
+  description?: string; // Made optional to avoid errors when missing
+  scale: [number, number, number]; // Tuple for 3D scaling factors
+  position: [number, number, number]; // Tuple for 3D position
+  rotation: [number, number, number];
   anchor: number;
-  model_data:string;
+  model_data: string;
 }
 
 interface FilterCardProps {
@@ -30,27 +29,29 @@ interface FilterCardProps {
 const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverContentRef = useRef<HTMLDivElement | null>(null);
-  const { setSelectedFilter } = useFilterContext(); // Access the context to set the selected filter
+  const { setSelectedFilter } = useFilterContext();
 
   // GSAP animation for hover effect
-  useEffect(() => {
-    gsap.to(hoverContentRef.current, {
-      x: isHovered ? 0 : '-100%',
-      duration: 0.5,
-      ease: 'power3.out',
-    });
+  useLayoutEffect(() => {
+    if (hoverContentRef.current) {
+      gsap.to(hoverContentRef.current, {
+        x: isHovered ? 0 : '-100%',
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+    }
   }, [isHovered]);
 
   const handleFilterSelection = () => {
-    console.log('Selected Filter:', filter); // Log the selected filter
+    console.log('Selected Filter:', filter);
     setSelectedFilter({
       id: filter.id,
       rotation: filter.rotation,
       position: filter.position,
       scale: filter.scale,
       anchor: filter.anchor,
-      model:filter.model_data
-    }); // Set the selected filter in the context
+      model: filter.model_data,
+    });
   };
 
   return (
@@ -63,20 +64,19 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       tabIndex={0}
       onKeyPress={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          setIsHovered((prev) => !prev); // Toggle hover on enter/space
+          setIsHovered((prev) => !prev);
         }
       }}
-      onClick={handleFilterSelection} // Set the selected filter on click
+      onClick={handleFilterSelection}
     >
       <figure>
         <Image
-          src={filter.image_url  }
-          alt={filter.title || ""}
+          src={filter.image_url}
+          alt={filter.title || ''}
           className="w-full"
-          layout="responsive"
           width={216}
           height={192}
-          style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} // Scale on hover
+          style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
         />
         {filter.description && (
           <div

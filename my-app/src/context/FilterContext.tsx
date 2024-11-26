@@ -3,9 +3,9 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 // Define the Filter interface
 interface Filter {
   id: number; 
-  rotation: string;
-  position: string;
-  scale: string;
+  scale: [number, number, number]; // Tuple for 3D scaling factors
+  position: [number, number, number]; // Tuple for 3D position
+  rotation: [number, number, number];
   anchor:number;
   model:string
 }

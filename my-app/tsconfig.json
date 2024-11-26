@@ -2,6 +2,8 @@
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "strict": false,
+    "noImplicitAny": false,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
@@ -19,8 +21,16 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./types"] // Include custom types here
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "Insert.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "Insert.js",
+    "types/**/*.d.ts" // Add your custom type declaration files
+  ],
   "exclude": ["node_modules"]
 }

@@ -7,9 +7,9 @@
         "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fjason_voorhees_mask.glb?alt=media&token=9569d610-9775-42ee-94a0-13ab61a6a8c3",
         "description": "a face mask for your halloween",
         "date": "2024-09-14",
-        "rotation":"0.4 0.4 0.4",
-        "position":"0 -0.40 -0.25",
-        "scale":"0.55 0.55 0.55",
+        "rotation":[0, 0, 0],
+        "position":[0,-0.30,-0.25],
+        "scale":[0.55,0.55,0.55],
         "anchor":168,
         "category":"Horror"
     },
@@ -19,8 +19,8 @@
     "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fghost_in_a_white_sheet.glb?alt=media&token=980d0ebc-fdeb-48b5-a915-7dacfc22beab",
     "description": "A ghost behind you",
     "date": "2024-09-14",
-    "rotation":"0.4 0.4 0.4",
-    "position":"1.5 -0.40 0.5",
+    "rotation":[0.4, 0.4 ,0.4],
+    "position":[1.5, -0.40 ,0.5],
     "animations": "property: position; to: 0.2 0 0.2; dur: 1000; loop: true; direction: alternate",
     "scale":"0.55 0.55 0.55",
     "anchor":168,
@@ -32,49 +32,69 @@
     "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fstylized_skull.glb?alt=media&token=8fc06887-a547-4677-8fbd-2ac615fa7ea7",
     "description": "A white skull mask",
     "date": "2024-09-14",
-    "rotation":"0.4 0.4 0.4",
-    "position":"0 0.1 -1.85",
-    "scale":"6 6 6",
+    "rotation":[0.4, 0.4, 0.4],
+    "position":[0, 0.1, -1.85],
+    "scale":[6, 6, 6],
     "anchor":164,
     "category":"Horror"
 },
 {   "id":4,
     "title": "Glasses",
     "image_url": "/Assets/photo.webp",
-    "model_data":"/Assets/Glasses/g1/g1.gltf",
+    "model_data":"/Assets/Glasses/g2/untitled.gltf",
     "description": "glasses",
     "date": "2024-09-14",
-    "rotation":"3 3 3",
-    "position":"0 -0.3 -.27",
-    "scale":" 0.45 0.45 0.45",
+    "rotation":[0 ,180, 0],
+    "position":[0 ,-0.45, -0.35],
+    "scale":[0.06, 0.06, 0.06],
     "anchor":168,
     "category":"Glasses"
 },
 {   "id":5,
     "title": "Goggles",
     "image_url": "/Assets/glasses.jpg",
-    "model_data":"/Assets/Glasses/g2/g2scene.gltf",
+    "model_data":"/untitled.gltf",
     "description": "glasses",
     "date": "2024-09-14",
-    "rotation":"0 0 0",
-    "position":"0 -0.3 -.3",
-    "scale":" 0.2 0.2 0.2",
+    "rotation":[0,0,0],
+    "position":[0,-0.5,0],
+    "scale":[0.09,0.09,0.09],
     "anchor":168,
     "category":"Glasses"
 },
-{   "id":6,
-    "title": "snowfall",
-    "image_url": "/Assets/2938.jpg",
-    "model_data":"/Assets/Glasses/snow/scene.gltf",
+
+
+{
+    "id":6,
+    "title": "movier mask",
+    "image_url": "/Assets/mask.png",
+    "model_data":"/moviers_face_beta/untitled.glb",
     "description": "snowfall effect",
     "date": "2024-09-14",
-    "rotation":"0 0 0",
-    "animations": "property: position; to: 0.2 0 0.2; dur: 1000; loop: true; direction: alternate",
-    "position":"-3 -4 0",
-    "scale":" 2 2 2",
-    
-    "category":"snowfall"
+    "rotation":[0, 0 ,0],
+    "position":[0 ,-0.2, 0],
+    "scale":[0.2 , 0.2, 0.2],
+    "anchor":168,
+    "category":"mask"
+},
+{
+    "id":7,
+    "title": "Iron man",
+    "image_url": "/Assets/images.jpg",
+    "model_data":"/Assets/ironman/scene.gltf",
+    "description": "",
+    "date": "2024-09-14",
+   "rotation":[0, 0, 0],
+    "position":[0, -0.2, 0],
+    "scale":[0.2, 2, 0.2],
+    "anchor":168,
+    "category":"mask"
 }
+
+
+
+
+
 
 
 ]
