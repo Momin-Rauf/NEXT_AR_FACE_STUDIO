@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
     // Parse and validate the request body using Zod
     const body = await request.json();
     const parsedData = UserFilterSchema.safeParse(body);
+    console.log(parsedData);
     if (!parsedData.success) {
       return NextResponse.json({ message: 'Invalid data format', errors: parsedData.error }, { status: 400 });
     }
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
       date,
       createdAt: new Date(),
     };
-
+    console.log("This it he filter added in add-model api",newFilter);
     // Push the new filter into the user's userfilter array
     user.userfilter.push(newFilter);
     await user.save();

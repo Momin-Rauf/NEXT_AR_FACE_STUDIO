@@ -31,15 +31,15 @@ const UserFilterSchema = new mongoose.Schema({
         required: true
     },
     rotation: {
-        type: String, // You can change this to an array if you prefer
+        type: [Number], // You can change this to an array if you prefer
         required: true
     },
     position: {
-        type: String, // You can also change this to an array for better structure
+        type: [Number], // You can also change this to an array for better structure
         required: true
     },
     scale: {
-        type: String, // Similarly, this can also be an array
+        type: [Number], // Similarly, this can also be an array
         required: true
     },
     anchor: {

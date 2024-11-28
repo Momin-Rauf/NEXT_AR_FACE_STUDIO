@@ -43,7 +43,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   }, [isHovered]);
 
   const handleFilterSelection = () => {
-    console.log('Selected Filter:', filter);
+    console.log('Selected Filter in Filter card:', filter);
     setSelectedFilter({
       id: filter.id,
       rotation: filter.rotation,
@@ -52,6 +52,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       anchor: filter.anchor,
       model: filter.model_data,
     });
+    
   };
 
   return (

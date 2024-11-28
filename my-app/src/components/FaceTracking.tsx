@@ -50,6 +50,7 @@ const FaceTracking = () => {
   };
 
   useEffect(() => {
+    console.log(selectedFilter);
     if (!selectedFilter?.model) return;
 
     const initAR = async () => {
@@ -73,7 +74,7 @@ const FaceTracking = () => {
       const loadModel = async (url) => {
         try {
           const gltf = await loader.loadAsync(url);
-
+          
           // Dispose of the previous model
           if (modelRef.current) {
             disposeObject(modelRef.current);

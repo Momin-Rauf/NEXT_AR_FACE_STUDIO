@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import FilterCustomizer from "./FilterCustomizer";
 import { storage } from "../firebase";
 
 interface ModelResult {
@@ -18,9 +18,9 @@ export default function Upload() {
   const [Modelfile, setModelFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [image_url, setUploadedUrl] = useState<string | null>(null);
-  const [model_data, setModelData] = useState<string | null>(null);
+  const [modelData, setModelData] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [category, setCategory] = useState<string>("Nature");
   const [progress, setProgress] = useState<string>("");
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -55,14 +55,15 @@ export default function Upload() {
     setCategory(event.target.value);
   };
 
-  const storeData = async () => {
+  const storeData = async (model_data) => {
     console.log("saving:", image_url, model_data, category);
     try {
       const response = await fetch("/api/add-model", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        
         body: JSON.stringify({ image_url, model_data, category }),
-      });
+      }); 
       if (!response.ok) throw new Error("Failed to store the data.");
       console.log("Data stored successfully.");
     } catch (error) {
@@ -77,10 +78,10 @@ export default function Upload() {
     const storageRef = ref(storage, `images/${Modelfile.name}-${Date.now()}.glb`);
     try {
       await uploadBytes(storageRef, Modelfile);
-      const url = await getDownloadURL(storageRef);
-      setModelData(url);
-      console.log("GLB file uploaded successfully:", url);
-      await storeData();
+      const model_data = await getDownloadURL(storageRef);
+      await setModelData(model_data);
+      console.log("GLB file uploaded successfully:", model_data);
+      await storeData(model_data);
     } catch (error) {
       console.error("Error uploading the GLB file", error);
     } finally {
@@ -205,16 +206,29 @@ export default function Upload() {
         >
           {uploading ? "Uploading..." : "Upload Image"}
         </button>
-
+        <div className="mt-6">
+                  <input
+                    type="file"
+                    onChange={ModelFileChange}
+                    className="file-input file-input-ghost w-full max-w-md p-2 mb-4 border-gray-300 rounded-md"
+                  />
+                  <button
+                    className="btn bg-[#6631f7] w-full text-white px-6 py-2 rounded-md mt-4 hover:bg-[#5a2dd6] transition-all"
+                    onClick={handleModelUpload}
+                    disabled={uploading}
+                  >
+                    {uploading ? "Uploading..." : "Upload GLB Model"}
+                  </button>
+                </div>
         {status && (
           <div className="mt-6 text-center">
             <p className="text-gray-700">Status: {status}</p>
             <p className="text-gray-700">Progress: {progress}%</p>
-            {status === "SUCCEEDED" && model_data ? (
+            {status === "SUCCEEDED" && modelData ? (
               <div className="mt-4">
                 <a
                   className="inline-block bg-[#6631f7] text-white px-4 py-2 rounded-md shadow-md hover:bg-[#5a2dd6] transition-all"
-                  href={model_data}
+                  href={modelData}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -235,12 +249,14 @@ export default function Upload() {
                   </button>
                 </div>
               </div>
+              
             ) : null}
 
              
           </div>
         )}
       </div>
+      {/* <FilterCustomizer/> */}
     </div>
   );
 }
