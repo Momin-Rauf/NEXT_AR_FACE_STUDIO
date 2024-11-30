@@ -56,6 +56,7 @@ const FilterBoard = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {currentItems.map((filter, index) => (
                             <div className="m-1 transform scale-90" key={index}>
+                                 {/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */}
                                 <FilterCard filter={filter} />
                             </div>
                         ))}

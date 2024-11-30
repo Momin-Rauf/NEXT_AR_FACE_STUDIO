@@ -21,8 +21,7 @@
     "date": "2024-09-14",
     "rotation":[0, 0 ,0],
     "position":[0, 0 ,0],
-    "animations": "property: position; to: 0.2 0 0.2; dur: 1000; loop: true; direction: alternate",
-    "scale":[0.2, 0.2, 0.2],
+     "scale":[0.2, 0.2, 0.2],
     "anchor":168,
     "category":"Horror"
 },

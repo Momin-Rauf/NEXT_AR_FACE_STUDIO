@@ -52,7 +52,6 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       anchor: filter.anchor,
       model: filter.model_data,
     });
-    
   };
 
   return (
@@ -63,18 +62,18 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       className="card card-compact bg-white w-54 h-54 cursor-pointer text-black shadow-xl transition-transform duration-300"
       role="button"
       tabIndex={0}
-      onKeyPress={(e) => {
+      onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          setIsHovered((prev) => !prev);
+          handleFilterSelection(); // Trigger selection on Enter or Space key press
         }
       }}
       onClick={handleFilterSelection}
     >
-      <figure className='w-[200px] h-[100px]' >
+      <figure className="w-[200px] h-[100px] relative">
         <Image
           src={filter.image_url}
           alt={filter.title || ''}
-          className="w-full object-contain"
+          className="w-full object-contain transition-transform duration-300 ease-in-out"
           width={150}
           height={132}
           style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
@@ -95,3 +94,4 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
 };
 
 export default FilterCard;
+  
