@@ -1,15 +1,16 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 
 const AboutWalee = () => {
   return (
     <div className='flex flex-row p-12 h-[100vh] bg-white justify-center items-center'>
       <div className='flex w-[50%] gap-6 text-black flex-col'>
         <h1 className='font-bold text-4xl mb-4 text-[#6f40f9]'>About Walee</h1>
-        
+
         <p className='m-2 text-lg leading-relaxed text-gray-700'>
-          Founded in 2019, Walee is Pakistans largest influencer marketing platform, boasting over 70 thousand registered users. We empower your voice, whether youre an influencer or a business. Our solutions are crafted to deliver winning experiences and opportunities.
+          Founded in 2019, Walee is Pakistan's largest influencer marketing platform, boasting over 70 thousand registered users. We empower your voice, whether you're an influencer or a business. Our solutions are crafted to deliver winning experiences and opportunities.
         </p>
 
         <p className='m-2 text-lg leading-relaxed text-gray-700'>
@@ -28,7 +29,13 @@ const AboutWalee = () => {
         </Link>
       </div>
 
-      <img className='w-[40%] m-2 rounded-lg shadow-lg' src='/Assets/myassets/about.jpg' alt="About Walee" />
+      <Image 
+        className='w-[40%] m-2 rounded-lg shadow-lg' 
+        src='/Assets/myassets/about.jpg' 
+        alt="About Walee" 
+        width={500} // Adjust width according to your design
+        height={500} // Adjust height according to your design
+      />
     </div>
   );
 };

@@ -1,5 +1,7 @@
+'use client';
+
 import { MindARThree } from "mind-ar/dist/mindar-face-three.prod.js";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { useFilterContext } from "@/context/FilterContext";
@@ -13,36 +15,28 @@ type Filter = {
 };
 
 const FaceTracking = () => {
- 
-  const [modelURL, setModelURL] = useState("");
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const initialized = useRef(false);
-  const modelRef = useRef(null); // Current model reference
-  const mindarThreeRef = useRef(null); // Store MindARThree instance
+  const modelRef = useRef<THREE.Object3D | null>(null); // Current model reference
+  const mindarThreeRef = useRef<MindARThree | null>(null); // Store MindARThree instance
   const { selectedFilter } = useFilterContext();
 
-  // Utility to dispose of objects
-  const disposeObject = (object) => {
+  const disposeObject = (object: THREE.Object3D) => {
     object.traverse((child) => {
-      if (child.geometry) child.geometry.dispose();
-      if (child.material) {
-        if (Array.isArray(child.material)) {
-          child.material.forEach((mat) => {
-            if (mat.map) mat.map.dispose();
-            if (mat.normalMap) mat.normalMap.dispose();
-            mat.dispose();
-          });
+      if ((child as THREE.Mesh).geometry) (child as THREE.Mesh).geometry.dispose();
+      if ((child as THREE.Mesh).material) {
+        const material = (child as THREE.Mesh).material;
+        if (Array.isArray(material)) {
+          material.forEach((mat) => mat.dispose());
         } else {
-          if (child.material.map) child.material.map.dispose();
-          if (child.material.normalMap) child.material.normalMap.dispose();
-          child.material.dispose();
+          material.dispose();
         }
       }
     });
     if (object.parent) object.parent.remove(object);
   };
 
-  const clearScene = (scene) => {
+  const clearScene = (scene: THREE.Scene) => {
     scene.traverse((object) => disposeObject(object));
     while (scene.children.length) {
       scene.remove(scene.children[0]);
@@ -50,42 +44,37 @@ const FaceTracking = () => {
   };
 
   useEffect(() => {
-    console.log(selectedFilter?.model);
     if (!selectedFilter?.model) return;
 
     const initAR = async () => {
       if (initialized.current) return;
+
+      if (!containerRef.current) return;
 
       const mindarThree = new MindARThree({ container: containerRef.current });
       const { renderer, scene, camera } = mindarThree;
 
       mindarThreeRef.current = mindarThree;
 
-      // Setup lighting
       const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
       scene.add(light);
 
-      // Setup anchor
       const anchor = mindarThree.addAnchor(selectedFilter.anchor || 168);
-
-      // GLTF Loader
       const loader = new GLTFLoader();
 
-      const loadModel = async (url) => {
+      const loadModel = async (url: string) => {
         try {
           const gltf = await loader.loadAsync(url);
-          
-          // Dispose of the previous model
+
           if (modelRef.current) {
             disposeObject(modelRef.current);
             modelRef.current = null;
           }
 
-          // Configure and add the new model
           const model = gltf.scene;
-          model.scale.set(selectedFilter.scale[0],selectedFilter.scale[1],selectedFilter.scale[2]);
-          model.position.set(selectedFilter.position[0],selectedFilter.position[1],selectedFilter.position[2]);
-          model.rotation.set(selectedFilter.rotation[0],selectedFilter.rotation[1],selectedFilter.rotation[2]);
+          model.scale.set(...selectedFilter.scale);
+          model.position.set(...selectedFilter.position);
+          model.rotation.set(...selectedFilter.rotation);
 
           anchor.group.add(model);
           modelRef.current = model;
@@ -94,12 +83,10 @@ const FaceTracking = () => {
         }
       };
 
-      // Initial model load
       if (selectedFilter.model) {
         await loadModel(selectedFilter.model);
       }
 
-      // Start rendering
       try {
         await mindarThree.start();
       } catch (error) {
@@ -107,9 +94,7 @@ const FaceTracking = () => {
         return;
       }
 
-      // Rendering loop
       renderer.setAnimationLoop(() => renderer.render(scene, camera));
-
       initialized.current = true;
 
       return () => {
@@ -138,7 +123,3 @@ const FaceTracking = () => {
 };
 
 export default FaceTracking;
-
-
-
-// http://localhost:3000/CustomizeFilter/67495fd58c3473ed622e3f54

@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import Image from 'next/image';
 
 import { useRouter } from 'next/navigation';
 import { storage } from "../firebase";
@@ -178,7 +178,13 @@ export default function Upload() {
       {image_url && (
         <div className="flex flex-col w-full md:w-[40%] justify-center items-center p-8 bg-[#f3f4f6] shadow-md rounded-md">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Uploaded Image</h2>
-          <img className="w-[300px] h-[300px] object-cover rounded-md shadow-md mb-4" src={image_url} alt="Uploaded" />
+          <Image
+  className="w-[300px] h-[300px] object-cover rounded-md shadow-md mb-4"
+  src={image_url}
+  alt="Uploaded"
+  width={300}
+  height={300}
+/>
           <label className="text-lg text-gray-700 mb-2">Select 3D Model Category</label>
           <select
             value={category}

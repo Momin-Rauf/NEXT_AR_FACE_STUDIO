@@ -2,7 +2,7 @@ import UserModel from '../../../model/User';
 import dbConnect from '@/lib/dbConnect';
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
-import mongoose from 'mongoose';
+
 
 export async function POST(request: NextRequest, { params }: { params: { filterId: string } }) {
   try {

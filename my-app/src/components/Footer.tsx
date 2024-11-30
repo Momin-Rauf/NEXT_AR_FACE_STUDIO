@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
@@ -6,7 +7,13 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col md:flex-row justify-between">
         {/* Logo Section */}
         <div className="mb-6 flex flex-col items-start">
-          <img src="/walee-logo.png" alt="Company Logo" className="w-32 h-auto mb-4" />
+          <Image 
+            src="/walee-logo.png" 
+            alt="Company Logo" 
+            width={128} 
+            height={64} // Adjust dimensions as needed
+            className="w-32 h-auto mb-4" 
+          />
           <p className="text-sm font-light">© 2024 Your Company. All rights reserved.</p>
         </div>
 
