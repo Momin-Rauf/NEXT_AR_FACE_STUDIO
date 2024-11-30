@@ -10,7 +10,7 @@ const AboutWalee = () => {
         <h1 className='font-bold text-4xl mb-4 text-[#6f40f9]'>About Walee</h1>
 
         <p className='m-2 text-lg leading-relaxed text-gray-700'>
-          Founded in 2019, Walee is Pakistan's largest influencer marketing platform, boasting over 70 thousand registered users. We empower your voice, whether you're an influencer or a business. Our solutions are crafted to deliver winning experiences and opportunities.
+          Founded in 2019, Walee is Pakistan&apos;s largest influencer marketing platform, boasting over 70 thousand registered users. We empower your voice, whether you&apos;re an influencer or a business. Our solutions are crafted to deliver winning experiences and opportunities.
         </p>
 
         <p className='m-2 text-lg leading-relaxed text-gray-700'>

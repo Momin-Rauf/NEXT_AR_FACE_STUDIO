@@ -18,7 +18,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
   const [position, setPosition] = useState<[number, number, number]>([0, 0, 0]);
   const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
 
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const mindarThreeRef = useRef<MindARThree | null>(null);
   const modelRef = useRef<THREE.Object3D | null>(null);
   const initialized = useRef<boolean>(false);
@@ -50,7 +50,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
 
     const initAR = async () => {
       try {
-        const mindarThree = new MindARThree({ container: containerRef.current });
+        const mindarThree = new MindARThree({ container: containerRef.current! });
         const { renderer, scene, camera } = mindarThree;
 
         mindarThreeRef.current = mindarThree;
@@ -108,37 +108,46 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
 
   // Function to update model scale, position, and rotation in real-time
   const handleScaleChange = (axis: 'x' | 'y' | 'z', value: number) => {
-    const newScale = [...scale];
-    if (axis === 'x') newScale[0] = value;
-    if (axis === 'y') newScale[1] = value;
-    if (axis === 'z') newScale[2] = value;
-    setScale(newScale);
-    if (modelRef.current) {
-      modelRef.current.scale.set(...newScale);
-    }
+    setScale((prevScale) => {
+      const newScale: [number, number, number] = [...prevScale]; // Ensure it's a tuple
+      if (axis === 'x') newScale[0] = value;
+      if (axis === 'y') newScale[1] = value;
+      if (axis === 'z') newScale[2] = value;
+      if (modelRef.current) {
+        modelRef.current.scale.set(...newScale);
+      }
+      return newScale; // Return the correct tuple type
+    });
   };
+  
 
   const handlePositionChange = (axis: 'x' | 'y' | 'z', value: number) => {
-    const newPosition = [...position];
-    if (axis === 'x') newPosition[0] = value;
-    if (axis === 'y') newPosition[1] = value;
-    if (axis === 'z') newPosition[2] = value;
-    setPosition(newPosition);
-    if (modelRef.current) {
-      modelRef.current.position.set(...newPosition);
-    }
+    setPosition((prevPosition) => {
+      const newPosition: [number, number, number] = [...prevPosition]; // Ensure it's a tuple
+      if (axis === 'x') newPosition[0] = value;
+      if (axis === 'y') newPosition[1] = value;
+      if (axis === 'z') newPosition[2] = value;
+      if (modelRef.current) {
+        modelRef.current.position.set(...newPosition);
+      }
+      return newPosition; // Return the correct tuple type
+    });
   };
+  
 
   const handleRotationChange = (axis: 'x' | 'y' | 'z', value: number) => {
-    const newRotation = [...rotation];
-    if (axis === 'x') newRotation[0] = value;
-    if (axis === 'y') newRotation[1] = value;
-    if (axis === 'z') newRotation[2] = value;
-    setRotation(newRotation);
-    if (modelRef.current) {
-      modelRef.current.rotation.set(...newRotation);
-    }
+    setRotation((prevRotation) => {
+      const newRotation: [number, number, number] = [...prevRotation]; // Ensure the type is a tuple
+      if (axis === 'x') newRotation[0] = value;
+      if (axis === 'y') newRotation[1] = value;
+      if (axis === 'z') newRotation[2] = value;
+      if (modelRef.current) {
+        modelRef.current.rotation.set(...newRotation);
+      }
+      return newRotation; // This will now always return a tuple of exactly three numbers
+    });
   };
+  
 
   // Function to save rotation, scale, and position to the API
   const saveModelState = async () => {
@@ -173,7 +182,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
   }
 
   return (
-    <div className="h-[120vh] flex bg-white flex-row items-center justify-center bg-gray-900">
+    <div className="h-[120vh] flex bg-white flex-row items-center justify-center ">
       {/* Camera View */}
       <div className="w-full flex justify-center">
         <div
@@ -268,9 +277,9 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             <label className="text-white mr-2">Rotation X</label>
             <input
               type="range"
-              min="-180"
-              max="180"
-              step="1"
+              min="-3.14"
+              max="3.14"
+              step="0.1"
               value={rotation[0]}
               onChange={(e) => handleRotationChange('x', parseFloat(e.target.value))}
               className="slider"
@@ -280,9 +289,9 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             <label className="text-white mr-2">Rotation Y</label>
             <input
               type="range"
-              min="-180"
-              max="180"
-              step="1"
+              min="-3.14"
+              max="3.14"
+              step="0.1"
               value={rotation[1]}
               onChange={(e) => handleRotationChange('y', parseFloat(e.target.value))}
               className="slider"
@@ -292,17 +301,20 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             <label className="text-white mr-2">Rotation Z</label>
             <input
               type="range"
-              min="-180"
-              max="180"
-              step="1"
+              min="-3.14"
+              max="3.14"
+              step="0.1"
               value={rotation[2]}
               onChange={(e) => handleRotationChange('z', parseFloat(e.target.value))}
               className="slider"
             />
           </div>
 
-          {/* Save button */}
-          <button onClick={saveModelState} className="bg-blue-500 text-white py-2 px-4 rounded-full mt-4">
+          {/* Save Button */}
+          <button
+            onClick={saveModelState}
+            className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 mt-4"
+          >
             Save Changes
           </button>
         </div>

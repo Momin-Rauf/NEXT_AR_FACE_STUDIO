@@ -54,16 +54,13 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-row h-screen justify-center items-center border-red-700 border-2 ">
-     import Image from "next/image";
-
-// In your component
-<Image 
-  src="/Assets/pictures/login.jpg" 
-  alt="Login illustration" 
-  width={500} 
-  height={500} 
-  className="w-[40%]" 
-/>
+      <Image 
+        src="/Assets/pictures/login.jpg" 
+        alt="Login illustration" 
+        width={500} 
+        height={500} 
+        className="w-[40%]" 
+      />
 
       <div className="bg-white hover:shadow-sm rounded-xl p-8 w-full max-w-md mt-4 shadow-black  transform transition-all duration-500 ">
         <h2 className="text-[#6631f7] text-4xl font-bold mb-8 text-center tracking-tight">Welcome Back</h2>
@@ -114,17 +111,14 @@ const LoginPage = () => {
           </form>
         </Form>
         <div className="text-center mt-6">
-  <p className="text-gray-600">
-     No account? 
-    <a href="/sign-up" className="text-[#6631f7] hover:text-[#ff275b] font-semibold ml-2 transition-all duration-300">Sign Up</a>
-  </p>
-</div>
-
+          <p className="text-gray-600">
+            No account? 
+            <a href="/sign-up" className="text-[#6631f7] hover:text-[#ff275b] font-semibold ml-2 transition-all duration-300">Sign Up</a>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
 export default LoginPage;
-
-

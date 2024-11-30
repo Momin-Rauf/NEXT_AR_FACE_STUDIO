@@ -6,14 +6,6 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { useFilterContext } from "@/context/FilterContext";
 
-type Filter = {
-  model?: string;
-  anchor?: number;
-  scale: [number, number, number]; // Tuple for 3D scaling factors
-  position: [number, number, number]; // Tuple for 3D position
-  rotation: [number, number, number]; // Tuple for 3D rotation
-};
-
 const FaceTracking = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const initialized = useRef(false);
