@@ -10,6 +10,7 @@ import { UserFilterSchema } from "@/schemas/UserFilterSchema"; // import your zo
 export async function POST(request: NextRequest) {
   try {
     // Connect to the database
+    
     await dbConnect();
 
     // Get JWT Token
@@ -30,6 +31,7 @@ export async function POST(request: NextRequest) {
     // Parse and validate the request body using Zod
     const body = await request.json();
     const parsedData = UserFilterSchema.safeParse(body);
+    console.log(parsedData,"parsed data");
     console.log(parsedData);
     if (!parsedData.success) {
       return NextResponse.json({ message: 'Invalid data format', errors: parsedData.error }, { status: 400 });
@@ -57,7 +59,7 @@ export async function POST(request: NextRequest) {
     user.userfilter.push(newFilter);
     await user.save();
 
-    return NextResponse.json({ message: 'User filter added successfully' }, { status: 201 });
+    return NextResponse.json({ message: 'User filter added successfully',newFilter }, { status: 201 });
   } catch (error) {
     console.error('Error adding user filter:', error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });

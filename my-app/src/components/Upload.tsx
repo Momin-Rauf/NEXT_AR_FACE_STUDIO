@@ -2,7 +2,9 @@
 
 import { useState, ChangeEvent } from "react";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import FilterCustomizer from "./FilterCustomizer";
+
+
+import { useRouter } from 'next/navigation';
 import { storage } from "../firebase";
 
 interface ModelResult {
@@ -23,6 +25,7 @@ export default function Upload() {
   const [category, setCategory] = useState<string>("Nature");
   const [progress, setProgress] = useState<string>("");
 
+  const router = useRouter();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     setFile(selectedFile || null);
@@ -64,8 +67,15 @@ export default function Upload() {
         
         body: JSON.stringify({ image_url, model_data, category }),
       }); 
+
+      console.log(response);
       if (!response.ok) throw new Error("Failed to store the data.");
-      console.log("Data stored successfully.");
+      const data = await response.json(); // Parse the response body
+      console.log("Data stored successfully.", data.newFilter._id);
+      const filterId = data.newFilter._id.toString(); // Get the filter ID from the response
+
+      // Redirect to the CustomizeFilter page with the filter ID
+      router.push(`/CustomizeFilter/${filterId}`);
     } catch (error) {
       console.error("Error storing data", error);
     }
@@ -175,11 +185,11 @@ export default function Upload() {
             onChange={handleCategoryChange}
             className="select bg-white select-bordered mt-2 w-full max-w-md border-gray-300 text-gray-700"
           >
-            <option value="">Choose a Category</option>
-            <option value="architecture">Architecture</option>
-            <option value="nature">Nature</option>
-            <option value="technology">Technology</option>
-            <option value="art">Art</option>
+            <option value="">Choose a landmark</option>
+            <option value="architecture">Eyes</option>
+            <option value="nature">Nose</option>
+            <option value="technology">Chin</option>
+            <option value="art">Head</option>
           </select>
           <button
             className="btn bg-[#6631f7] text-white px-6 py-2 rounded-md mt-4 hover:bg-[#5a2dd6] transition-all"
@@ -207,18 +217,8 @@ export default function Upload() {
           {uploading ? "Uploading..." : "Upload Image"}
         </button>
         <div className="mt-6">
-                  <input
-                    type="file"
-                    onChange={ModelFileChange}
-                    className="file-input file-input-ghost w-full max-w-md p-2 mb-4 border-gray-300 rounded-md"
-                  />
-                  <button
-                    className="btn bg-[#6631f7] w-full text-white px-6 py-2 rounded-md mt-4 hover:bg-[#5a2dd6] transition-all"
-                    onClick={handleModelUpload}
-                    disabled={uploading}
-                  >
-                    {uploading ? "Uploading..." : "Upload GLB Model"}
-                  </button>
+                  
+                 
                 </div>
         {status && (
           <div className="mt-6 text-center">

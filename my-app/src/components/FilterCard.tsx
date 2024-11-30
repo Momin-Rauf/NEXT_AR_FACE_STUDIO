@@ -70,13 +70,13 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       }}
       onClick={handleFilterSelection}
     >
-      <figure>
+      <figure className='w-[200px] h-[100px]' >
         <Image
           src={filter.image_url}
           alt={filter.title || ''}
-          className="w-full"
-          width={216}
-          height={192}
+          className="w-full object-contain"
+          width={150}
+          height={132}
           style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
         />
         {filter.description && (

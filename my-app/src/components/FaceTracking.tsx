@@ -50,7 +50,7 @@ const FaceTracking = () => {
   };
 
   useEffect(() => {
-    console.log(selectedFilter);
+    console.log(selectedFilter?.model);
     if (!selectedFilter?.model) return;
 
     const initAR = async () => {
@@ -138,3 +138,7 @@ const FaceTracking = () => {
 };
 
 export default FaceTracking;
+
+
+
+// http://localhost:3000/CustomizeFilter/67495fd58c3473ed622e3f54

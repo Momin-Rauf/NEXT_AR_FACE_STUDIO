@@ -10,5 +10,5 @@ export const UserFilterSchema = z.object({
   rotation: z.array(z.number()).length(3).default([0, 0, 0]),
   position: z.array(z.number()).length(3).default([0, 0, 0]),
   scale: z.array(z.number()).length(3).default([0.4, 0.4, 0.4]),
-  anchor: z.number().default(10),
+  anchor: z.number().default(168),
 });

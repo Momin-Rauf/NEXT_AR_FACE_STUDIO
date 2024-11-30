@@ -14,15 +14,15 @@
         "category":"Horror"
     },
     {   "id":2,
-    "title": "White ghost",
-    "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fghost.png?alt=media&token=27e375e6-58dc-4ab2-825c-21dc5e036784",
-    "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fghost_in_a_white_sheet.glb?alt=media&token=980d0ebc-fdeb-48b5-a915-7dacfc22beab",
-    "description": "A ghost behind you",
+    "title": "glasses",
+    "image_url": "/Assets/Glasses/images.jpg",
+    "model_data":"/Assets/Glasses/g2/g2scene.gltf",
+    "description": "glasses",
     "date": "2024-09-14",
     "rotation":[0, 0 ,0],
     "position":[0, 0 ,0],
     "animations": "property: position; to: 0.2 0 0.2; dur: 1000; loop: true; direction: alternate",
-    "scale":[0.55, 0.55, 0.55],
+    "scale":[0.2, 0.2, 0.2],
     "anchor":168,
     "category":"Horror"
 },
@@ -32,7 +32,7 @@
     "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fstylized_skull.glb?alt=media&token=8fc06887-a547-4677-8fbd-2ac615fa7ea7",
     "description": "A white skull mask",
     "date": "2024-09-14",
-    "rotation":[0.4, 0.4, 0.4],
+    "rotation":[0, 0, 0],
     "position":[0, 0.1, -1.85],
     "scale":[6, 6, 6],
     "anchor":164,
@@ -73,7 +73,7 @@
     "date": "2024-09-14",
     "rotation":[0, 0 ,0],
     "position":[0 ,-0.2, 0],
-    "scale":[0.2 , 0.2, 0.2],
+    "scale":[0.2 , 0.2, 0.05],
     "anchor":168,
     "category":"mask"
 }
