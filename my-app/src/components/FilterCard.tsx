@@ -3,6 +3,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
+
 import { useFilterContext } from '@/context/FilterContext';
 
 // Utility function to truncate text
@@ -69,7 +70,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       }}
       onClick={handleFilterSelection}
     >
-      <figure className="w-[200px] h-[100px] relative">
+      <figure className="w-[200px] h-[100px] object-cover relative">
         <Image
           src={filter.image_url}
           alt={filter.title || ''}

@@ -1,105 +1,77 @@
 'use client';
 import React, { useEffect, useRef, useState } from "react";
+import FilterCustomizer from "./FilterCustomizer";
 import Link from "next/link";
-import { gsap } from "gsap";
-import Image from "next/image";
-import { FaAngleDoubleDown } from "react-icons/fa";
-import { useSession } from "next-auth/react"; // No need to import Session from here
-import { Session } from "next-auth"; // Import Session from next-auth
+import { motion } from "framer-motion";
+import { AuroraBackground } from "./ui/aurora-background";
+import { TextGenerateEffect } from "./ui/text-generate-effect";
+import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 
 const HeroSection = () => {
-    const [sessionData, setSessionData] = useState<Session | null>(null); // Update the type to 'Session | null'
-    const { data: session } = useSession(); 
-    const textRef = useRef<HTMLDivElement | null>(null); // Specify the type of the ref
+    const [sessionData, setSessionData] = useState<Session | null>(null);
+    const { data: session } = useSession();
+    const textRef = useRef<HTMLDivElement | null>(null);
 
-    // Set session data once the session changes
     useEffect(() => {
-        setSessionData(session); // Now this will work since sessionData accepts 'Session | null'
-    }, [session]); // Only run when `session` changes
-
-    // GSAP animations
-    useEffect(() => {
-        if (textRef.current) { // Check if textRef.current is not null
-            gsap.fromTo(
-                textRef.current.querySelectorAll("h1, p, button, span"),
-                {
-                    opacity: 0,
-                    y: -50,
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.7,
-                    ease: "power3.out",
-                    stagger: 0.1,
-                }
-            );
-        }
-    }, []);
+        setSessionData(session);
+    }, [session]);
 
     return (
-        <div className="hero bg-white text-content min-h-screen">
-            <div className="hero-content text-[#fd275d] flex-col lg:flex-row-reverse">
-                <div className="relative flex flex-row max-w-sm mr-24 rounded-lg">
-                    <span className='animate-pulse'><FaAngleDoubleDown size={32} /></span>
-                    <div className="carousel w-96 carousel-vertical rounded-box h-96">
-                        <div className="carousel-item h-full">
-                            <Image
-                                src={`/Assets/myassets/a2.png`}
-                                alt="AR Face Filter"
-                                layout="responsive"
-                                width={700}
-                                height={700}
-                            />
-                        </div>
-                        <div className="carousel-item h-full">
-                            <Image
-                                src={`/Assets/myassets/a1.png`}
-                                alt="AR Face Filter"
-                                layout="responsive"
-                                width={700}
-                                height={700}
-                            />
-                        </div>
-                        <div className="carousel-item h-full">
-                            <Image
-                                src={`/Assets/myassets/a3.png`}
-                                alt="AR Face Filter"
-                                layout="responsive"
-                                width={700}
-                                height={700}
-                            />
-                        </div>
-                        <div className="carousel-item h-full">
-                            <Image
-                                src={`/Assets/myassets/a4.png`}
-                                alt="AR Face Filter"
-                                layout="responsive"
-                                width={700}
-                                height={700}
-                            />
-                        </div>
+        <>
+            <AuroraBackground>
+                <motion.div
+                    initial={{ opacity: 0.0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                        delay: 0.3,
+                        duration: 0.8,
+                        ease: "easeInOut",
+                    }}
+                    className="relative flex flex-col gap-4 items-center justify-center px-4"
+                >
+                    <div className="text-3xl md:text-7xl font-bold text-[#662ff3] dark:text-white text-center">
+                        AR FACE STUDIO
                     </div>
-                </div>
-                <div ref={textRef}>
-                    <h1 className="text-5xl font-bold">AR Face Studio</h1>
-                    <p className="py-6">
-                        Transform your look in real-time with our AI-powered face filters.
-                        Explore endless possibilities for creativity, fun, and magic—all in
-                        your browser!
-                    </p>
-                    {sessionData ? ( // Check if sessionData exists
-                        <Link className="btn btn-active border-0 shadow-mg hover:scale-105 shadow-black w-[100px] bg-[#6530f8] text-white hover:bg-blue-800" href={"/FaceStudio"}>
-                            Face Studio
-                        </Link>
-                    ) : (
-                        <Link className="btn btn-active border-0 shadow-mg hover:scale-105 shadow-black w-[100px] bg-[#6530f8] text-white hover:bg-blue-800" href={"/SignIn"}>
-                            Sign In
-                        </Link>
-                    )}
-                </div>
-            </div>
-        </div>
+                    <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
+                        <TextGenerateEffect className="font-extralight" words={'Real-time face filter app with dynamic effects'} />
+                       
+                    </div>
+
+                    <div className='py-4 px-2' >
+                        {sessionData ? (
+                            <Link href={"/FaceStudio"} className="px-2 py-4 relative">
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#662ff3] to-[#ff275b] rounded-lg" />
+                                <div className="px-6 py-1.5 text-sm bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+                                    Face Studio
+                                </div>
+                            </Link>
+                        ) : (
+                            <div className="flex flex-row gap-2">
+                                <Link href={"/FaceStudio"} className="p-[3px] relative">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#662ff3] to-[#ff275b] rounded-lg" />
+                                    <div className="px-6 py-1.5 text-sm bg-[#401d98] rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+                                    Sign up
+                                    </div>
+                                </Link>
+                                <Link
+                                    href={"/SignIn"}
+                                    className="px-4 py-1.5 text-sm rounded-md border border-black bg-white text-black hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200"
+                                >
+                                    Sign In
+                                </Link>
+                            </div>
+                        )}
+                        </div>
+                </motion.div>
+            </AuroraBackground>
+
+             
+           
+                    
+                    
+             
+        </>
     );
 };
 
