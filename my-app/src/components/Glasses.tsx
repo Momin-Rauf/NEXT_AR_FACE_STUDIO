@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import gsap from 'gsap';
@@ -61,7 +62,7 @@ export function Glasses(props) {
         decay={2} // Attenuation effect
       />
 
-      <group {...props} ref={groupRef} dispose={null}>
+      <group {...props} className='relative z-50' ref={groupRef} dispose={null}>
         <mesh
           castShadow
           receiveShadow

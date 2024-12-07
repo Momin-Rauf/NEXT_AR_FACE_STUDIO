@@ -1,54 +1,45 @@
-'use client';
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import Image from "next/image";
+"use client";
+import React from "react";
+import { StickyScroll } from "./ui/sticky-scroll-reveal";
+
 import FilterCustomizer from './FilterCustomizer';
-// Placeholder image URLs (replace with your preferred images)
-
-const AboutSection = () => {
-  const sectionRef = useRef(null);
-  const triggerRef = useRef(null);
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  useEffect(() => {
-    const pin = gsap.fromTo(
-      sectionRef.current,
-      {
-        translateX: 0,
-      },
-      {
-        translateX: "-200vw", // Adjust for three sections
-        ease: "none",
-        duration: 1,
-        scrollTrigger: {
-          trigger: triggerRef.current,
-          start: "top top",
-          end: "1500 top", // Adjust end point for three sections
-          scrub: 0.6,
-          pin: true,
-        },
-      }
-    );
-
-    return () => {
-      // Cleanup animation on component unmount
-      pin.kill();
-    };
-  }, []);
-
+const content = [
+  {
+    title: "Collaborative Editing",
+    description:
+      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+    content: (
+      <div className="h-full w-full flex items-center justify-center text-white">
+        <FilterCustomizer model={1} />
+      </div>
+    ),
+  },
+  {
+    title: "Real time changes",
+    description:
+      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+    content: (
+      <div className="h-full w-full  flex items-center justify-center text-white">
+        <FilterCustomizer model={2} />
+      </div>
+    ),
+  },
+  {
+    title: "Version control",
+    description:
+      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+    content: (
+      <div className="h-full w-full  flex items-center justify-center text-white">
+        <FilterCustomizer model={3} />
+      </div>
+    ),
+  },
+  
+];
+export default function AboutSection() {
   return (
-    <section className="scroll-section-outer bg-white text-black py-20">
-      <div ref={triggerRef} className="container mx-auto">
-        <div ref={sectionRef} className="flex scroll-section-inner space-x-10">
-          {/* Custom Filters Section */}
-          <FilterCustomizer/>
-          </div>
-        </div>
-      
-    </section>
+    <div className="p-10 bg-white">
+      <StickyScroll content={content} />
+    </div>
   );
-};
-
-export default AboutSection;
+}

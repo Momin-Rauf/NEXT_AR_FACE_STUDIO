@@ -41,10 +41,12 @@ const HeroSection = () => {
                     <div className='py-4 px-2' >
                         {sessionData ? (
                             <Link href={"/FaceStudio"} className="px-2 py-4 relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#662ff3] to-[#ff275b] rounded-lg" />
-                                <div className="px-6 py-1.5 text-sm bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
-                                    Face Studio
-                                </div>
+                                
+                                
+                                    <div className="px-6 py-1.5 text-sm bg-[#401d98] rounded-[6px] relative group transition duration-200 text-white">
+                                    Ar Face studio
+                                    </div>
+                               
                             </Link>
                         ) : (
                             <div className="flex flex-row gap-2">
