@@ -8,4 +8,4 @@ const Avatar = () => {
   )
 }
 
-Helloexport default Avatar
+export default Avatar

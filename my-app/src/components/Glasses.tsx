@@ -1,11 +1,27 @@
-
 import React, { useRef, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
+import * as THREE from 'three';
 import gsap from 'gsap';
 
-export function Glasses(props) {
-  const { nodes, materials } = useGLTF('/glasses (2).glb');
-  const groupRef = useRef();
+// Define the structure of the GLTF model
+type GLTFResult = {
+  nodes: {
+    Glasses_Glasses2_0: THREE.Mesh;
+    Glasses_Lenses_0: THREE.Mesh;
+    Glasses_Glasses1_0: THREE.Mesh;
+  };
+  materials: {
+    Glasses2: THREE.Material;
+    Lenses: THREE.Material;
+    Glasses1: THREE.Material;
+  };
+};
+
+export function Glasses(props: JSX.IntrinsicElements['group']) {
+  // Use useGLTF hook and safely assert type
+  const gltf = useGLTF('/glasses (2).glb') as unknown as GLTFResult;
+  const { nodes, materials } = gltf;
+  const groupRef = useRef<THREE.Group>(null);
 
   useEffect(() => {
     if (groupRef.current) {
@@ -62,7 +78,7 @@ export function Glasses(props) {
         decay={2} // Attenuation effect
       />
 
-      <group {...props} className='relative z-50' ref={groupRef} dispose={null}>
+      <group {...props} ref={groupRef} dispose={null}>
         <mesh
           castShadow
           receiveShadow

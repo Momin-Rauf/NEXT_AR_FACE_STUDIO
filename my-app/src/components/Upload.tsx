@@ -5,8 +5,7 @@ import {useDropzone} from 'react-dropzone';
 import { GrUpload } from "react-icons/gr";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Image from 'next/image';
-import { BackgroundGradient } from "./ui/background-gradient";
-import { IconAppWindow } from "@tabler/icons-react";
+
 import { MultiStepLoader as Loader } from "./ui/multi-step-loader";
 import { IconSquareRoundedX } from "@tabler/icons-react";
 import { useRouter } from 'next/navigation';
@@ -290,7 +289,7 @@ useEffect(() => {
 {uploading && (
   <button
   className="fixed top-4 right-4 text-black dark:text-white z-[120]"
-  onClick={() => setLoading(false)}
+  onClick={() => setUploading(false)}
   >
           <IconSquareRoundedX className="h-10 w-10" />
         </button>

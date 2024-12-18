@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from "react";
-import FilterCustomizer from "./FilterCustomizer";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { AuroraBackground } from "./ui/aurora-background";

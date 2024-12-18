@@ -1,15 +1,22 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { useGLTF} from '@react-three/drei';
+import React from 'react';
+import { useGLTF } from '@react-three/drei';
+import { GroupProps } from '@react-three/fiber';
+import { Mesh, Material } from 'three'; // Import necessary types
 
-export function Face(props) {
-  const { nodes, materials } = useGLTF('/face.glb');
-  
-  // Load the texture
+type FaceGLTF = {
+  nodes: {
+    faceMesh_defaultMaterial_0: Mesh;
+  };
+  materials: {
+    defaultMaterial: Material;
+  };
+};
 
+export function Face(props: GroupProps) {
+  const { nodes, materials } = useGLTF('/face.glb') as unknown as FaceGLTF;
 
- 
   return (
     <group {...props} scale={0.2} position={[0, 0, 1.9]} dispose={null}>
       <mesh
