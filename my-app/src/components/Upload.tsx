@@ -20,7 +20,7 @@ interface ModelResult {
 }
 
 export default function Upload() {
-  const [file, setFile] = useState<File | null>(null);
+
   const [Modelfile, setModelFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [image_url, setUploadedUrl] = useState<string | null>(null);
@@ -61,8 +61,7 @@ export default function Upload() {
 const onDrop = useCallback(async (acceptedFiles: File[]) => {
   if (acceptedFiles.length > 0) {
     const selectedFile = acceptedFiles[0];
-    setFile(selectedFile);
-
+  
     // Generate preview URL
     const preview = URL.createObjectURL(selectedFile);
     console.log(preview);
@@ -93,7 +92,7 @@ useEffect(() => {
   const router = useRouter();
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
-    setFile(selectedFile || null);
+   
   };
 
   const ModelFileChange = (event: ChangeEvent<HTMLInputElement>) => {

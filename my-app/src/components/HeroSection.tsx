@@ -1,6 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { AuroraBackground } from "./ui/aurora-background";
@@ -11,7 +10,6 @@ import { Session } from "next-auth";
 const HeroSection = () => {
     const [sessionData, setSessionData] = useState<Session | null>(null);
     const { data: session } = useSession();
-    const textRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         setSessionData(session);
@@ -34,26 +32,22 @@ const HeroSection = () => {
                         AR FACE STUDIO
                     </div>
                     <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
-                        <TextGenerateEffect className="font-extralight" words={'Real-time face filter app with dynamic effects'} />
-                       
+                        <TextGenerateEffect className="font-extralight" words="Real-time face filter app with dynamic effects" />
                     </div>
 
-                    <div className='py-4 px-2' >
+                    <div className="py-4 px-2">
                         {sessionData ? (
                             <Link href={"/FaceStudio"} className="px-2 py-4 relative">
-                                
-                                
-                                    <div className="px-6 py-1.5 text-sm bg-[#401d98] rounded-[6px] relative group transition duration-200 text-white">
-                                    Ar Face studio
-                                    </div>
-                               
+                                <div className="px-6 py-1.5 text-sm bg-[#401d98] rounded-[6px] relative group transition duration-200 text-white">
+                                    AR Face Studio
+                                </div>
                             </Link>
                         ) : (
                             <div className="flex flex-row gap-2">
                                 <Link href={"/FaceStudio"} className="p-[3px] relative">
                                     <div className="absolute inset-0 bg-gradient-to-r from-[#662ff3] to-[#ff275b] rounded-lg" />
                                     <div className="px-6 py-1.5 text-sm bg-[#401d98] rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
-                                    Sign up
+                                        Sign up
                                     </div>
                                 </Link>
                                 <Link
@@ -64,15 +58,9 @@ const HeroSection = () => {
                                 </Link>
                             </div>
                         )}
-                        </div>
+                    </div>
                 </motion.div>
             </AuroraBackground>
-
-             
-           
-                    
-                    
-             
         </>
     );
 };
