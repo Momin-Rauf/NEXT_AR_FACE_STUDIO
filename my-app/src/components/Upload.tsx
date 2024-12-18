@@ -90,15 +90,17 @@ useEffect(() => {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   const router = useRouter();
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
+  // const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const selectedFile = event.target.files?.[0];
+  //   console.log(selectedFile);
    
-  };
+  // };
 
   const ModelFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
 
     setModelFile(selectedFile || null);
+
     console.log("Modelfile:",Modelfile)
   };
 
