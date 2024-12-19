@@ -1,5 +1,5 @@
 'use client';
-
+import Image from 'next/Image'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -43,6 +43,7 @@ const SignUpPage = () => {
     const checkUserNameUniqueness = async () => {
       if (username) {
         setIsCheckingUsername(true);
+        console.log(isCheckingUsername);
         try {
           const response = await axios.get(`/api/check-username-unique?username=${username}`);
           console.log(response);
@@ -50,7 +51,6 @@ const SignUpPage = () => {
           console.error(error);
         } finally {
           setIsCheckingUsername(false);
-          console.log(isCheckingUsername);
         }
       }
     };
@@ -78,7 +78,13 @@ const SignUpPage = () => {
 
   return (
     <div className="flex flex-row h-screen justify-center items-center border-red-700 border-2">
-      <img src="/Assets/pictures/signup.jpg" className='w-[40%]' />
+      <Image
+      src="/Assets/pictures/signup.jpg"
+      alt="Sign-up illustration"
+      width={500}
+      height={500}
+      className="w-[40%]"
+    />
       <div className="bg-white  hover:shadow-sm rounded-xl p-4 w-full max-w-md mt-10 shadow-black transform transition-all duration-500">
         <h2 className="text-[#6631f7] text-4xl font-bold mb-8 text-center tracking-tight">Create an Account</h2>
         <Form {...form}>
