@@ -1,45 +1,55 @@
 "use client";
-import React from "react";
-import { StickyScroll } from "./ui/sticky-scroll-reveal";
+import React, { useEffect, useRef, useState } from "react";
+import FilterCustomizer from "./FilterCustomizer";
 
-import FilterCustomizer from './FilterCustomizer';
-const content = [
-  {
-    title: "Collaborative Editing",
-    description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
-    content: (
-      <div className="h-full w-full flex items-center justify-center text-white">
-        <FilterCustomizer model={1} />
-      </div>
-    ),
-  },
-  {
-    title: "Real time changes",
-    description:
-      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
-    content: (
-      <div className="h-full w-full  flex items-center justify-center text-white">
-        <FilterCustomizer model={2} />
-      </div>
-    ),
-  },
-  {
-    title: "Version control",
-    description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-    content: (
-      <div className="h-full w-full  flex items-center justify-center text-white">
-        <FilterCustomizer model={3} />
-      </div>
-    ),
-  },
-  
-];
-export default function AboutSection() {
+const AboutSection = () => {
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.5 } // Trigger when 50% of the section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="p-10 bg-white">
-      <StickyScroll content={content} />
+    <div
+      ref={sectionRef}
+      className="flex flex-row p-12 h-[100vh] bg-white justify-center items-center"
+    >
+      {/* Left Content: Text Section */}
+      <div className="flex w-[50%] gap-6 text-black flex-col">
+        <h1 className="font-bold text-4xl mb-4 text-[#6f40f9]">
+          Create Real-Time Filters
+        </h1>
+        <p className="m-2 text-lg leading-relaxed text-gray-700">
+          Transform your creativity into reality by creating real-time filters
+          with just a picture. Our platform simplifies the process, empowering
+          you to design and customize filters effortlessly. Whether you're an
+          influencer or a brand, bring your ideas to life in seconds.
+        </p>
+      </div>
+
+      {/* Right Content: 3D Scene */}
+      <div className="w-[40%] m-2 rounded-lg shadow-lg">
+        {/* Render FilterCustomizer only when visible */}
+        {isVisible && <FilterCustomizer model={1} />}
+      </div>
     </div>
   );
-}
+};
+
+export default AboutSection;

@@ -3,7 +3,7 @@ import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Face } from './Face';
-import { AlternateGlasses } from "./AlternateGlasses";
+
 import { Glasses } from './Glasses';
 
 const FilterCustomizer = (props) => {
@@ -37,7 +37,7 @@ const FilterCustomizer = (props) => {
           <Glasses position={position} rotation={rotation} />
         )}
 
-        {props.model === 2 && <AlternateGlasses />}
+       
 
         {/* OrbitControls for camera interaction */}
         <OrbitControls
