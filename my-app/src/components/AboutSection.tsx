@@ -38,8 +38,8 @@ const AboutSection = () => {
         <p className="m-2 text-lg leading-relaxed text-gray-700">
           Transform your creativity into reality by creating real-time filters
           with just a picture. Our platform simplifies the process, empowering
-          you to design and customize filters effortlessly. Whether you're an
-          influencer or a brand, bring your ideas to life in seconds.
+          you to design and customize filters effortlessly. Whether you&apos;re
+          an influencer or a brand, bring your ideas to life in seconds.
         </p>
       </div>
 
