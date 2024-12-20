@@ -58,7 +58,7 @@ const FilterBoard = () => {
                             <div className="m-1 transform scale-90" key={index}>
                                  
                                  {/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */}
-                                 // @ts-ignore
+                                 {/* @ts-ignore */}
                                 <FilterCard filter={filter} />
                 
                             </div>
