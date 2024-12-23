@@ -7,7 +7,8 @@ interface Filter {
   position: [number, number, number]; // Tuple for 3D position
   rotation: [number, number, number];
   anchor:number;
-  model:string
+  model:string,
+  category:string
 }
 
 // Define the context properties

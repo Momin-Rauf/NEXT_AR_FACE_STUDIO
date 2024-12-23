@@ -1,7 +1,6 @@
 [
-
-  
-    {   "id":1,
+    {
+        "id":1,
         "title": "Jason Voorhees Mask",
         "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2FJason%20Voorhees%20Mask.png?alt=media&token=f112c1ac-2414-49f5-b32a-3acdbe1e0b6e",
         "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fjason_voorhees_mask.glb?alt=media&token=9569d610-9775-42ee-94a0-13ab61a6a8c3",
@@ -13,74 +12,82 @@
         "anchor":168,
         "category":"Horror"
     },
-    {   "id":2,
-    "title": "glasses",
-    "image_url": "/Assets/Glasses/images.jpg",
-    "model_data":"/Assets/Glasses/g2/g2scene.gltf",
-    "description": "glasses",
-    "date": "2024-09-14",
-    "rotation":[0, 0 ,0],
-    "position":[0, 0 ,0],
-     "scale":[0.2, 0.2, 0.2],
-    "anchor":168,
-    "category":"Horror"
-},
-{   "id":3,
-    "title": "White SKull mask",
-    "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fskull%20mask.png?alt=media&token=4d24a85e-7bc4-4a84-aa7b-89ac490b002b",
-    "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fstylized_skull.glb?alt=media&token=8fc06887-a547-4677-8fbd-2ac615fa7ea7",
-    "description": "A white skull mask",
-    "date": "2024-09-14",
-    "rotation":[0, 0, 0],
-    "position":[0, 0.1, -1.85],
-    "scale":[6, 6, 6],
-    "anchor":164,
-    "category":"Horror"
-},
-{   "id":4,
-    "title": "Glasses",
-    "image_url": "/Assets/photo.webp",
-    "model_data":"/Assets/Glasses/g4/g4scene.gltf",
-    "description": "glasses",
-    "date": "2024-09-14",
-    "rotation":[0 ,0, 0],
-    "position":[0 ,-0.1, 0],
-    "scale":[0.15, 0.1, 0.03],
-    "anchor":168,
-    "category":"Glasses"
-},
-{   "id":5,
-    "title": "Goggles",
-    "image_url": "/Assets/glasses.jpg",
-    "model_data":"/Assets/glasses/g1/g1.gltf",
-    "description": "glasses",
-    "date": "2024-09-14",
-    "rotation":[0,0,0],
-    "position":[0,0,0],
-    "scale":[0.55,0.45,0.2],
-    "anchor":168,
-    "category":"Glasses"
-},
-
-
-{
-    "id":6,
-    "title": "movier mask",
-    "image_url": "/Assets/mask.png",
-    "model_data":"/moviers_face_beta/untitled.glb",
-    "description": "snowfall effect",
-    "date": "2024-09-14",
-    "rotation":[0, 0 ,0],
-    "position":[0 ,-0.2, 0],
-    "scale":[0.2 , 0.2, 0.05],
-    "anchor":168,
-    "category":"mask"
-}
-
-
-
-
-
-
-
+    {
+        "id":2,
+        "title": "glasses",
+        "image_url": "/Assets/Glasses/images.jpg",
+        "model_data":"/Assets/Glasses/g2/g2scene.gltf",
+        "description": "glasses",
+        "date": "2024-09-14",
+        "rotation":[0, 0 ,0],
+        "position":[0, 0 ,0],
+        "scale":[0.2, 0.2, 0.2],
+        "anchor":168,
+        "category":"Horror"
+    },
+    {
+        "id":3,
+        "title": "White SKull mask",
+        "image_url": "https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/images%2Fskull%20mask.png?alt=media&token=4d24a85e-7bc4-4a84-aa7b-89ac490b002b",
+        "model_data":"https://firebasestorage.googleapis.com/v0/b/ar-face-studio.appspot.com/o/models%2Fstylized_skull.glb?alt=media&token=8fc06887-a547-4677-8fbd-2ac615fa7ea7",
+        "description": "A white skull mask",
+        "date": "2024-09-14",
+        "rotation":[0, 0, 0],
+        "position":[0, 0.1, -1.85],
+        "scale":[6, 6, 6],
+        "anchor":164,
+        "category":"Horror"
+    },
+    {
+        "id":4,
+        "title": "Glasses",
+        "image_url": "/Assets/photo.webp",
+        "model_data":"/Assets/Glasses/g4/g4scene.gltf",
+        "description": "glasses",
+        "date": "2024-09-14",
+        "rotation":[0 ,0, 0],
+        "position":[0 ,-0.1, 0],
+        "scale":[0.15, 0.1, 0.03],
+        "anchor":168,
+        "category":"Glasses"
+    },
+    {
+        "id":5,
+        "title": "Goggles",
+        "image_url": "/Assets/glasses.jpg",
+        "model_data":"/Assets/glasses/g1/g1.gltf",
+        "description": "glasses",
+        "date": "2024-09-14",
+        "rotation":[0,0,0],
+        "position":[0,0,0],
+        "scale":[0.55,0.45,0.2],
+        "anchor":168,
+        "category":"Glasses"
+    },
+    {
+        "id":6,
+        "title": "movier mask",
+        "image_url": "/Assets/mask.png",
+        "model_data":"/moviers_face_beta/untitled.glb",
+        "description": "snowfall effect",
+        "date": "2024-09-14",
+        "rotation":[0, 0 ,0],
+        "position":[0 ,-0.2, 0],
+        "scale":[0.2 , 0.2, 0.05],
+        "anchor":168,
+        "category":"mask"
+    },
+    {
+        "id":7,
+        "title": "Face Paint Example",
+        "image_url": "/Assets/mask.png",
+        "model_data": null,
+        "description": "face paint for your fun event",
+        "date": "2024-09-14",
+        "rotation": [0, 0, 0],
+        "position": [0, 0, 0],
+        "scale": [0, 0, 0],
+        "anchor": 0,
+        "category": "Face Paint"
+    }
 ]

@@ -21,6 +21,7 @@ interface Filter {
   rotation: [number, number, number];
   anchor: number;
   model_data: string;
+  category: string;
 }
 
 interface FilterCardProps {
@@ -52,6 +53,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       scale: filter.scale,
       anchor: filter.anchor,
       model: filter.model_data,
+      category:filter.category,
     });
   };
 
