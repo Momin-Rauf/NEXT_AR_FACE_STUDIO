@@ -99,12 +99,15 @@ const FaceTracking = () => {
       console.log(123213);
       // Add face mesh
       const faceMesh = mindarThreeRef.current!.addFaceMesh();
-      const texture = new THREE.TextureLoader().load(
-        '/facePaint/spiderman.png'
-      );
-      faceMesh.material.map = texture;
-      faceMesh.material.transparent = true;
-      faceMesh.material.needsUpdate = true;
+      const texture = new THREE.TextureLoader().load(selectedFilter.image_url);
+
+      // @ts-ignore
+faceMesh.material.map = texture;
+// @ts-ignore
+faceMesh.material.transparent = true;
+// @ts-ignore
+faceMesh.material.needsUpdate = true;
+
       
       
       

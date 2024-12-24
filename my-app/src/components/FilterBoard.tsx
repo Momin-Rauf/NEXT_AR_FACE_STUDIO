@@ -171,8 +171,7 @@ const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
                     {currentItems2.map((filter, index) => (
                             
                             <div className="m-1 transform scale-90" key={index}>
@@ -185,7 +184,6 @@ const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
                         ))}
 </div>
 
-                    </div>
 
                     <div className="flex justify-center mt-4">
                         {[...Array(totalPages)].map((_, index) => (

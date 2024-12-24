@@ -3,7 +3,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 
 import { useFilterContext } from '@/context/FilterContext';
 
@@ -16,9 +16,9 @@ interface Filter {
   id: number;
   image_url: string;
   title: string;
-  description?: string; // Made optional to avoid errors when missing
-  scale: [number, number, number]; // Tuple for 3D scaling factors
-  position: [number, number, number]; // Tuple for 3D position
+  description?: string;
+  scale: [number, number, number];
+  position: [number, number, number];
   rotation: [number, number, number];
   anchor: number;
   model_data: string;
@@ -34,9 +34,9 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const hoverContentRef = useRef<HTMLDivElement | null>(null);
   const { setSelectedFilter } = useFilterContext();
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(filter);
-  },[])
+  }, []);
 
   // GSAP animation for hover effect
   useLayoutEffect(() => {
@@ -49,8 +49,6 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
     }
   }, [isHovered]);
 
-
-
   const handleFilterSelection = () => {
     console.log('Selected Filter in Filter card:', filter);
     setSelectedFilter({
@@ -60,8 +58,8 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       scale: filter.scale,
       anchor: filter.anchor,
       model: filter.model_data,
-      category:filter.category,
-      image_url: filter.image_url
+      category: filter.category,
+      image_url: filter.image_url,
     });
   };
 
@@ -70,39 +68,39 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="card card-compact bg-white w-54 h-54 cursor-pointer text-black shadow-xl transition-transform duration-300"
+      className="card bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-44  cursor-pointer rounded-lg border border-gray-200 text-white shadow-lg transition-transform transform duration-300 hover:scale-105"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          handleFilterSelection(); // Trigger selection on Enter or Space key press
+          handleFilterSelection();
         }
       }}
       onClick={handleFilterSelection}
     >
-      <figure className="w-[200px] h-[100px] object-cover relative">
+      {/* Container with aspect ratio */}
+      <div className="relative w-full pb-[80.71%]"> {/* Aspect ratio of ~2:3 */}
         <Image
           src={filter.image_url}
           alt={filter.title || ''}
-          className="w-full object-contain transition-transform duration-300 ease-in-out"
-          width={350}
-          height={132}
+          className="absolute top-0 left-0 rounded-t-lg object-cover transition-transform duration-300 ease-in-out"
+          fill
           style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
         />
-        {filter.description && (
-          <div
-            ref={hoverContentRef}
-            className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white p-4"
-            style={{ top: 0, left: 0 }}
-          >
-            <h3 className="text-lg font-bold mb-2">{filter.title}</h3>
-            <p className="text-sm">{truncateText(filter.description, 100)}</p>
-          </div>
-        )}
-      </figure>
+      </div>
+      <div className="p-3">
+        <h3 className="text-lg font-semibold truncate">{filter.title}</h3>
+      </div>
+      {isHovered && (
+        <div
+          ref={hoverContentRef}
+          className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-sm text-gray-200 p-4"
+        >
+          <p>{filter.description}</p>
+        </div>
+      )}
     </div>
   );
 };
 
 export default FilterCard;
-  
