@@ -8,9 +8,7 @@ import { useEffect } from 'react';
 import { useFilterContext } from '@/context/FilterContext';
 
 // Utility function to truncate text
-const truncateText = (text: string, maxLength: number): string => {
-  return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
-};
+
 
 interface Filter {
   id: number;
