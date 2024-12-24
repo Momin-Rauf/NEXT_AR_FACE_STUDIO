@@ -100,21 +100,12 @@ const FaceTracking = () => {
       // Add face mesh
       const faceMesh = mindarThreeRef.current!.addFaceMesh();
       const texture = new THREE.TextureLoader().load(
-        "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/canonical_face_model_uv_visualization.png"
+        '/facePaint/spiderman.png'
       );
-      if (!Array.isArray(faceMesh.material)) {
-        const material = faceMesh.material as THREE.MeshBasicMaterial;
-        material.map = texture;
-        material.transparent = true;
-        material.needsUpdate = true;
-      } else {
-        faceMesh.material.forEach((mat) => {
-          const material = mat as THREE.MeshBasicMaterial;
-          material.map = texture;
-          material.transparent = true;
-          material.needsUpdate = true;
-        });
-      }
+      faceMesh.material.map = texture;
+      faceMesh.material.transparent = true;
+      faceMesh.material.needsUpdate = true;
+      
       
       
       scene.add(faceMesh);

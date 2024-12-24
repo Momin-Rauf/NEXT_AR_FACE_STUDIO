@@ -8,7 +8,8 @@ interface Filter {
   rotation: [number, number, number];
   anchor:number;
   model:string,
-  category:string
+  category:string,
+  image_url,
 }
 
 // Define the context properties

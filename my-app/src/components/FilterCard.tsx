@@ -3,6 +3,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
+import {useEffect} from 'react';
 
 import { useFilterContext } from '@/context/FilterContext';
 
@@ -33,6 +34,10 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const hoverContentRef = useRef<HTMLDivElement | null>(null);
   const { setSelectedFilter } = useFilterContext();
 
+  useEffect(()=>{
+    console.log(filter);
+  },[])
+
   // GSAP animation for hover effect
   useLayoutEffect(() => {
     if (hoverContentRef.current) {
@@ -44,6 +49,8 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
     }
   }, [isHovered]);
 
+
+
   const handleFilterSelection = () => {
     console.log('Selected Filter in Filter card:', filter);
     setSelectedFilter({
@@ -54,6 +61,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       anchor: filter.anchor,
       model: filter.model_data,
       category:filter.category,
+      image_url: filter.image_url
     });
   };
 
@@ -77,7 +85,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
           src={filter.image_url}
           alt={filter.title || ''}
           className="w-full object-contain transition-transform duration-300 ease-in-out"
-          width={150}
+          width={350}
           height={132}
           style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
         />

@@ -7,12 +7,20 @@ const FilterBoard = () => {
     const itemsPerPage = 3;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = dummy_data.slice(indexOfFirstItem, indexOfLastItem);
+    const filteredData = dummy_data.filter(item => item.category !== "Face Paint");
+const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+    const filteredData1 = dummy_data.filter(item => item.category === "Face Paint");
+    const currentItems2 = filteredData1.slice(indexOfFirstItem, indexOfLastItem);
+    
     const totalPages = Math.ceil(dummy_data.length / itemsPerPage);
 
     const [FilterData, setFilterData] = useState([]);
 
     useEffect(() => {
+        console.log(currentItems,"1")
+        console.log(currentItems2,"2")
+
         const fetchFilter = async () => {
             const res = await fetch('/api/getFilter');
             const data = await res.json();
@@ -105,12 +113,7 @@ const FilterBoard = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </div>
-                            <input
-                                className="peer h-full border-1 border-gray-900 w-full bg-white outline-none text-sm text-gray-700 pr-2"
-                                type="text"
-                                id="search"
-                                placeholder="Search something..."
-                            />
+                           
                         </div>
                     </div>
 
@@ -164,24 +167,22 @@ const FilterBoard = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </div>
-                            <input
-                                className="peer h-full border-1 border-gray-900 w-full bg-white outline-none text-sm text-gray-700 pr-2"
-                                type="text"
-                                id="search"
-                                placeholder="Search something..."
-                            />
+                           
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-    {FilterData && FilterData.map((filter, index) => (
-        <div className="m-1 transform scale-90" key={index}>
-            {/* Render specific properties of the filter object */}
-
-            <FilterCard filter={filter} />
-        </div>
-    ))}
+                    {currentItems2.map((filter, index) => (
+                            
+                            <div className="m-1 transform scale-90" key={index}>
+                                 
+                                 {/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */}
+                                 {/* @ts-ignore */}
+                                <FilterCard filter={filter} />
+                
+                            </div>
+                        ))}
 </div>
 
                     </div>
