@@ -135,6 +135,7 @@ const FaceTracking = () => {
         console.error("Error loading model:", error);
       }
     }
+    applyFilters();
   };
 
   useEffect(() => {
