@@ -21,19 +21,20 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mindarThreeRef = useRef<MindARThree | null>(null);
   const modelRef = useRef<THREE.Object3D | null>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
   const initialized = useRef<boolean>(false);
 
   // Fetch filter data
   useEffect(() => {
     const fetchFilter = async () => {
+      console.log('Fetching filter data...');
       try {
         const response = await fetch(`/api/get-filter/${params.filterId}`);
         if (response.ok) {
           const data = await response.json();
+          console.log('Filter data fetched successfully:', data);
           setFilter(data.filter);
         } else {
-          console.error('Error fetching filter data:', response.statusText);
+          console.error('Error fetching filter data: Response not OK');
         }
       } catch (error) {
         console.error('Error fetching filter data:', error);
@@ -53,7 +54,6 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
         const { renderer, scene, camera } = mindarThree;
 
         mindarThreeRef.current = mindarThree;
-        sceneRef.current = scene;
 
         // Add lighting
         const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
@@ -82,11 +82,11 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
 
     initAR();
 
-    // Cleanup function
+    // Cleanup
     return () => {
       if (mindarThreeRef.current) {
         try {
-          mindarThreeRef.current.stop();
+          mindarThreeRef.current.stop(); // Safely stop the AR session
           mindarThreeRef.current = null;
         } catch (error) {
           console.error('Error stopping AR:', error);
@@ -95,77 +95,79 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
 
       if (modelRef.current) {
         try {
-          modelRef.current.parent?.remove(modelRef.current);
-          modelRef.current.traverse((object: THREE.Object3D) => {
-            if ((object as THREE.Mesh).geometry) {
-              (object as THREE.Mesh).geometry.dispose();
-            }
-            if ((object as THREE.Mesh).material) {
-              if (Array.isArray((object as THREE.Mesh).material)) {
-                
-                // @ts-ignore
-                (object as THREE.Mesh).material.forEach((material) => material.dispose());
-              } else {
-                // @ts-ignore
-                (object as THREE.Mesh).material.dispose();
-              }
-            }
-          });
+          modelRef.current.parent?.remove(modelRef.current); // Remove the 3D model
           modelRef.current = null;
         } catch (error) {
-          console.error('Error disposing model:', error);
+          console.error('Error removing model:', error);
         }
       }
 
-      if (sceneRef.current) {
-        while (sceneRef.current.children.length > 0) {
-          const child = sceneRef.current.children[0];
-          sceneRef.current.remove(child);
-        }
-        sceneRef.current = null;
-      }
-
-      initialized.current = false;
+      initialized.current = false; // Reset initialization flag
     };
   }, [filter]);
 
-  // Real-time update functions
+  // Function to update model scale, position, and rotation in real-time
   const handleScaleChange = (axis: 'x' | 'y' | 'z', value: number) => {
-    setScale((prev) => {
-      const newScale = [...prev] as [number, number, number];
-      newScale[['x', 'y', 'z'].indexOf(axis)] = value;
-      if (modelRef.current) modelRef.current.scale.set(...newScale);
-      return newScale;
+    setScale((prevScale) => {
+      const newScale: [number, number, number] = [...prevScale]; // Ensure it's a tuple
+      if (axis === 'x') newScale[0] = value;
+      if (axis === 'y') newScale[1] = value;
+      if (axis === 'z') newScale[2] = value;
+      if (modelRef.current) {
+        modelRef.current.scale.set(...newScale);
+      }
+      return newScale; // Return the correct tuple type
     });
   };
+  
 
   const handlePositionChange = (axis: 'x' | 'y' | 'z', value: number) => {
-    setPosition((prev) => {
-      const newPosition = [...prev] as [number, number, number];
-      newPosition[['x', 'y', 'z'].indexOf(axis)] = value;
-      if (modelRef.current) modelRef.current.position.set(...newPosition);
-      return newPosition;
+    setPosition((prevPosition) => {
+      const newPosition: [number, number, number] = [...prevPosition]; // Ensure it's a tuple
+      if (axis === 'x') newPosition[0] = value;
+      if (axis === 'y') newPosition[1] = value;
+      if (axis === 'z') newPosition[2] = value;
+      if (modelRef.current) {
+        modelRef.current.position.set(...newPosition);
+      }
+      return newPosition; // Return the correct tuple type
     });
   };
+  
 
   const handleRotationChange = (axis: 'x' | 'y' | 'z', value: number) => {
-    setRotation((prev) => {
-      const newRotation = [...prev] as [number, number, number];
-      newRotation[['x', 'y', 'z'].indexOf(axis)] = value;
-      if (modelRef.current) modelRef.current.rotation.set(...newRotation);
-      return newRotation;
+    setRotation((prevRotation) => {
+      const newRotation: [number, number, number] = [...prevRotation]; // Ensure the type is a tuple
+      if (axis === 'x') newRotation[0] = value;
+      if (axis === 'y') newRotation[1] = value;
+      if (axis === 'z') newRotation[2] = value;
+      if (modelRef.current) {
+        modelRef.current.rotation.set(...newRotation);
+      }
+      return newRotation; // This will now always return a tuple of exactly three numbers
     });
   };
+  
 
+  // Function to save rotation, scale, and position to the API
   const saveModelState = async () => {
     try {
       const response = await fetch(`/api/update-model/${params.filterId}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ scale, position, rotation }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          scale,
+          position,
+          rotation,
+        }),
       });
+
       if (response.ok) {
+        const data = await response.json();
         alert('Model state saved successfully!');
+        console.log(data);
       } else {
         console.error('Error saving model state:', response.statusText);
       }
@@ -174,146 +176,155 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
     }
   };
 
-  if (!filter) return <div>Loading...</div>;
+  if (!filter) {
+    console.log('Filter data is not yet loaded.');
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="h-[120vh] flex bg-white flex-row items-center justify-center">
+    <div className="h-[120vh] flex bg-white flex-row items-center justify-center ">
+      {/* Camera View */}
       <div className="w-full flex justify-center">
         <div
           className="w-[50%] h-[70%] relative border-2 border-gray-400 m-2 flex flex-row items-center justify-center z-0"
           ref={containerRef}
         ></div>
       </div>
+
+      {/* Dashboard */}
       <div className="mt-8 p-4 bg-gray-800 rounded-lg shadow-lg w-[40%]">
-  <h2 className="text-white text-xl font-semibold mb-4">Model Customization</h2>
-  
-  {/* Scale Controls */}
-  <div className="space-y-4">
-    <div className="flex items-center">
-      <label className="text-white mr-2">Scale X</label>
-      <input
-        type="range"
-        min="0.1"
-        max="3"
-        step="0.1"
-        value={scale[0]}
-        onChange={(e) => handleScaleChange('x', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
-    <div className="flex items-center">
-      <label className="text-white mr-2">Scale Y</label>
-      <input
-        type="range"
-        min="0.1"
-        max="3"
-        step="0.1"
-        value={scale[1]}
-        onChange={(e) => handleScaleChange('y', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
-    <div className="flex items-center">
-      <label className="text-white mr-2">Scale Z</label>
-      <input
-        type="range"
-        min="0.1"
-        max="3"
-        step="0.1"
-        value={scale[2]}
-        onChange={(e) => handleScaleChange('z', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
+        <h2 className="text-white text-xl font-semibold mb-4">Model Customization</h2>
 
-    {/* Position Controls */}
-    <div className="flex items-center">
-      <label className="text-white mr-2">Position X</label>
-      <input
-        type="range"
-        min="-2"
-        max="2"
-        step="0.1"
-        value={position[0]}
-        onChange={(e) => handlePositionChange('x', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
-    <div className="flex items-center">
-      <label className="text-white mr-2">Position Y</label>
-      <input
-        type="range"
-        min="-2"
-        max="2"
-        step="0.1"
-        value={position[1]}
-        onChange={(e) => handlePositionChange('y', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
-    <div className="flex items-center">
-      <label className="text-white mr-2">Position Z</label>
-      <input
-        type="range"
-        min="-2"
-        max="2"
-        step="0.1"
-        value={position[2]}
-        onChange={(e) => handlePositionChange('z', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
+        <div className="space-y-4">
+          {/* Scale Controls */}
+          <div className="flex items-center">
+            <label className="text-white mr-2">Scale X</label>
+            <input
+              type="range"
+              min="0.1"
+              max="3"
+              step="0.1"
+              value={scale[0]}
+              onChange={(e) => handleScaleChange('x', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
+          <div className="flex items-center">
+            <label className="text-white mr-2">Scale Y</label>
+            <input
+              type="range"
+              min="0.1"
+              max="3"
+              step="0.1"
+              value={scale[1]}
+              onChange={(e) => handleScaleChange('y', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
+          <div className="flex items-center">
+            <label className="text-white mr-2">Scale Z</label>
+            <input
+              type="range"
+              min="0.1"
+              max="3"
+              step="0.1"
+              value={scale[2]}
+              onChange={(e) => handleScaleChange('z', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
 
-    {/* Rotation Controls */}
-    <div className="flex items-center">
-      <label className="text-white mr-2">Rotation X</label>
-      <input
-        type="range"
-        min="-3.14"
-        max="3.14"
-        step="0.1"
-        value={rotation[0]}
-        onChange={(e) => handleRotationChange('x', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
-    <div className="flex items-center">
-      <label className="text-white mr-2">Rotation Y</label>
-      <input
-        type="range"
-        min="-3.14"
-        max="3.14"
-        step="0.1"
-        value={rotation[1]}
-        onChange={(e) => handleRotationChange('y', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
-    <div className="flex items-center">
-      <label className="text-white mr-2">Rotation Z</label>
-      <input
-        type="range"
-        min="-3.14"
-        max="3.14"
-        step="0.1"
-        value={rotation[2]}
-        onChange={(e) => handleRotationChange('z', parseFloat(e.target.value))}
-        className="slider"
-      />
-    </div>
-  </div>
+          {/* Position Controls */}
+          <div className="flex items-center">
+            <label className="text-white mr-2">Position X</label>
+            <input
+              type="range"
+              min="-2"
+              max="2"
+              step="0.1"
+              value={position[0]}
+              onChange={(e) => handlePositionChange('x', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
+          <div className="flex items-center">
+            <label className="text-white mr-2">Position Y</label>
+            <input
+              type="range"
+              min="-2"
+              max="2"
+              step="0.1"
+              value={position[1]}
+              onChange={(e) => handlePositionChange('y', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
+          <div className="flex items-center">
+            <label className="text-white mr-2">Position Z</label>
+            <input
+              type="range"
+              min="-2"
+              max="2"
+              step="0.1"
+              value={position[2]}
+              onChange={(e) => handlePositionChange('z', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
 
-  {/* Save Button */}
-  <button
-    onClick={saveModelState}
-    className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 mt-4"
-  >
-    Save Changes
-  </button>
-</div>
+          {/* Rotation Controls */}
+          <div className="flex items-center">
+            <label className="text-white mr-2">Rotation X</label>
+            <input
+              type="range"
+              min="-3.14"
+              max="3.14"
+              step="0.1"
+              value={rotation[0]}
+              onChange={(e) => handleRotationChange('x', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
+          <div className="flex items-center">
+            <label className="text-white mr-2">Rotation Y</label>
+            <input
+              type="range"
+              min="-3.14"
+              max="3.14"
+              step="0.1"
+              value={rotation[1]}
+              onChange={(e) => handleRotationChange('y', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
+          <div className="flex items-center">
+            <label className="text-white mr-2">Rotation Z</label>
+            <input
+              type="range"
+              min="-3.14"
+              max="3.14"
+              step="0.1"
+              value={rotation[2]}
+              onChange={(e) => handleRotationChange('z', parseFloat(e.target.value))}
+              className="slider"
+            />
+          </div>
 
+          {/* Save Button */}
+          <button
+            onClick={saveModelState}
+            className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 mt-4"
+          >
+            Save Changes
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default CustomizeFilter;
+
+
+
+

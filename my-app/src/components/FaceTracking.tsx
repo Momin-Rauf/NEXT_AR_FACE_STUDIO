@@ -1,4 +1,4 @@
-// 'use client';
+'use client';
 
 import { MindARThree } from "mind-ar/dist/mindar-face-three.prod.js";
 import { useEffect, useRef, useState } from "react";
@@ -30,7 +30,6 @@ const FaceTracking = () => {
   const [filterValues, setFilterValues] = useState(
     filterButtons.reduce((acc, filter) => ({ ...acc, [filter.id]: 0 }), {}) // Default to 0
   );
-  
 
   const handleSliderChange = (id: string, value: number) => {
     setFilterValues((prev) => ({ ...prev, [id]: value }));
@@ -38,10 +37,10 @@ const FaceTracking = () => {
 
   const applyFilters = () => {
     if (!containerRef.current) return;
-  
+
     const filterWrapper = containerRef.current.querySelector(".filter-wrapper") as HTMLDivElement;
     if (!filterWrapper) return;
-  
+
     const filters = filterButtons
       .map(({ id }) => {
         const value = filterValues[id];
@@ -49,7 +48,7 @@ const FaceTracking = () => {
           case "blur":
             return `blur(${value}px)`; // Keep value as px for blur
           case "brightness":
-            return `brightness(${value /10 || 1})`; // Default 1 for no change
+            return `brightness(${value / 10 || 1})`; // Default 1 for no change
           case "contrast":
             return `contrast(${value / 10 || 1})`;
           case "grayscale":
@@ -63,10 +62,9 @@ const FaceTracking = () => {
         }
       })
       .join(" ");
-  
+
     filterWrapper.style.filter = filters;
   };
-  
 
   const disposeObject = (object: THREE.Object3D | null) => {
     if (!object) return;
@@ -92,36 +90,45 @@ const FaceTracking = () => {
   };
 
   const updateFilterContent = async (scene: THREE.Scene, anchor: any) => {
-    disposeObject(modelRef.current);
-    disposeObject(faceMeshRef.current);
-    console.log(selectedFilter?.category);
-    if (selectedFilter?.category === "Face Paint") {
-      console.log(123213);
-      // Add face mesh
+    // Properly dispose of the previous model and face mesh only if necessary
+    if (modelRef.current) {
+      anchor.group.remove(modelRef.current); // Remove from anchor group
+      disposeObject(modelRef.current);
+      modelRef.current = null;
+    }
+    if (faceMeshRef.current) {
+      scene.remove(faceMeshRef.current); // Remove from the scene
+      disposeObject(faceMeshRef.current);
+      faceMeshRef.current = null;
+    }
+
+    // Add face paint filter
+    if (selectedFilter?.category === "Face Paint" && !faceMeshRef.current) {
       const faceMesh = mindarThreeRef.current!.addFaceMesh();
       const texture = new THREE.TextureLoader().load(selectedFilter.image_url);
 
-      // @ts-ignore
-faceMesh.material.map = texture;
-// @ts-ignore
-faceMesh.material.transparent = true;
-// @ts-ignore
-faceMesh.material.needsUpdate = true;
+      faceMesh.material = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 1.0,
+      });
 
-      
-      
-      
+      faceMesh.material.needsUpdate = true;
       scene.add(faceMesh);
       faceMeshRef.current = faceMesh;
-    } else if (selectedFilter?.model) {
-      // Add 3D model
+    } else if (selectedFilter?.model && !modelRef.current) {
+      // Load and add 3D model only if it is not already loaded
       const loader = new GLTFLoader();
       try {
         const gltf = await loader.loadAsync(selectedFilter.model);
         const model = gltf.scene;
+
+        // Scale, position, and rotate the model
         model.scale.set(...selectedFilter.scale);
         model.position.set(...selectedFilter.position);
         model.rotation.set(...selectedFilter.rotation);
+
+        // Add model to the anchor group
         anchor.group.add(model);
         modelRef.current = model;
       } catch (error) {
@@ -131,12 +138,9 @@ faceMesh.material.needsUpdate = true;
   };
 
   useEffect(() => {
-    applyFilters();
-  }, [filterValues]);
-
-  useEffect(() => {
     const initAR = async () => {
       if (initialized.current) return;
+
       const containerElement = containerRef.current?.querySelector(".filter-wrapper") as HTMLElement | null;
       if (!containerElement) {
         console.error("Container element is not found or null.");
@@ -148,11 +152,44 @@ faceMesh.material.needsUpdate = true;
       mindarThreeRef.current = mindarThree;
       const anchor = mindarThree.addAnchor(selectedFilter?.anchor || 168);
 
+      // Add lighting
       const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
       scene.add(light);
 
+      // Load and add the face occluder
+      const loader = new GLTFLoader();
+      const headModelUrl =
+        "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/sparkar/headOccluder.glb";
+
+      try {
+        const gltf = await loader.loadAsync(headModelUrl);
+        const headModel = gltf.scene;
+
+        headModel.scale.set(0.07, 0.07, 0.07); // Adjust scale as needed
+        headModel.position.set(0, -0.3, 0.15); // Adjust position as needed
+        headModel.rotation.set(0, 0, 0); // Adjust rotation as needed
+
+        // Use a material that acts as an occluder
+        headModel.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshBasicMaterial({
+              colorWrite: false, // Prevent the material from rendering visually
+              depthWrite: true, // Ensure it writes depth to occlude
+              depthTest: true,
+            });
+          }
+        });
+
+        // Add head model to the scene
+        anchor.group.add(headModel);
+      } catch (error) {
+        console.error("Error loading head model:", error);
+      }
+
+      // Add filters and 3D content
       await updateFilterContent(scene, anchor);
 
+      // Start AR
       try {
         await mindarThree.start();
       } catch (error) {
