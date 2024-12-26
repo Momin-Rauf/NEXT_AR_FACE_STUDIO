@@ -36,6 +36,7 @@ const FaceTracking = () => {
     setFilterValues((prev) => ({ ...prev, [id]: value }));
   };
 
+  
   const applyFilters = () => {
     if (!containerRef.current) return;
 
@@ -66,6 +67,11 @@ const FaceTracking = () => {
 
     filterWrapper.style.filter = filters;
   };
+
+  useEffect(()=>{
+    applyFilters();
+  },[filterVlaues])
+
 
   const disposeObject = (object: THREE.Object3D | null) => {
     if (!object) return;
