@@ -226,10 +226,10 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
      
 
       {/* Dashboard */}
-      <div className="mt-8 p-4 bg-[#6632f1] h-[60%] rounded-lg shadow-lg w-[50%]">
+      <div className="mt-4 p-4 bg-[#6632f1] h-[65%] rounded-lg shadow-lg w-[50%]">
         <h2 className="text-white text-2xl font-semibold mb-4">Model Customization</h2>
 
-        <div className="grid grid-cols-2 gap-8 space-y-8">
+        <div className="grid grid-cols-2 gap-6">
           {/* Scale Controls */}
           <div className='bg-white flex h-[100%] flex-col px-4 gap-4 rounded-lg text-[#6632f1]' >
           <h2 className=" text-xl text-[#6632f1] font-semibold mb-4">Scale</h2>
@@ -272,7 +272,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
           </div>
 
           {/* Position Controls */}
-          <div className='bg-white flex flex-col h-[100%] px-4 gap-4 rounded-lg text-[#6632f1]' >
+          <div className='bg-white flex flex-col border-2 h-[100%] px-4 gap-4 rounded-lg text-[#6632f1]' >
           <h2 className="text-[#6632f1] text-xl font-semibold mb-4">Position</h2>
           <div className="flex items-center">
             <label className="text-[#6632f1] mr-2">Position X</label>
