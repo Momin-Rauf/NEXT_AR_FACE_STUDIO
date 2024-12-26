@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signInSchema } from "@/schemas/signInSchema";
-import { FaGoogle, FaTwitter, FaDiscord } from "react-icons/fa";
+import { FaGoogle, FaDiscord } from "react-icons/fa";
 
 const LoginPage = () => {
   const { toast } = useToast();
