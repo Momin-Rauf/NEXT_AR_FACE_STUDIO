@@ -70,7 +70,7 @@ const FaceTracking = () => {
 
   useEffect(()=>{
     applyFilters();
-  },[filterVlaues])
+  },[filterValues])
 
 
   const disposeObject = (object: THREE.Object3D | null) => {
