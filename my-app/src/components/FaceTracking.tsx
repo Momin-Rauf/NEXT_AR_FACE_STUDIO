@@ -26,6 +26,7 @@ const FaceTracking = () => {
   const mindarThreeRef = useRef<MindARThree | null>(null);
   const { selectedFilter } = useFilterContext();
   const [showFilters, setShowFilters] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [filterValues, setFilterValues] = useState(
     filterButtons.reduce((acc, filter) => ({ ...acc, [filter.id]: 0 }), {}) // Default to 0
@@ -91,6 +92,8 @@ const FaceTracking = () => {
 
   const updateFilterContent = async (scene: THREE.Scene, anchor: any) => {
     // Properly dispose of the previous model and face mesh only if necessary
+    if (loading) return; // Prevent double calls
+    setLoading(true);
     if (modelRef.current) {
       anchor.group.remove(modelRef.current); // Remove from anchor group
       disposeObject(modelRef.current);
@@ -135,10 +138,12 @@ const FaceTracking = () => {
         console.error("Error loading model:", error);
       }
     }
-    applyFilters();
+    setLoading(false); 
   };
 
   useEffect(() => {
+    if ((selectedFilter?.category !== "Face Paint") && (!selectedFilter?.model) ) return;
+    console.log('hello')
     const initAR = async () => {
       if (initialized.current) return;
 
@@ -153,9 +158,10 @@ const FaceTracking = () => {
       mindarThreeRef.current = mindarThree;
       const anchor = mindarThree.addAnchor(selectedFilter?.anchor || 168);
 
-      // Add lighting
-      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
-      scene.add(light);
+    // Add lighting
+const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+ // Position the light above the scene
+scene.add(light);
 
       // Load and add the face occluder
       const loader = new GLTFLoader();
@@ -258,6 +264,11 @@ const FaceTracking = () => {
       )}
 
       <div className="filter-wrapper w-full h-full pointer-events-none"></div>
+      {loading && (
+        <div className="absolute left-0 top-0 h-[100vh] w-[1080px] inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
     </div>
   );
 };

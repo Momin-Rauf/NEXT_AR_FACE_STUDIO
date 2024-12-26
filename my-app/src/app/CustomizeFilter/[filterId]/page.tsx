@@ -23,15 +23,35 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
   const modelRef = useRef<THREE.Object3D | null>(null);
   const initialized = useRef<boolean>(false);
 
+  const disposeObject = (object: THREE.Object3D) => {
+    object.traverse((child) => {
+      if ((child as THREE.Mesh).geometry) (child as THREE.Mesh).geometry.dispose();
+      if ((child as THREE.Mesh).material) {
+        const material = (child as THREE.Mesh).material;
+        if (Array.isArray(material)) {
+          material.forEach((mat) => mat.dispose());
+        } else {
+          material.dispose();
+        }
+      }
+    });
+    if (object.parent) object.parent.remove(object);
+  };
+
+  const clearScene = (scene: THREE.Scene) => {
+    scene.traverse((object) => disposeObject(object));
+    while (scene.children.length) {
+      scene.remove(scene.children[0]);
+    }
+  };
+
   // Fetch filter data
   useEffect(() => {
     const fetchFilter = async () => {
-      console.log('Fetching filter data...');
       try {
         const response = await fetch(`/api/get-filter/${params.filterId}`);
         if (response.ok) {
           const data = await response.json();
-          console.log('Filter data fetched successfully:', data);
           setFilter(data.filter);
         } else {
           console.error('Error fetching filter data: Response not OK');
@@ -44,67 +64,82 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
     fetchFilter();
   }, [params.filterId]);
 
-  // Initialize AR
   useEffect(() => {
     if (!filter || initialized.current) return;
-
+  
     const initAR = async () => {
       try {
+        if (!containerRef.current) return;
+  
         const mindarThree = new MindARThree({ container: containerRef.current! });
         const { renderer, scene, camera } = mindarThree;
-
         mindarThreeRef.current = mindarThree;
-
-        // Add lighting
+  
         const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
         scene.add(light);
-
-        // Add anchor and model
+  
         const anchor = mindarThree.addAnchor(filter.anchor || 168);
         const loader = new GLTFLoader();
-        const gltf = await loader.loadAsync(filter.model_data);
-        const model = gltf.scene;
-        model.scale.set(...filter.scale);
-        model.position.set(...filter.position);
-        model.rotation.set(...filter.rotation);
-        anchor.group.add(model);
-        modelRef.current = model;
-
-        // Start rendering
-        await mindarThree.start();
+        const loadModel = async (url: string) => {
+          try {
+            const gltf = await loader.loadAsync(url);
+  
+            if (modelRef.current) {
+              disposeObject(modelRef.current);
+              modelRef.current = null;
+            }
+  
+            const model = gltf.scene;
+            model.scale.set(...filter.scale);
+            model.position.set(...filter.position);
+            model.rotation.set(...filter.rotation);
+  
+            anchor.group.add(model);
+            modelRef.current = model;
+          } catch (error) {
+            console.error("Error loading model:", error);
+          }
+        };
+  
+        if (filter) {
+          await loadModel(filter.model_data);
+        }
+  
+        try {
+          await mindarThree.start();
+        } catch (error) {
+          console.error("MindARThree initialization failed:", error);
+          return;
+        }
+  
         renderer.setAnimationLoop(() => renderer.render(scene, camera));
-
         initialized.current = true;
+  
+        return () => {
+          renderer.setAnimationLoop(null);
+          mindarThree.stop();
+          clearScene(scene);
+          renderer.dispose();
+          if (modelRef.current) disposeObject(modelRef.current);
+          initialized.current = false;
+        };
       } catch (error) {
-        console.error('Error during AR initialization:', error);
+        console.error("Error initializing AR:", error);
       }
     };
-
+  
     initAR();
-
-    // Cleanup
+  
     return () => {
-      if (mindarThreeRef.current) {
-        try {
-          mindarThreeRef.current.stop(); // Safely stop the AR session
-          mindarThreeRef.current = null;
-        } catch (error) {
-          console.error('Error stopping AR:', error);
-        }
-      }
-
-      if (modelRef.current) {
-        try {
-          modelRef.current.parent?.remove(modelRef.current); // Remove the 3D model
-          modelRef.current = null;
-        } catch (error) {
-          console.error('Error removing model:', error);
-        }
-      }
-
-      initialized.current = false; // Reset initialization flag
+      initialized.current = false;
     };
   }, [filter]);
+    
+
+
+
+  
+
 
   // Function to update model scale, position, and rotation in real-time
   const handleScaleChange = (axis: 'x' | 'y' | 'z', value: number) => {
@@ -184,9 +219,9 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
   return (
     <div className="h-[120vh] flex bg-white flex-row items-center justify-center ">
       {/* Camera View */}
-      <div className="w-full flex justify-center">
+      <div className="w-full flex shadow-sm shadow-[#ff295c]  justify-center">
         <div
-          className="w-[50%] h-[70%] relative border-2 border-gray-400 m-2 flex flex-row items-center justify-center z-0"
+          className="w-[50%] h-[70%]  relative  m-2 flex flex-row items-center justify-center z-0"
           ref={containerRef}
         ></div>
       </div>

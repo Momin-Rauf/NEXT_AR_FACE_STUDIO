@@ -31,6 +31,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverContentRef = useRef<HTMLDivElement | null>(null);
   const { setSelectedFilter } = useFilterContext();
+ 
 
   useEffect(() => {
     console.log(filter);
@@ -48,6 +49,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   }, [isHovered]);
 
   const handleFilterSelection = () => {
+   
     console.log('Selected Filter in Filter card:', filter);
     setSelectedFilter({
       id: filter.id,
@@ -97,6 +99,9 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
           <p>{filter.description}</p>
         </div>
       )}
+
+
+
     </div>
   );
 };

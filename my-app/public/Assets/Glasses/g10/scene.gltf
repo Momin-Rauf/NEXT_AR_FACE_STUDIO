@@ -1,0 +1,390 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 244,
+      "max": [
+        5.662835121154785,
+        4.0069804191589355,
+        7.257162570953369
+      ],
+      "min": [
+        -5.662835121154785,
+        0.8257593512535095,
+        6.152695178985596
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 2928,
+      "componentType": 5126,
+      "count": 244,
+      "max": [
+        0.296203076839447,
+        0.18288129568099976,
+        0.9921409487724304
+      ],
+      "min": [
+        -0.2962472438812256,
+        -0.1831274777650833,
+        -0.9921369552612305
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 244,
+      "max": [
+        1.0,
+        0.5
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 360,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5856,
+      "componentType": 5126,
+      "count": 1602,
+      "max": [
+        6.356118679046631,
+        4.172375202178955,
+        6.4484477043151855
+      ],
+      "min": [
+        -6.356118679046631,
+        3.6442439556121826,
+        4.570943832397461
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 25080,
+      "componentType": 5126,
+      "count": 1602,
+      "max": [
+        0.9977939128875732,
+        0.9993687272071838,
+        0.9909478425979614
+      ],
+      "min": [
+        -0.9977938532829285,
+        -0.9993684887886047,
+        -0.9909488558769226
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1952,
+      "componentType": 5126,
+      "count": 1602,
+      "max": [
+        0.9185537099838257,
+        0.9980080127716064
+      ],
+      "min": [
+        0.18856707215309143,
+        0.6312893629074097
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1440,
+      "componentType": 5125,
+      "count": 3624,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 44304,
+      "componentType": 5126,
+      "count": 2544,
+      "max": [
+        7.713679790496826,
+        4.373025894165039,
+        7.4564032554626465
+      ],
+      "min": [
+        -7.713680267333984,
+        -0.2851235270500183,
+        -9.055560111999512
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 74832,
+      "componentType": 5126,
+      "count": 2544,
+      "max": [
+        0.9996607899665833,
+        0.9997733235359192,
+        0.9997108578681946
+      ],
+      "min": [
+        -0.9996607899665833,
+        -0.9999930262565613,
+        -0.9999805092811584
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 14768,
+      "componentType": 5126,
+      "count": 2544,
+      "max": [
+        0.9185537099838257,
+        0.9891720414161682
+      ],
+      "min": [
+        0.001833440619520843,
+        0.00199203216470778
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 15936,
+      "componentType": 5125,
+      "count": 10860,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "pervertex (https://sketchfab.com/pervertex)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/glasses-low-poly-model-download-bab93acb3990415783b9b6d9b2e178ba",
+      "title": "Glasses low-poly model \"download\""
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 59376,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 35120,
+      "byteOffset": 59376,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 105360,
+      "byteOffset": 94496,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 199856,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "name": "Glasses_glass",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7579697625,
+          0.5845482006,
+          0.1408186709,
+          0.229992378
+        ],
+        "roughnessFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Glasses_metal",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7158558932,
+          0.7158558932,
+          0.7158558932,
+          1.0
+        ],
+        "roughnessFactor": 0.19950457317073167
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Glasses_frame",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "metallicFactor": 0.1053734756,
+        "roughnessFactor": 0.07755335370000005
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Glass_Glasses_glass_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Glasses_Glasses_metal_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Glasses_Glasses_frame_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "8e8a32b199cf423e92d69fc18603386a.fbx"
+    },
+    {
+      "children": [
+        3,
+        5
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "Glass"
+    },
+    {
+      "mesh": 0,
+      "name": "Glass_Glasses_glass_0"
+    },
+    {
+      "children": [
+        6,
+        7
+      ],
+      "name": "Glasses"
+    },
+    {
+      "mesh": 1,
+      "name": "Glasses_Glasses_metal_0"
+    },
+    {
+      "mesh": 2,
+      "name": "Glasses_Glasses_frame_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Black glasses
+* source:	https://sketchfab.com/3d-models/black-glasses-11940b52003d453b8bd43bf868f1002f
+* author:	Nofil.Khan (https://sketchfab.com/Nofil.Khan)
+
+Model License:
+* license type:	CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)
+* requirements:	Author must be credited. Modified versions can not be distributed. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Black glasses" (https://sketchfab.com/3d-models/black-glasses-11940b52003d453b8bd43bf868f1002f) by Nofil.Khan (https://sketchfab.com/Nofil.Khan) licensed under CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)

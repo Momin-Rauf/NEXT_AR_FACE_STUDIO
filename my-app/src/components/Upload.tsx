@@ -237,7 +237,7 @@ useEffect(() => {
   
   return (
     
-    <div className="flex h-auto p-10 flex-col md:flex-row  justify-between items-start bg-white shadow-lg rounded-lg">
+    <div className="flex h-auto p-10 flex-col md:flex-row mt-24 justify-between items-start bg-white shadow-lg rounded-lg">
 
       <section className="flex  flex-col  p-4 mx-auto mb-4  justify-start items-start mt-3 w-[40%]" >
       <h1 className="text-3xl font-semibold text-gray-800  mb-4 ">Create and Upload Personalized 3D Models</h1>
