@@ -231,7 +231,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
 
         <div className="grid grid-cols-2 gap-8 space-y-8">
           {/* Scale Controls */}
-          <div className='bg-white flex flex-col gap-4 rounded-lg text-[#6632f1]' >
+          <div className='bg-white flex flex-col p-2 gap-4 rounded-lg text-[#6632f1]' >
 
           <div className="flex items-center">
             <label className="text-[#6632f1] mr-2">Scale X</label>
@@ -272,7 +272,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
           </div>
 
           {/* Position Controls */}
-          <div className='bg-white flex flex-col gap-4 rounded-lg text-[#6632f1]' >
+          <div className='bg-white flex flex-col p-2 gap-4 rounded-lg text-[#6632f1]' >
           <div className="flex items-center">
             <label className="text-[#6632f1] mr-2">Position X</label>
             <input
@@ -310,7 +310,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             />
           </div>
           </div>
-<div className='bg-white flex flex-col gap-4 rounded-lg  text-[#6632f1]' >
+<div className='bg-white flex flex-col gap-4 rounded-lg p-2  text-[#6632f1]' >
           {/* Rotation Controls */}
           <div className="flex items-center">
             <label className="text-[#6632f1] mr-2">Rotation X</label>
