@@ -68,7 +68,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="card bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-44  cursor-pointer rounded-lg border border-gray-200 text-white shadow-lg transition-transform transform duration-300 hover:scale-105"
+      className="card bg-white text-black shadow-sm shadow-[#6631f7] w-44  cursor-pointer rounded-lg border border-gray-200 text-white shadow-lg transition-transform transform duration-300 hover:scale-105"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -89,7 +89,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
         />
       </div>
       <div className="p-3">
-        <h3 className="text-lg font-semibold truncate">{filter.title}</h3>
+        <h3 className="text-lg text-black font-semibold truncate">{filter.title}</h3>
       </div>
       {isHovered && (
         <div

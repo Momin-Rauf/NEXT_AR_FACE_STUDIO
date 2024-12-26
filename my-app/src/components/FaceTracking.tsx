@@ -271,9 +271,7 @@ scene.add(light);
 
       <div className="filter-wrapper w-full h-full pointer-events-none"></div>
       {loading && (
-        <div className="absolute left-0 top-0 h-[100vh] w-[1080px] inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="loader">Loading...</div>
-        </div>
+       <div></div>
       )}
     </div>
   );

@@ -34,14 +34,13 @@ const FilterBoard = () => {
 
     return (
         <div className="w-full bg-white px-6 py-4 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-[#6631f7] mb-4 text-center">Filter Items</h2>
             <div role="tablist" className="tabs tabs-bordered">
                 <input 
                     type="radio" 
                     name="my_tabs" 
                     role="tab" 
-                    className="tab flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
-                    aria-label="Face" 
+                    className="tab  font-bold  text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
+                    aria-label="3D" 
                     defaultChecked 
                 />
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">
@@ -84,7 +83,7 @@ const FilterBoard = () => {
                     type="radio" 
                     name="my_tabs" 
                     role="tab" 
-                    className="tab flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
+                    className="tab font-bold text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
                     aria-label="Paints"
                 />
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">
@@ -139,7 +138,7 @@ const FilterBoard = () => {
                     type="radio" 
                     name="my_tabs" 
                     role="tab" 
-                    className="tab flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
+                    className="tab font-bold text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
                     aria-label="Custom"
                 />
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">

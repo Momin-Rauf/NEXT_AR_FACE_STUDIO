@@ -40,7 +40,7 @@ const VerifyAccount = () => {
 
             toast({
                 title: "Success",
-                description: res.data.message // Use res instead of response
+                description: res.data.message
             });
           
 
@@ -56,9 +56,9 @@ const VerifyAccount = () => {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-gray-500 to-black animate-gradient">
-            <h1 className="text-white text-4xl font-bold mb-6">AR Face Studio</h1>
-            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md transition-transform transform hover:scale-105">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-white ">
+            <h1 className="text-Black text-4xl font-bold mb-6">AR Face Studio</h1>
+            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md transition-transform shadow-[#ff275b] transform hover:scale-105">
                 <h2 className="text-lg font-semibold text-gray-700 mb-4">Verify Account</h2>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -72,14 +72,14 @@ const VerifyAccount = () => {
                                         <Input
                                             placeholder="Enter Verification Code"
                                             {...field}
-                                            className="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg transition-all duration-300"
+                                            className="border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff275b] rounded-lg transition-all duration-300"
                                         />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" className="w-full bg-gray-500 hover:bg-gray-700 text-white transition-colors duration-300 rounded-lg shadow-md">
+                        <Button type="submit" className="w-full bg-[#ff275b] hover:bg-[#ff4971] text-white transition-colors duration-300 rounded-lg shadow-md">
                             Submit
                         </Button>
                     </form>

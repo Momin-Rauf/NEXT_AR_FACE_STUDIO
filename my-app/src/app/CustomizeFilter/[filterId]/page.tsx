@@ -219,21 +219,22 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
   return (
     <div className="h-[120vh] flex bg-white flex-row items-center justify-center ">
       {/* Camera View */}
-      <div className="w-full flex shadow-sm shadow-[#ff295c]  justify-center">
         <div
           className="w-[50%] h-[70%]  relative  m-2 flex flex-row items-center justify-center z-0"
           ref={containerRef}
         ></div>
-      </div>
+     
 
       {/* Dashboard */}
-      <div className="mt-8 p-4 bg-gray-800 rounded-lg shadow-lg w-[40%]">
+      <div className="mt-8 p-4 bg-[#6632f1] h-[60%] rounded-lg shadow-lg w-[50%]">
         <h2 className="text-white text-xl font-semibold mb-4">Model Customization</h2>
 
-        <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-8 space-y-8">
           {/* Scale Controls */}
+          <div className='bg-white flex flex-col gap-4 rounded-lg text-[#6632f1]' >
+
           <div className="flex items-center">
-            <label className="text-white mr-2">Scale X</label>
+            <label className="text-[#6632f1] mr-2">Scale X</label>
             <input
               type="range"
               min="0.1"
@@ -245,7 +246,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             />
           </div>
           <div className="flex items-center">
-            <label className="text-white mr-2">Scale Y</label>
+            <label className="text-[#6632f1] mr-2">Scale Y</label>
             <input
               type="range"
               min="0.1"
@@ -257,7 +258,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             />
           </div>
           <div className="flex items-center">
-            <label className="text-white mr-2">Scale Z</label>
+            <label className="text-[#6632f1] mr-2">Scale Z</label>
             <input
               type="range"
               min="0.1"
@@ -266,12 +267,14 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
               value={scale[2]}
               onChange={(e) => handleScaleChange('z', parseFloat(e.target.value))}
               className="slider"
-            />
+              />
+          </div>
           </div>
 
           {/* Position Controls */}
+          <div className='bg-white gap-4 rounded-lg text-[#6632f1]' >
           <div className="flex items-center">
-            <label className="text-white mr-2">Position X</label>
+            <label className="text-[#6632f1] mr-2">Position X</label>
             <input
               type="range"
               min="-2"
@@ -283,7 +286,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             />
           </div>
           <div className="flex items-center">
-            <label className="text-white mr-2">Position Y</label>
+            <label className="text-[#6632f1] mr-2">Position Y</label>
             <input
               type="range"
               min="-2"
@@ -295,7 +298,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             />
           </div>
           <div className="flex items-center">
-            <label className="text-white mr-2">Position Z</label>
+            <label className="text-[#6632f1] mr-2">Position Z</label>
             <input
               type="range"
               min="-2"
@@ -306,10 +309,11 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
               className="slider"
             />
           </div>
-
+          </div>
+<div className='bg-white gap-4 rounded-lg text-[#6632f1]' >
           {/* Rotation Controls */}
           <div className="flex items-center">
-            <label className="text-white mr-2">Rotation X</label>
+            <label className="text-[#6632f1] mr-2">Rotation X</label>
             <input
               type="range"
               min="-3.14"
@@ -321,7 +325,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             />
           </div>
           <div className="flex items-center">
-            <label className="text-white mr-2">Rotation Y</label>
+            <label className="text-[#6632f1] mr-2">Rotation Y</label>
             <input
               type="range"
               min="-3.14"
@@ -333,7 +337,7 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
             />
           </div>
           <div className="flex items-center">
-            <label className="text-white mr-2">Rotation Z</label>
+            <label className="text-[#6632f1] mr-2">Rotation Z</label>
             <input
               type="range"
               min="-3.14"
@@ -344,11 +348,12 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
               className="slider"
             />
           </div>
+          </div>
 
           {/* Save Button */}
           <button
             onClick={saveModelState}
-            className="w-full py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 mt-4"
+            className="w-full py-2  bg-white text-[#6632f1] h-16 font-semibold rounded-lg shadow-md hover:bg-green-600 mt-4"
           >
             Save Changes
           </button>
@@ -359,7 +364,3 @@ const CustomizeFilter = ({ params }: { params: { filterId: string } }) => {
 };
 
 export default CustomizeFilter;
-
-
-
-
