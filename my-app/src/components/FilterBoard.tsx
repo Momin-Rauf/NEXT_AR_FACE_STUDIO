@@ -154,7 +154,7 @@ const FilterBoard = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
-    {FilterData && FilterData.map((filter, index) => (
+                    {FilterData && FilterData.map((filter, index) => (
         <div className="m-1 transform scale-90" key={index}>
             {/* Render specific properties of the filter object */}
 
@@ -163,8 +163,7 @@ const FilterBoard = () => {
     ))}
 </div>
 
-
-                    </div>
+                   
 
                     <div className="flex justify-center mt-4">
                         {[...Array(totalPages1)].map((_, index) => (
@@ -190,7 +189,7 @@ const FilterBoard = () => {
 
                 
             </div>
-        
+        </div>
     );
 };
 
