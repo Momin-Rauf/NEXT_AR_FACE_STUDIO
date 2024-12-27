@@ -162,7 +162,7 @@ const FilterBoard = () => {
         </div>
     ))}
 </div>
-</div>
+
 
                     </div>
 
@@ -190,7 +190,7 @@ const FilterBoard = () => {
 
                 
             </div>
-        </div>
+        
     );
 };
 
