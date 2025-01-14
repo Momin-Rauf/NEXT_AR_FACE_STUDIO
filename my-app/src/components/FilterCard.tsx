@@ -108,7 +108,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       {/* Icon Button */}
       <button
         onClick={(e) => {
-          // e.stopPropagation(); // Prevent triggering the card click event
+          e.stopPropagation(); // Prevent triggering the card click event
           console.log(filter.id);
           setFilterId(filter.id)
           navigateToCustomizeFilter(filter.id);
@@ -117,7 +117,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
         className="absolute bottom-3 right-3 p-2 bg-purple-500 rounded-full text-white hover:bg-purple-400 focus:outline-none"
         aria-label="Customize Filter"
       >
-        {filter._id}
+       
         <FaCog className="text-lg" /> {/* Gear icon */}
       </button>
     </div>
