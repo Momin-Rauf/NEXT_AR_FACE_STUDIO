@@ -95,57 +95,64 @@ const FaceTracking = () => {
       scene.remove(scene.children[0]);
     }
   };
-
   const updateFilterContent = async (scene: THREE.Scene, anchor: any) => {
-    // Properly dispose of the previous model and face mesh only if necessary
     if (loading) return; // Prevent double calls
     setLoading(true);
+  
+    // Clear previously loaded model and face mesh
     if (modelRef.current) {
-      anchor.group.remove(modelRef.current); // Remove from anchor group
+      anchor.group.remove(modelRef.current);
       disposeObject(modelRef.current);
       modelRef.current = null;
     }
     if (faceMeshRef.current) {
-      scene.remove(faceMeshRef.current); // Remove from the scene
+      scene.remove(faceMeshRef.current);
       disposeObject(faceMeshRef.current);
       faceMeshRef.current = null;
     }
-
-    // Add face paint filter
+  
+    // Load face paint filter
     if (selectedFilter?.category === "Face Paint" && !faceMeshRef.current) {
       const faceMesh = mindarThreeRef.current!.addFaceMesh();
       const texture = new THREE.TextureLoader().load(selectedFilter.image_url);
-
       faceMesh.material = new THREE.MeshBasicMaterial({
         map: texture,
         transparent: true,
         opacity: 1.0,
       });
-
-      faceMesh.material.needsUpdate = true;
       scene.add(faceMesh);
       faceMeshRef.current = faceMesh;
     } else if (selectedFilter?.model && !modelRef.current) {
-      // Load and add 3D model only if it is not already loaded
+      // Load 3D model using GLTFLoader with caching
       const loader = new GLTFLoader();
       try {
-        const gltf = await loader.loadAsync(selectedFilter.model);
+        let gltf;
+        const cached = THREE.Cache.get(selectedFilter.model);
+        if (cached) {
+          // Use the cached model
+          gltf = cached;
+        } else {
+          // Load the model and cache it
+          gltf = await loader.loadAsync(selectedFilter.model);
+          THREE.Cache.add(selectedFilter.model, gltf);
+        }
         const model = gltf.scene;
-
+  
         // Scale, position, and rotate the model
         model.scale.set(...selectedFilter.scale);
         model.position.set(...selectedFilter.position);
         model.rotation.set(...selectedFilter.rotation);
-
-        // Add model to the anchor group
+  
+        // Add the model to the anchor group
         anchor.group.add(model);
         modelRef.current = model;
       } catch (error) {
         console.error("Error loading model:", error);
       }
     }
-    setLoading(false); 
+    setLoading(false);
   };
+  
 
   useEffect(() => {
     if ((selectedFilter?.category !== "Face Paint") && (!selectedFilter?.model) ) return;

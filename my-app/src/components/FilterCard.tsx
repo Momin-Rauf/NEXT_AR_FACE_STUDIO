@@ -1,15 +1,14 @@
 'use client';
 
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import gsap from 'gsap';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { FaCog } from 'react-icons/fa'; // Import gear icon from react-icons
 
 import { useFilterContext } from '@/context/FilterContext';
 
-// Utility function to truncate text
-
-
+// Define Filter type
 interface Filter {
   id: number;
   image_url: string;
@@ -30,12 +29,13 @@ interface FilterCardProps {
 const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverContentRef = useRef<HTMLDivElement | null>(null);
+  const [filter_id,setFilterId] = useState(0);
   const { setSelectedFilter } = useFilterContext();
- 
+  const router = useRouter();
 
   useEffect(() => {
-    console.log(filter);
-  }, []);
+    console.log(filter); // Log filter details for debugging
+  }, [filter]);
 
   // GSAP animation for hover effect
   useLayoutEffect(() => {
@@ -49,7 +49,6 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   }, [isHovered]);
 
   const handleFilterSelection = () => {
-   
     console.log('Selected Filter in Filter card:', filter);
     setSelectedFilter({
       id: filter.id,
@@ -63,12 +62,18 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
     });
   };
 
+  const navigateToCustomizeFilter = (filterId: number) => {
+    console.log(filterId);
+    
+    router.push(`/CustomizeFilter/${filter_id}`);
+  };
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="card bg-white  shadow-[#6631f7] w-44  cursor-pointer rounded-lg border border-gray-200 text-white shadow-lg transition-transform transform duration-300 hover:scale-105"
+      className="card bg-white shadow-[#6631f7] w-44 cursor-pointer rounded-lg border border-gray-200 text-white shadow-lg transition-transform transform duration-300 hover:scale-105"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -81,8 +86,8 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       {/* Container with aspect ratio */}
       <div className="relative w-full pb-[80.71%]"> {/* Aspect ratio of ~2:3 */}
         <Image
-          src={filter.image_url}
-          alt={filter.title || ''}
+          src={filter.image_url || '/fallback-image.jpg'}
+          alt={filter.title || 'Filter Image'}
           className="absolute top-0 left-0 rounded-t-lg object-cover transition-transform duration-300 ease-in-out"
           fill
           style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
@@ -100,8 +105,21 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
         </div>
       )}
 
-
-
+      {/* Icon Button */}
+      <button
+        onClick={(e) => {
+          // e.stopPropagation(); // Prevent triggering the card click event
+          console.log(filter.id);
+          setFilterId(filter.id)
+          navigateToCustomizeFilter(filter.id);
+        }}
+      
+        className="absolute bottom-3 right-3 p-2 bg-purple-500 rounded-full text-white hover:bg-purple-400 focus:outline-none"
+        aria-label="Customize Filter"
+      >
+        {filter._id}
+        <FaCog className="text-lg" /> {/* Gear icon */}
+      </button>
     </div>
   );
 };
