@@ -4,7 +4,6 @@ import gsap from 'gsap';
 import Link from 'next/link';
 import { useSession, signOut } from "next-auth/react";
 import Image from 'next/image'; 
-import { FaBars } from 'react-icons/fa';  // Import React Icon
 
 const Navbar = () => {
   const navbarRef = useRef<HTMLDivElement | null>(null);

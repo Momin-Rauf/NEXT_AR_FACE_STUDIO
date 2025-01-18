@@ -1,6 +1,5 @@
 'use client';
 import '../globals.css';
-import Navbar from '@/components/Navbar';
 import React, { useEffect, useState } from 'react';
 import FilterBoard from '@/components/FilterBoard';
 import dynamic from 'next/dynamic';
