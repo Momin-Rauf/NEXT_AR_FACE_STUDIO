@@ -33,7 +33,7 @@ const FilterBoard = () => {
     }, []);
 
     return (
-        <div className="sm:w-full bg-white sm:px-6 sm:py-4 py-1 px-1 w-full rounded-lg shadow-lg">
+        <div className="sm:w-full bg-white sm:px-6 sm:py-4 py-1  mx-0  w-full rounded-lg shadow-lg">
             <div role="tablist" className="tabs tabs-bordered">
                 <input
                     type="radio"

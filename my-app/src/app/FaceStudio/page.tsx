@@ -32,9 +32,9 @@ export default function FaceStudio() {
     <FilterProvider>
       
       <div className = 'sm:relative  sm:top-0 sm:flex sm:flex-col sm:gap-5' >
-      <div className="bg-white pl-2 flex justify-between sm:flex-row flex-col">
+      <div className="bg-white sm:pl-2 px-2 flex justify-between sm:flex-row flex-col">
         <FaceTracking />
-        <div className="border-2 relative ml-0 right-0 sm:mt-20 mt-[410px] w-[100%] sm:w-[50%]">
+        <div className="border-2 relative bg-white ml-0 right-0 sm:mt-20 mt-[410px] w-[100%] sm:w-[50%]">
           <FilterBoard />
         </div>
       </div>
