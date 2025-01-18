@@ -83,7 +83,7 @@ const SignUpPage = () => {
       alt="Sign-up illustration"
       width={500}
       height={500}
-      className="w-[40%]"
+      className="w-[40%] hidden md:block"
     />
       <div className="bg-white  hover:shadow-sm rounded-xl p-4 w-full max-w-md mt-10 shadow-black transform transition-all duration-500">
         <h2 className="text-[#6631f7] text-4xl font-bold mb-8 text-center tracking-tight">Create an Account</h2>

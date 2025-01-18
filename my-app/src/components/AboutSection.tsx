@@ -28,10 +28,10 @@ const AboutSection = () => {
   return (
     <div
       ref={sectionRef}
-      className="flex flex-row p-12 h-[100vh] bg-white justify-center items-center"
+      className="sm:flex sm:flex-row sm:p-12 p-4 sm:h-[100vh] flex flex-col sm:bg-white justify-center items-center"
     >
       {/* Left Content: Text Section */}
-      <div className="flex w-[50%] gap-6 text-black flex-col">
+      <div className="flex sm:w-[50%] w-full gap-6 text-black flex-col">
         <h1 className="font-bold text-4xl mb-4 text-[#6f40f9]">
           Create Real-Time Filters
         </h1>
@@ -44,7 +44,7 @@ const AboutSection = () => {
       </div>
 
       {/* Right Content: 3D Scene */}
-      <div className="w-[40%] m-2 rounded-lg shadow-lg">
+      <div className="w-[40%] sm:block hidden m-2 rounded-lg shadow-lg">
         {/* Render FilterCustomizer only when visible */}
         {isVisible && <FilterCustomizer model={1} />}
       </div>

@@ -57,14 +57,15 @@ const LoginPage = () => {
   return (
     <div className="flex flex-row h-[110vh] justify-center items-center border-red-700 border-2 ">
       <Image 
-        src="/Assets/pictures/login.jpg" 
-        alt="Login illustration" 
-        width={500} 
-        height={500} 
-        className="w-[40%]" 
-      />
+  src="/Assets/pictures/login.jpg" 
+  alt="Login illustration" 
+  width={500} 
+  height={500} 
+  className="hidden md:block w-[40%]" 
+/>
 
-      <div className="bg-white hover:shadow-sm mt-20 rounded-xl p-8 w-full max-w-md mt-4 shadow-black  transform transition-all duration-500 ">
+
+      <div className="bg-white hover:shadow-sm  rounded-xl p-8 w-full max-w-md mt-4 shadow-black  transform transition-all duration-500 ">
         <h2 className="text-[#6631f7] text-4xl font-bold mb-8 text-center tracking-tight">Welcome Back</h2>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>

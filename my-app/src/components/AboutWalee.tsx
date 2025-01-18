@@ -5,19 +5,29 @@ import Image from "next/image";
 
 const AboutWalee = () => {
   return (
-    <div className='flex flex-row p-12 h-[100vh] bg-white justify-center items-center'>
-      <div className='flex w-[50%] gap-6 text-black flex-col'>
+    <div className='sm:flex sm:flex-row flex-col p-4 items-center justify-center sm:p-12 sm:h-[100vh] bg-white sm:justify-center sm:items-center'>
+      {/* Image Section */}
+      <Image 
+        className='sm:w-[40%] w-full my-2 rounded-lg shadow-lg order-1 sm:order-2' 
+        src='/Assets/myassets/about.jpg' 
+        alt="About Walee" 
+        width={500} // Adjust width according to your design
+        height={500} // Adjust height according to your design
+      />
+
+      {/* Text Section */}
+      <div className='flex sm:w-[50%] w-[100%] gap-6 text-black flex-col order-2 sm:order-1'>
         <h1 className='font-bold text-4xl mb-4 text-[#6f40f9]'>About Walee</h1>
 
         <p className='m-2 text-lg leading-relaxed text-gray-700'>
           Founded in 2019, Walee is Pakistan&apos;s largest influencer marketing platform, boasting over 70 thousand registered users. We empower your voice, whether you&apos;re an influencer or a business. Our solutions are crafted to deliver winning experiences and opportunities.
         </p>
 
-        <p className='m-2 text-lg leading-relaxed text-gray-700'>
+        <p className='m-2 text-lg md:block hidden leading-relaxed text-gray-700'>
           Our solutions encompass Automated Influencer Marketing, Influencer Insights, Social Listening, Social Commerce, Payment Gateway, and Mobility Marketing.
         </p>
 
-        <p className='m-2 text-lg leading-relaxed text-gray-700'>
+        <p className='m-2 text-lg md:block hidden leading-relaxed text-gray-700'>
           If you are an influencer looking to collaborate with brands, download our app from the Google Play Store or Apple App Store. Alternatively, if you are a business owner aiming to reach your audience, please fill out the form below.
         </p>
 
@@ -28,14 +38,6 @@ const AboutWalee = () => {
           Know More
         </Link>
       </div>
-
-      <Image 
-        className='w-[40%] m-2 rounded-lg shadow-lg' 
-        src='/Assets/myassets/about.jpg' 
-        alt="About Walee" 
-        width={500} // Adjust width according to your design
-        height={500} // Adjust height according to your design
-      />
     </div>
   );
 };

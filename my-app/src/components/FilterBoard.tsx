@@ -12,14 +12,14 @@ const FilterBoard = () => {
 
     const filteredData1 = dummy_data.filter(item => item.category === "Face Paint");
     const currentItems2 = filteredData1.slice(indexOfFirstItem, indexOfLastItem);
-    
+
     const totalPages1 = Math.ceil(filteredData.length / itemsPerPage);
     const totalPages2 = Math.ceil(filteredData1.length / itemsPerPage);
     const [FilterData, setFilterData] = useState([]);
 
     useEffect(() => {
-        console.log(currentItems,"1")
-        console.log(currentItems2,"2")
+        console.log(currentItems, "1")
+        console.log(currentItems2, "2")
 
         const fetchFilter = async () => {
             const res = await fetch('/api/getFilter');
@@ -33,32 +33,32 @@ const FilterBoard = () => {
     }, []);
 
     return (
-        <div className="w-full bg-white px-6 py-4 rounded-lg shadow-lg">
+        <div className="sm:w-full bg-white sm:px-6 sm:py-4 py-1 px-1 w-full rounded-lg shadow-lg">
             <div role="tablist" className="tabs tabs-bordered">
-                <input 
-                    type="radio" 
-                    name="my_tabs" 
-                    role="tab" 
-                    className="tab  font-bold  text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
-                    aria-label="3D" 
-                    defaultChecked 
+                <input
+                    type="radio"
+                    name="my_tabs"
+                    role="tab"
+                    className="tab  font-bold  text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300"
+                    aria-label="3D"
+                    defaultChecked
                 />
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">
-                   
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-  {currentItems.map((filter, index) => (
-    <div className="m-1 transform scale-90" key={index}>
-      {/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */}
-      {/* @ts-ignore */}
-      <FilterCard filter={filter} />
-    </div>
-  ))}
-</div>
+
+                    <div className="grid grid-cols-4  sm:grid-cols-3 gap-6">
+                        {currentItems.map((filter, index) => (
+                            <div className="m-1 transform scale-90" key={index}>
+                                {/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */}
+                                {/* @ts-ignore */}
+                                <FilterCard filter={filter} />
+                            </div>
+                        ))}
+                    </div>
 
 
 
-                    
-                    
+
+
 
 
 
@@ -79,28 +79,28 @@ const FilterBoard = () => {
                         ))}
                     </div>
                 </div>
-                <input 
-                    type="radio" 
-                    name="my_tabs" 
-                    role="tab" 
-                    className="tab font-bold text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
+                <input
+                    type="radio"
+                    name="my_tabs"
+                    role="tab"
+                    className="tab font-bold text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300"
                     aria-label="Paints"
                 />
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">
-                    
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
-                    {currentItems2.map((filter, index) => (
-                            
+
+                    <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-3  gap-6">
+                        {currentItems2.map((filter, index) => (
+
                             <div className="m-1 transform scale-90" key={index}>
-                                 
-                                 {/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */}
-                                 {/* @ts-ignore */}
+
+                                {/* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types */}
+                                {/* @ts-ignore */}
                                 <FilterCard filter={filter} />
-                
+
                             </div>
                         ))}
-</div>
+                    </div>
 
 
                     <div className="flex justify-center mt-4">
@@ -132,13 +132,13 @@ const FilterBoard = () => {
 
 
 
-                
 
-                 <input 
-                    type="radio" 
-                    name="my_tabs" 
-                    role="tab" 
-                    className="tab font-bold text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300" 
+
+                <input
+                    type="radio"
+                    name="my_tabs"
+                    role="tab"
+                    className="tab font-bold text-xl flex-grow text-[#6631f7] rounded-lg py-2 px-4 mx-1 cursor-pointer hover:underline transition duration-300"
                     aria-label="Custom"
                 />
                 <div role="tabpanel" className="tab-content text-black rounded-box p-3">
@@ -149,21 +149,21 @@ const FilterBoard = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </div>
-                           
+
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
-                    {FilterData && FilterData.map((filter, index) => (
-        <div className="m-1 transform scale-90" key={index}>
-            {/* Render specific properties of the filter object */}
+                    <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3  gap-6">
+                        {FilterData && FilterData.map((filter, index) => (
+                            <div className="m-1 transform scale-90" key={index}>
+                                {/* Render specific properties of the filter object */}
 
-            <FilterCard filter={filter} />
-        </div>
-    ))}
-</div>
+                                <FilterCard filter={filter} />
+                            </div>
+                        ))}
+                    </div>
 
-                   
+
 
                     <div className="flex justify-center mt-4">
                         {[...Array(totalPages1)].map((_, index) => (
@@ -187,7 +187,7 @@ const FilterBoard = () => {
 
 
 
-                
+
             </div>
         </div>
     );

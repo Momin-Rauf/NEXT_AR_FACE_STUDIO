@@ -73,7 +73,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ position: 'relative', overflow: 'hidden' }}
-      className="card bg-white shadow-[#6631f7] w-44 cursor-pointer rounded-lg border border-gray-200 text-white shadow-lg transition-transform transform duration-300 hover:scale-105"
+      className="card bg-white shadow-[#6631f7] sm:w-44 w-24 cursor-pointer rounded-lg border border-gray-200 text-white shadow-lg transition-transform transform duration-300 hover:scale-105"
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -93,13 +93,13 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
           style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
         />
       </div>
-      <div className="p-3">
-        <h3 className="text-lg text-black font-semibold truncate">{filter.title}</h3>
+      <div className="sm:p-3">
+        <h3 className="text-lg text-black sm:block hidden font-semibold truncate">{filter.title}</h3>
       </div>
       {isHovered && (
         <div
           ref={hoverContentRef}
-          className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-sm text-gray-200 p-4"
+          className="absolute  hidden inset-0 bg-black bg-opacity-50 sm:flex items-center justify-center text-sm text-gray-200 p-4"
         >
           <p>{filter.description}</p>
         </div>
@@ -114,7 +114,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
           navigateToCustomizeFilter(filter.id);
         }}
       
-        className="absolute bottom-3 right-3 p-2 bg-purple-500 rounded-full text-white hover:bg-purple-400 focus:outline-none"
+        className="absolute sm:block hidden bottom-3 right-3 p-2 bg-purple-500 rounded-full text-white hover:bg-purple-400 focus:outline-none"
         aria-label="Customize Filter"
       >
        

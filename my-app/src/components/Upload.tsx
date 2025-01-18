@@ -239,7 +239,7 @@ useEffect(() => {
     
     <div className="flex h-auto p-10 flex-col md:flex-row mt-24 justify-between items-start bg-white shadow-lg rounded-lg">
 
-      <section className="flex  flex-col  p-4 mx-auto mb-4  justify-start items-start mt-3 w-[40%]" >
+      <section className="sm:flex   sm:flex-col  sm:p-4 sm:mx-auto sm:mb-4  sm:justify-start sm:items-start sm:mt-3 hidden sm:w-[40%]" >
       <h1 className="text-3xl font-semibold text-gray-800  mb-4 ">Create and Upload Personalized 3D Models</h1>
       <p className='text-lg mt-5' > With just a few clicks, you can upload your designs or pictures and convert them into fully functional 3D models. These models can then be customized and used as AR filters</p>
       </section>
