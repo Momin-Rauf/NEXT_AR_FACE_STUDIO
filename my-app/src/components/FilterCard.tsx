@@ -10,7 +10,7 @@ import { useFilterContext } from '@/context/FilterContext';
 
 // Define Filter type
 interface Filter {
-  id: number;
+  _id: number;
   image_url: string;
   title: string;
   description?: string;
@@ -51,7 +51,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const handleFilterSelection = () => {
     console.log('Selected Filter in Filter card:', filter);
     setSelectedFilter({
-      id: filter.id,
+      id: filter._id,
       rotation: filter.rotation,
       position: filter.position,
       scale: filter.scale,
@@ -65,7 +65,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const navigateToCustomizeFilter = (filterId: number) => {
     console.log(filterId);
     
-    router.push(`/CustomizeFilter/${filter_id}`);
+    router.push(`/CustomizeFilter/${filterId}`);
   };
 
   return (
@@ -102,6 +102,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
           className="absolute  hidden inset-0 bg-black bg-opacity-50 sm:flex items-center justify-center text-sm text-gray-200 p-4"
         >
           <p>{filter.description}</p>
+          <p>{filter._id}</p>
         </div>
       )}
 
@@ -109,9 +110,9 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
       <button
         onClick={(e) => {
           e.stopPropagation(); // Prevent triggering the card click event
-          console.log(filter.id);
-          setFilterId(filter.id)
-          navigateToCustomizeFilter(filter.id);
+          console.log(filter._id);
+          setFilterId(filter._id)
+          navigateToCustomizeFilter(filter._id);
         }}
       
         className="absolute sm:block hidden bottom-3 right-3 p-2 bg-purple-500 rounded-full text-white hover:bg-purple-400 focus:outline-none"
