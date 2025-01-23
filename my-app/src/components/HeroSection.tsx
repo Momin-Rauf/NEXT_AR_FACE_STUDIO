@@ -44,7 +44,7 @@ const HeroSection = () => {
                             </Link>
                         ) : (
                             <div className="flex flex-row gap-2">
-                                <Link href={"/FaceStudio"} className="p-[3px] relative">
+                                <Link href={"/Sign-up"} className="p-[3px] relative">
                                     <div className="absolute inset-0 bg-gradient-to-r from-[#662ff3] to-[#ff275b] rounded-lg" />
                                     <div className="px-6 text-[20px] py-2  bg-[#401d98] rounded-[4px] relative group transition duration-200 text-white hover:bg-transparent">
                                         Sign up
