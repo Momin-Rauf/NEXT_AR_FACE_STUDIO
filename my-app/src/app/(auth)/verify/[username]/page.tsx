@@ -44,7 +44,7 @@ const VerifyAccount = () => {
             });
           
 
-            router.replace('signIn');
+            router.push('/SignIn');
         } catch (error) {
             console.log(error);
             toast({
