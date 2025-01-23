@@ -29,7 +29,7 @@ interface FilterCardProps {
 const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverContentRef = useRef<HTMLDivElement | null>(null);
-  const [filter_id,setFilterId] = useState(0);
+ 
   const { setSelectedFilter } = useFilterContext();
   const router = useRouter();
 
@@ -111,7 +111,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ filter }) => {
         onClick={(e) => {
           e.stopPropagation(); // Prevent triggering the card click event
           console.log(filter._id);
-          setFilterId(filter._id)
+        
           navigateToCustomizeFilter(filter._id);
         }}
       
