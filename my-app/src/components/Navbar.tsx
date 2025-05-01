@@ -6,7 +6,7 @@ import { FiMenu } from "react-icons/fi";
 
 import { useSession, signOut } from "next-auth/react";
 import Image from 'next/image';
-import { FaHome, FaInfoCircle, FaServicestack, FaPhone, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaServicestack, FaPhone, FaSignOutAlt, FaCube } from 'react-icons/fa';
 
 const Navbar = () => {
   const navbarRef = useRef<HTMLDivElement | null>(null);
@@ -37,6 +37,9 @@ const Navbar = () => {
       <ul className="hidden sm:flex sm:text-lg sm:items-center sm:gap-8">
         <li className="relative cursor-pointer hover:after:w-full after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all">
           <Link href="/AssetsPage">My Assets</Link>
+        </li>
+        <li className="relative cursor-pointer hover:after:w-full after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all">
+          <Link href="/model-generator">Model Generator</Link>
         </li>
         <li className="relative cursor-pointer hover:after:w-full after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-black after:transition-all">
           <Link href="/about">About Us</Link>
@@ -77,6 +80,11 @@ const Navbar = () => {
             <li>
               <Link href="/AssetsPage" className="flex items-center gap-2">
                 <FaHome /> My Assets
+              </Link>
+            </li>
+            <li>
+              <Link href="/model-generator" className="flex items-center gap-2">
+                <FaCube /> Model Generator
               </Link>
             </li>
             <li>
