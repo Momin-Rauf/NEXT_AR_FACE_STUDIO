@@ -3,13 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import FormData from 'form-data';
 
-// Required to enable FormData parsing
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 // Constants
 const HF_API_URL = 'https://ahmad-sarmad-ali-3d-model-ai.hf.space/generate-3d/';
 const MAX_RETRIES = 3;
@@ -17,6 +10,10 @@ const RETRY_DELAY = 3000; // 3 seconds
 
 // Helper for delayed retry
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Modern Next.js App Router config
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
   console.log('Received request for 3D model generation');
